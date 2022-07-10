@@ -1,0 +1,29 @@
+﻿@namespace BlazorComponents
+
+<Dialog ShowDialog="@ShowDialog" DialogTitle="Confirmation">
+    <div class="dialogBody">
+        @ChildContent
+    </div>
+    <div class="dialogButtons">
+        <button class="btn btn-primary" @onclick="async () => await ButtonClicked(true)">Yes</button>
+        <button class="btn btn-danger" @onclick="async () => await ButtonClicked(false)">No</button>
+    </div>
+</Dialog>
+
+@code {
+    [Parameter] public EventCallback OnYes { get; set; }
+
+    [Parameter] public EventCallback OnNo { get; set; }
+
+    [Parameter] public bool ShowDialog { get; set; } = false;
+
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
+    private async Task ButtonClicked(bool yes)
+    {
+        ShowDialog = false;
+
+        if (yes) await OnYes.InvokeAsync();
+        else await OnNo.InvokeAsync();
+    }
+}

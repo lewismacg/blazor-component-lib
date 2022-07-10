@@ -1,0 +1,49 @@
+﻿@page "/Testing"
+
+<h3>Toasts</h3>
+<hr />
+
+<label>To set a custom timed toaster set a value here in milliseconds.</label>
+<input type="number" @bind="@TimedToastValue" />
+
+<button class="btn btn-primary" @onclick="AddToast">Add Toast</button>
+<button class="btn btn-secondary" @onclick="AddTimedToast">Add Timed Toast</button>
+
+<BannerWrapper>
+	<Banner NotificationType="NotificationType.Error" IsSmall="true" IsDraggable="true" DepthForDisplay="100">
+		<span>This is a notification. You should close it.</span>
+	</Banner>
+
+	<Banner NotificationType="NotificationType.None" IsSmall="true" IsDraggable="true">
+		<span>This is a notification. You should close it.</span>
+	</Banner>
+</BannerWrapper>
+
+
+@code {
+	[CascadingParameter]
+	public ToasterManager ToasterManager { get; set; }
+
+	public int TimedToastValue { get; set; } = 1000;
+
+	protected override void OnInitialized()
+	{
+		ToasterManager.AddToast("Success", "This is a demo toast", NotificationType.Success, DateTime.Now);
+	}
+
+	private void AddToast()
+	{
+		var levels = Enum.GetValues(typeof(NotificationType));
+		var toastLevel = (NotificationType)levels.GetValue(new Random().Next(levels.Length));
+
+		ToasterManager.AddToast("Sample Toast", $"Toast: {Guid.NewGuid().ToString()}", toastLevel, DateTime.Now);
+	}
+
+	private void AddTimedToast()
+	{
+		var levels = Enum.GetValues(typeof(NotificationType));
+		var toastLevel = (NotificationType)levels.GetValue(new Random().Next(levels.Length));
+
+		ToasterManager.AddTimedToast("Sample Timed Toast", $"Toast: {Guid.NewGuid().ToString()}", toastLevel, DateTime.Now, TimedToastValue);
+	}
+}

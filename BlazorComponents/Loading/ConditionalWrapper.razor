@@ -1,0 +1,20 @@
+﻿@namespace BlazorComponents
+
+@if (Condition.Invoke())
+{
+	@ChildContent
+}
+
+@code
+{
+	[Parameter] public Func<bool> Condition { get; set; }
+
+	[Parameter] public RenderFragment ChildContent { get; set; }
+
+	protected override void OnInitialized()
+	{
+		base.OnInitialized();
+
+		if (Condition == null) throw new InvalidOperationException("Condition must be set when using a conditional wrapper");
+	}
+}

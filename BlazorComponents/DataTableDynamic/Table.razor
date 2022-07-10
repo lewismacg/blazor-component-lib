@@ -1,0 +1,313 @@
+﻿@namespace BlazorComponents
+@typeparam TableItem
+
+@if (ShowChildContentAtTop)
+{
+	<CascadingValue Value="(ITable<TableItem>)this" Name="Table">
+		@ChildContent
+	</CascadingValue>
+}
+
+@if (Columns.Any())
+{
+	var columnCount = Columns.Count + (_detailTemplate != null ? 1 : 0);
+
+	<div class="data-table-wrapper @ClassWrapperOverride">
+
+		@if (ShowSearchBar)
+		{
+			<div class="flex flex-row mb-3">
+				<div class="flex-grow-0">
+					@if (Columns.Exists(column => !column.Visible))
+					{
+						<div class="float-left" @onclick="@(_ => VisibilityMenuOpen = !VisibilityMenuOpen)">
+							<div class="column-visibility-section px-3 pt-3">
+								<Popover IsOpen="@VisibilityMenuOpen" Placement="Placement.Bottom" DismissOnNextClick="false" Reference="VisibilityMenuIconRef">
+									<h3 class="popover-header">Column Visibility</h3>
+									<div class="popover-body">
+										<table class="table table-borderless">
+											@foreach (IColumn<TableItem> column in Columns.Where(column => !column.Visible))
+											{
+												<tr>
+													<td>
+														@(column.Title)
+													</td>
+													<td>
+														<div class="float-right" @onclick="@(_ => { column.Visible = true; if (!Columns.Exists(column => !column.Visible)) VisibilityMenuOpen = false;})">
+															<a href="javascript:;">
+																<span aria-hidden="true">
+																	<Icon IconColour="Colour.Black" IconName="add" />
+																</span>
+															</a>
+														</div>
+													</td>
+												</tr>
+
+											}
+										</table>
+										<button class="btn btn-sm btn-secondary" @onclick="@(_ => VisibilityMenuOpen = false)">
+											Close
+										</button>
+									</div>
+								</Popover>
+								<a class="btn btn-secondary" href="javascript:;" @ref="VisibilityMenuIconRef">
+									Column Visibility
+								</a>
+							</div>
+						</div>
+					}
+					@if (AllowExport && ExportAtTop)
+					{
+						<div class="px-3 pt-3">
+							<button class="btn btn-primary" type="button" @onclick="@DownloadCsv">
+								Export
+							</button>
+						</div>
+					}
+				</div>
+
+				<div class="flex-grow-1">
+					<div class="data-table-filter">
+						<div class="float-right">
+							<div class="form-group row">
+							<label class="col-form-label col-sm-4">Filter</label>
+							<input class="form-control col-sm-8" type="text" placeholder="@SearchPlaceholder" @onchange=@(x => { GlobalSearch = x.Value.ToString(); UpdateAsync(); })/>
+						</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		}
+
+		<table aria-readonly="@(IsEditMode ? "false" : "true")" role="grid" class="@TableClass" @attributes="UnknownParameters">
+			<thead class="@TableHeadClass" style="cursor: pointer;">
+				@if (_detailTemplate != null)
+				{
+				<th style="width: 1%"></th>
+				}
+				@foreach (IColumn<TableItem> column in Columns)
+				{
+					@if (column.Visible)
+					{
+					<th scope="col" style="@(!string.IsNullOrEmpty(column.Width) ? $"width:{column.Width};" : "") user-select: none"
+			@ondrop="@(_ => HandleDrop(column))"
+			@ondragstart="@(_ => HandleDragStart(column))"
+			ondragover="event.preventDefault();"
+			draggable="@(ColumnReorder.ToString())"
+			@key="column"
+			aria-sort="@column.AriaSort"
+			class="@(column.Class)">
+
+						<div @onclick="@(async () => await column.SortByAsync())" class="column-header">
+							<span>@column.Title</span>
+
+								@if (column.SortColumn)
+								{
+									if (column.SortDescending)
+									{
+									<span aria-hidden="true"><Icon IconColour="Colour.Black" IconName="arrow_upward" /></span>
+									}
+									else
+									{
+									<span aria-hidden="true"><Icon IconColour="Colour.Black" IconName="arrow_downward" /></span>
+									}
+								}
+
+								@if (column.Filterable)
+								{
+								<div class="float-right" @onclick="@(_ => column.ToggleFilter())" @onclick:stopPropagation>
+									<a href="javascript:;" @ref="column.FilterRef" aria-expanded="@(column.FilterOpen ? "true" : "false")" style="text-decoration: none" aria-label="@(column.Filter == null ? "unfiltered" : "filtered")">
+										<span aria-hidden="true" style="@(column.Filter == null ? "opacity: 0.2;" : string.Empty)">
+											<Icon IconColour="Colour.Black" IconName="filter_list" />
+										</span>
+									</a>
+								</div>
+								<CascadingValue Value="column" Name="Column">
+									<Popover Reference="@column.FilterRef" IsOpen="@column.FilterOpen" Placement="Placement.Bottom" DismissOnNextClick="false">
+										<h3 class="popover-header">Filter</h3>
+										<div class="popover-body">
+											<FilterManager TableItem="TableItem">
+												<StringFilter TableItem="TableItem" />
+												<BooleanFilter TableItem="TableItem" />
+												<NumberFilter TableItem="TableItem" />
+												<DateFilter TableItem="TableItem" />
+												<EnumFilter TableItem="TableItem" />
+													@if (column.CustomIFilters != null)
+													{
+										@column.CustomIFilters(column)
+													}
+							</FilterManager>
+						</div>
+					</Popover>
+				</CascadingValue>
+								}
+
+								@if (column.Hideable)
+								{
+								<div class="float-right mr-1" @onclick="@(_ => column.Visible = false)" @onclick:stopPropagation>
+									<span aria-hidden="true">
+										<Icon IconColour="Colour.Black" IconName="remove" />
+									</span>
+								</div>
+								}
+						</div>
+					</th>
+					}
+				}
+			</thead>
+			<tbody class="@TableBodyClass">
+				@if (FilteredItems != null)
+				{
+					if (FilteredItems.Any())
+					{
+						int i = 0;
+						bool detailViewActive = _detailTemplate != null;
+
+						foreach (TableItem item in FilteredItems)
+						{
+							bool rowDisplayed = false;
+
+							foreach (CustomRow<TableItem> customRow in CustomRows)
+							{
+								if (customRow.IsActiveForItem != null && customRow.IsActiveForItem(item))
+								{
+									@customRow.ChildContent(item)
+									rowDisplayed = true;
+									break;
+								}
+							}
+
+							if (!rowDisplayed)
+							{
+								<tr @key="item" aria-selected="@(SelectedItems.Contains(item) ? "true" : null)" class="@RowClass(item) @(SelectedItems.Contains(item) ? "table-active" : "") data-table-row slim-row" @onclick="(() => OnRowClickHandler(item))">
+
+									@{
+										int locali = i;
+										if (!detailsViewOpen.ContainsKey(locali))
+										{
+											detailsViewOpen[locali] = false;
+										}
+									}
+									@if (detailViewActive)
+									{
+										<td>
+											<a href="javascript:;" style="text-decoration: none" @onclick="@(() => { detailsViewOpen[locali] = !detailsViewOpen[locali]; StateHasChanged(); })" title="Details View" aria-expanded="@(detailsViewOpen[locali] ? "true" : "false")">
+												@if (detailsViewOpen[locali])
+												{
+													<span aria-hidden="true"><Icon IconColour="Colour.Black" IconName="remove" /></span>
+												}
+												else
+												{
+													<span aria-hidden="true"><Icon IconColour="Colour.Black" IconName="add" /></span>
+												}
+											</a>
+										</td>
+									}
+
+									@foreach (IColumn<TableItem> column in Columns)
+									{
+										@if (column.Visible)
+										{
+											<td @key="column"
+					style="@(column.Align > 0 ? $"text-align: {column.Align};" : "")"
+					class="@(column.Class)">
+
+												@if (IsEditMode && column.EditTemplate != null)
+												{
+													@column.EditTemplate(item)
+												}
+												else if (column.Template == null)
+												{
+													@column.Render(item)
+												}
+												else
+												{
+													@column.Template(item)
+												}
+											</td>
+										}
+									}
+								</tr>
+
+								if (detailViewActive && detailsViewOpen[i])
+								{
+									<tr>
+										<td></td>
+										<td colspan="@(Columns.Count)">
+											@_detailTemplate(item)
+										</td>
+									</tr>
+								}
+							}
+
+							{
+								i++;
+							}
+						}
+					}
+					else if (_emptyDataTemplate != null)
+					{
+						<tr>
+							<td colspan="@columnCount">
+								@_emptyDataTemplate
+							</td>
+						</tr>
+					}
+				}
+				else
+				{
+					<tr>
+						<td colspan="@columnCount">
+							<LoadingWrapper Condition="() => _loadingDataTemplate != null">
+								@_loadingDataTemplate
+							</LoadingWrapper>
+						</td>
+					</tr>
+				}
+			</tbody>
+
+			@if (ShowFooter)
+			{
+				<tfoot class="@TableFooterClass">
+					<tr>
+						@if (_detailTemplate != null)
+						{
+							<td style="width: 1%"></td>
+						}
+						@foreach (IColumn<TableItem> column in Columns)
+						{
+							<td @key="column" style="@(column.Align > 0 ? $"text-align: {column.Align};" : "")" class="@(column.ColumnFooterClass)">
+								@if (!string.IsNullOrEmpty(column.SetFooterValue))
+								{
+									@column.SetFooterValue
+								}
+								else if (FilteredItems != null && FilteredItems.Any())
+								{
+									@column.GetFooterValue()
+								}
+							</td>
+						}
+					</tr>
+				</tfoot>
+			}
+		</table>
+	</div>
+}
+
+@if (AllowExport && !ExportAtTop)
+{
+	<div class="mt-2 mb-2 float-left">
+		<button class="btn btn-primary" type="button" @onclick="@DownloadCsv">
+			Export
+		</button>
+	</div>
+}
+
+@if (!ShowChildContentAtTop)
+{
+	<CascadingValue Value="(ITable<TableItem>)this" Name="Table">
+		@ChildContent
+	</CascadingValue>
+}
+

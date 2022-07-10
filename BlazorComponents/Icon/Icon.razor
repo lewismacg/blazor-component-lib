@@ -1,0 +1,11 @@
+﻿@namespace BlazorComponents
+@inherits IconBase
+
+@if (!string.IsNullOrEmpty(IconName) && ChildContent == null)
+{
+    <i title="@IconTitle" class="material-icons noselect @ColourMapper.GetColourClass(IconColour) @(IsLarge ? "large-icon" : string.Empty)" @onclick="@((args) => { OnClickAction?.Invoke(args); })" id="@IconId">@IconName</i>
+}
+else
+{
+    <i title="@IconTitle" class="material-icons noselect @ColourMapper.GetColourClass(IconColour) @(IsLarge ? "large-icon" : string.Empty)" @onclick="@((args) => { OnClickAction?.Invoke(args); })" id="@IconId">@ChildContent</i>
+}

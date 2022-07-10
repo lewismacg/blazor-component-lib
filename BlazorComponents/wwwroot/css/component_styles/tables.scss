@@ -1,0 +1,143 @@
+﻿@import 'colours.scss';
+
+.data-table-wrapper {
+    background-color: transparent;
+    border-top: 1px solid $grey-light;
+    border-bottom: 1px solid $grey-light;
+
+    table {
+        &.data-table {
+            width: 100%;
+            max-width: 100%;
+            background-color: transparent;
+            border-collapse: collapse;
+            border-spacing: 0;
+            display: inline-table;
+
+            thead {
+                display: table-header-group;
+                vertical-align: middle;
+                border: inherit;
+            }
+
+            tr {
+                height: 40px;
+
+                &.slim-row {
+                    height: 32px;
+                }
+
+                &:hover {
+                    background: $grey-light;
+                }
+            }
+
+            th {
+                padding: 0 16px;
+                height: 56px;
+            }
+
+            td {
+                padding: 0 16px;
+            }
+
+            .align-right {
+                justify-content: right;
+            }
+
+            &.striped {
+                tr:nth-child(odd) {
+                    background: $grey-lightest;
+
+                    &:hover {
+                        background: $grey-light;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.data-table-paging {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-content: center;
+    height: 52px;
+
+    .paging-element {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0px 16px;
+
+        span {
+            padding-top: 5px;
+            cursor: pointer;
+        }
+    }
+
+    .page-sizing {
+        height: 32px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+
+        p {
+            padding-top: 2px;
+            padding-right: 8px;
+        }
+    }
+}
+
+select {
+    &.dropdown-select {
+        height: 32px;
+        border: none;
+
+        option {
+            height: 32px;
+        }
+    }
+}
+
+.data-table-filter {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 1em 1em 0 0;
+
+    .input-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0px 6px;
+    }
+}
+
+.data-table {
+    .bs-popover-bottom {
+        margin-top: 1.7rem;
+    }
+}
+
+.popover {
+    width: 228px;
+}
+
+.column-visibility-section {
+    position: relative;
+
+    .popover {
+        top: 2.1rem;
+        left: 1.2rem;
+    }
+
+    .bs-popover-bottom {
+        margin-top: 1.7rem;
+    }
+}
+
+.column-header {
+    position: relative;
+}

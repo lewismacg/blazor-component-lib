@@ -1,0 +1,13 @@
+﻿@namespace BlazorComponents
+@typeparam TableItem
+
+<CascadingValue Value="(IColumn<TableItem>)this.Column" Name="Column">
+    @ChildContent
+</CascadingValue>
+<br />
+
+<div class="justify-content-md-center">
+    <button type="button" class="btn btn-danger btn-sm" role="button" @onclick="@((x) => Column.ToggleFilter())">Close</button>
+    <button type="button" class="btn btn-secondary btn-sm" role="button" @onclick="@(async (x) => await ClearFilterAsync())">Clear</button>
+    <button type="button" class="btn btn-primary btn-sm" role="button" @onclick="@(async (x) => await ApplyFilterAsync())">Apply</button>
+</div>

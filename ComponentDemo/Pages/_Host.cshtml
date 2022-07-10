@@ -1,0 +1,31 @@
+﻿@page "/"
+@namespace ComponentDemo.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>ComponentDemo</title>
+	<base href="~/" />
+	<link rel="icon" type="image/png" href="_content/BlazorComponents/images/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="_content/BlazorComponents/images/android-chrome-192x192.png" sizes="192x192">
+	<link rel="icon" type="image/png" href="_content/BlazorComponents/images/favicon-16x16.png" sizes="16x16">
+	<link rel="shortcut icon" href="_content/BlazorComponents/images/favicon.ico">
+	<link rel="apple-touch-icon" href="_content/BlazorComponents/images/apple-touch-icon.png">
+	<link rel="stylesheet" href="_content/BlazorComponents/css/component_styling.min.css" />
+	<script src="_content/BlazorComponents/js/WebHelpersInterop.min.js"></script>
+</head>
+<body>
+    <app>
+        @(await Html.RenderComponentAsync<App>(RenderMode.Server))
+    </app>
+    <script src="_framework/blazor.server.js"></script>
+    <script src="_content/BlazorComponents/DataTable.min.js"></script>
+    <script src="_content/BlazorComponents/js/DraggableElementInterop.min.js"></script>
+    <script src="_content/BlazorComponents/js/depth-class-toggle.min.js"></script>
+    <script src="_content/BlazorComponents/js/custom-datepicker.min.js"></script>
+    <script src="_content/Blazored.Typeahead/blazored-typeahead.js"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+﻿@page "/ConditionalWrapperDemo"
+<h3>ConditionalWrapper</h3>
+
+<div class="flex flex-row h-100">
+    <div class="flex-grow-1">
+        <div class="input-group input-group-sm">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <input type="checkbox" @bind="@Conditional" />
+                </div>
+            </div>
+            <div class="form-control">Show Conditional</div>
+        </div>
+    </div>
+    <div class="flex-grow-1">
+        <ConditionalWrapper Condition="() => Conditional">
+            <Card>
+                <CardHeader>Hidden Text</CardHeader>
+                <CardBody>
+                    I'm only visible when the conditional is true
+                </CardBody>
+            </Card>
+        </ConditionalWrapper>
+    </div>
+</div>
+
+@code {
+    public bool Conditional { get; set; }
+}

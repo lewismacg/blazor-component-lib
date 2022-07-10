@@ -1,0 +1,31 @@
+﻿@namespace BlazorComponents
+
+@if (Condition.Invoke())
+{
+	@ChildContent
+}
+else
+{
+	<div class="flex flex-column justify-content-center h-100">
+		<div class="flex flex-row">
+			<LoadingSpinner Width="Width" Height="Height" />
+		</div>
+	</div>
+}
+
+@code {
+	[Parameter] public Func<bool> Condition { get; set; }
+
+	[Parameter] public int Width { get; set; } = 65;
+
+	[Parameter] public int Height { get; set; } = 65;
+
+	[Parameter] public RenderFragment ChildContent { get; set; }
+
+	protected override void OnInitialized()
+	{
+		base.OnInitialized();
+
+		if (Condition == null) throw new InvalidOperationException("Condition must be set when using a conditional wrapper");
+	}
+}

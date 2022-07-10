@@ -1,0 +1,18 @@
+﻿[
+	{
+		"outputFile": "wwwroot/css/component_styling.css",
+		"inputFile": "wwwroot/css/component_styling.scss"
+	},
+	{
+		"outputFile": "wwwroot/js/DraggableElementInterop.min.js",
+		"inputFile": "wwwroot/js/DraggableElementInterop.js"
+	},
+	{
+		"outputFile": "wwwroot/js/WebHelpersInterop.min.js",
+		"inputFile": "wwwroot/js/WebHelpersInterop.js"
+	},
+	{
+		"outputFile": "wwwroot/js/depth-class-toggle.min.js",
+		"inputFile": "wwwroot/js/depth-class-toggle.js"
+	}
+]

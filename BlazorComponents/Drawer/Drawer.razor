@@ -1,0 +1,18 @@
+﻿@namespace BlazorComponents
+@inherits DrawerBase
+
+<div class="drawer-wrapper @(ExpansionState ? "drawer-open" : "drawer-closed") d-print-none">
+    <div class="drawer-content">
+        @ChildContent
+    </div>
+    <hr />
+    <div class="drawer-branding" @onclick="@ToggleDrawerExpansion">
+        <Icon IconColour="@Colour.White">@GetExpansionIcon()</Icon>
+        @if (ExpansionState)
+        {
+            <div class="drawer-brand">
+                @Brand
+            </div>
+        }
+    </div>
+</div>

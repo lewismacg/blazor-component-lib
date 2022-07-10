@@ -1,0 +1,88 @@
+﻿@import 'colours.scss';
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    color: $black;
+}
+
+.alert-dismissible {
+    padding-right: 4rem;
+}
+
+.alert-dismissible .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    padding: 0.75rem 1.25rem;
+    color: inherit;
+}
+
+.alert h4 {
+    margin-top: 0;
+    color: inherit;
+}
+
+.alert .alert-link, .alert a {
+    font-family: 'Lato-Bold';
+}
+
+.alert > p, .alert > ul {
+    margin-bottom: 0;
+}
+
+.alert > p + p {
+    margin-top: 5px;
+}
+
+.alert-dismissable, .alert-dismissible {
+    padding-right: 35px;
+}
+
+.alert-dismissable .close, .alert-dismissible .close {
+    position: relative;
+    top: -2px;
+    right: -21px;
+    color: inherit;
+}
+
+.alert-success {
+    background-color: $light-green !important;
+    border-left: 5px solid $primary-green !important;
+}
+
+.alert-success hr {
+    border-top-color: $primary-green;
+}
+
+.alert-info {
+    background-color: $light-blue !important;
+    border-left: 5px solid $blue !important;
+}
+
+.alert-info hr {
+    border-top-color: $blue;
+}
+
+.alert-warning {
+    background-color: $light-yellow !important;
+    border-left: 5px solid $yellow !important;
+}
+
+.alert-warning hr {
+    border-top-color: $yellow;
+}
+
+.alert-danger {
+    background-color: $light-red !important;
+    border-left: 5px solid $primary-red !important;
+}
+
+.alert-danger hr {
+    border-top-color: $primary-red;
+}

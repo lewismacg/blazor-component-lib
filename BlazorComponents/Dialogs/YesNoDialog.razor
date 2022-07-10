@@ -1,0 +1,29 @@
+﻿@namespace BlazorComponents
+
+<Dialog ShowDialog="@ShowDialog" DialogTitle="Confirmation">
+    <div class="dialogBody">
+        @ChildContent
+    </div>
+    <div class="dialogButtons">
+        <button class="btn btn-primary" @onclick="()=>ButtonClicked(true)">Yes</button>
+        <button class="btn btn-danger" @onclick="()=>ButtonClicked(false)">No</button>
+    </div>
+</Dialog>
+
+@code {
+    [Parameter] public Action OnYes { get; set; }
+
+    [Parameter] public Action OnNo { get; set; }
+
+    [Parameter] public bool ShowDialog { get; set; } = false;
+
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
+    private void ButtonClicked(bool yes)
+    {
+        ShowDialog = false;
+
+        if (yes) OnYes?.Invoke();
+        else OnNo?.Invoke();
+    }
+}

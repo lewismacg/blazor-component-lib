@@ -1,0 +1,75 @@
+﻿@namespace BlazorComponents
+
+<CascadingValue Value="this">
+	<ul class="nav nav-tabs">
+		@foreach (TabPage tabPage in _pages)
+		{
+			<li class="nav-item">
+				<a class="nav-link @GetButtonClass(tabPage)" @onclick=@(() => ActivatePage(tabPage))>
+					<div class="row">
+						<div class="pr-1 pt-1">
+							@tabPage.TabTitle
+						</div>
+						@if (@tabPage.TabBadge > 0)
+						{
+							<div class="numberCircle pt-0">@tabPage.TabBadge</div>
+						}
+						else
+						{
+							<div class="pt-0" style="height:30px"> </div>
+						}
+					</div>
+				</a>
+			</li>
+		}
+	</ul>
+	@ChildContent
+</CascadingValue>
+
+@code {
+
+	#region Parameters
+
+	[Parameter] public RenderFragment ChildContent { get; set; }
+
+	#endregion
+
+	#region Properties and Fields
+
+	public TabPage ActivePage { get; set; }
+	List<TabPage> _pages = new();
+
+	#endregion
+
+	#region Methods
+
+	internal void AddPage(TabPage tabPage)
+	{
+		_pages.Add(tabPage);
+
+		if (_pages.Count == 1) ActivePage = tabPage;
+		StateHasChanged();
+	}
+
+	public void RemoveActiveTab()
+	{
+		var activePageIndex = _pages.IndexOf(ActivePage);
+
+		_pages.Remove(ActivePage);
+
+		if (_pages.Any())
+		{
+			if (activePageIndex < _pages.Count) ActivePage = _pages[activePageIndex];
+			else if (activePageIndex - 1 < _pages.Count) ActivePage = _pages[activePageIndex - 1];
+			else ActivePage = _pages.First();
+		}
+
+		StateHasChanged();
+	}
+
+	string GetButtonClass(TabPage page) => page == ActivePage ? "active" : "";
+
+	void ActivatePage(TabPage page) => ActivePage = page;
+
+	#endregion
+}

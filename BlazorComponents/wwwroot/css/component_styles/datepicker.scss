@@ -1,0 +1,299 @@
+﻿@import 'colours.scss';
+
+.datepicker {
+    display: none
+}
+
+.datepicker.active {
+    display: block
+}
+
+.datepicker-dropdown {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10001;
+    padding-top: 4px
+}
+
+.datepicker-dropdown.datepicker-orient-top {
+    padding-top: 0;
+    padding-bottom: 4px
+}
+
+.datepicker-picker {
+    display: inline-block;
+    border-radius: 4px;
+    background-color: $white;
+}
+
+.datepicker-dropdown .datepicker-picker {
+    box-shadow: 0 2px 3px $grey-light,0 0 0 1px $grey-light;
+}
+
+.datepicker-picker span {
+    display: block;
+    flex: 1;
+    border: 0;
+    border-radius: 4px;
+    cursor: default;
+    text-align: center;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none
+}
+
+.datepicker-main {
+    padding: 2px
+}
+
+.datepicker-footer {
+    box-shadow: inset 0 1px 1px $grey-light;
+    background-color: $grey-lightest;
+}
+
+.datepicker-controls, .datepicker-grid, .datepicker-view, .datepicker-view .days-of-week {
+    display: flex
+}
+
+.datepicker-grid {
+    flex-wrap: wrap
+}
+
+.datepicker-view .days .datepicker-cell, .datepicker-view .dow {
+    flex-basis: 14.28571%
+}
+
+.datepicker-view.datepicker-grid .datepicker-cell {
+    flex-basis: 25%
+}
+
+.datepicker-cell, .datepicker-view .week {
+    height: 2.25rem;
+    line-height: 2.25rem
+}
+
+.datepicker-title {
+    box-shadow: inset 0 -1px 1px $grey-light;
+    background-color: $grey-lightest;
+    padding: .375rem .75rem;
+    text-align: center;
+    font-weight: 700
+}
+
+.datepicker-header .datepicker-controls {
+    padding: 2px 2px 0
+}
+
+.datepicker-controls .button {
+    display: inline-flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    border: 1px solid $grey;
+    border-radius: 4px;
+    box-shadow: none;
+    background-color: $white;
+    cursor: pointer;
+    padding: calc(.375em - 1px) .75em;
+    height: 2.25em;
+    vertical-align: top;
+    text-align: center;
+    line-height: 1.5;
+    white-space: nowrap;
+    color: $black;
+    font-size: 1rem
+}
+
+.datepicker-controls .button:active, .datepicker-controls .button:focus {
+    outline: none
+}
+
+.datepicker-controls .button:hover {
+    border-color: $grey-dark;
+    color: $black
+}
+
+.datepicker-controls .button:focus {
+    border-color: $grey;
+    color: $black
+}
+
+.datepicker-controls .button:focus:not(:active) {
+    box-shadow: 0 0 0 .125em $grey-light;
+}
+
+.datepicker-controls .button:active {
+    border-color: $grey-darkest;
+    color: $black
+}
+
+.datepicker-controls .button[disabled] {
+    cursor: not-allowed
+}
+
+.datepicker-header .datepicker-controls .button {
+    border-color: transparent;
+    font-weight: 700
+}
+
+.datepicker-header .datepicker-controls .button:hover {
+    background-color: $grey-lightest
+}
+
+.datepicker-header .datepicker-controls .button:focus:not(:active) {
+    box-shadow: 0 0 0 .125em hsla(0,0%,100%,.25)
+}
+
+.datepicker-header .datepicker-controls .button:active {
+    background-color: $grey-lightest
+}
+
+.datepicker-header .datepicker-controls .button[disabled] {
+    box-shadow: none
+}
+
+.datepicker-footer .datepicker-controls .button {
+    margin: calc(.375rem - 1px) .375rem;
+    border-radius: 2px;
+    width: 100%;
+    font-size: .75rem
+}
+
+.datepicker-controls .view-switch {
+    flex: auto
+}
+
+.datepicker-controls .next-btn, .datepicker-controls .prev-btn {
+    padding-right: .375rem;
+    padding-left: .375rem;
+    width: 2.25rem
+}
+
+.datepicker-controls .next-btn.disabled, .datepicker-controls .prev-btn.disabled {
+    visibility: hidden
+}
+
+.datepicker-view .dow {
+    height: 1.5rem;
+    line-height: 1.5rem;
+    font-size: .875rem;
+    font-weight: 700
+}
+
+.datepicker-view .week {
+    width: 2.25rem;
+    color: $grey;
+    font-size: .75rem
+}
+
+@media (max-width:22.5rem) {
+    .datepicker-view .week {
+        width: 1.96875rem
+    }
+}
+
+.datepicker-grid {
+    width: 15.75rem
+}
+
+@media (max-width:22.5rem) {
+    .calendar-weeks + .days .datepicker-grid {
+        width: 13.78125rem
+    }
+}
+
+.datepicker-cell:not(.disabled):hover {
+    background-color: $dark-yellow;
+    cursor: pointer
+}
+
+.datepicker-cell.selected, .datepicker-cell.selected:hover {
+    background-color: $light-yellow;
+    color: $black;
+    font-weight: 600
+}
+
+.datepicker-cell.disabled {
+    color: $grey
+}
+
+.datepicker-cell.next:not(.disabled), .datepicker-cell.prev:not(.disabled) {
+    color: $grey-dark
+}
+
+.datepicker-cell.next.selected, .datepicker-cell.prev.selected {
+    color: $grey-light
+}
+
+.datepicker-cell.highlighted:not(.selected):not(.range):not(.today) {
+    border-radius: 0;
+    background-color: $grey-light
+}
+
+.datepicker-cell.highlighted:not(.selected):not(.range):not(.today):not(.disabled):hover {
+    background-color: $grey
+}
+
+.datepicker-cell.highlighted:not(.selected):not(.range):not(.today).focused {
+    background-color: $grey-lightest
+}
+
+.datepicker-cell.today:not(.selected) {
+    background-color: $blue
+}
+
+.datepicker-cell.today:not(.selected):not(.disabled) {
+    color: $white
+}
+
+.datepicker-cell.today.focused:not(.selected) {
+    background-color: $light-blue
+}
+
+.datepicker-cell.range-end:not(.selected), .datepicker-cell.range-start:not(.selected) {
+    background-color: $grey;
+    color: $white
+}
+
+.datepicker-cell.range-end.focused:not(.selected), .datepicker-cell.range-start.focused:not(.selected) {
+    background-color: $grey
+}
+
+.datepicker-cell.range-start {
+    border-radius: 4px 0 0 4px
+}
+
+.datepicker-cell.range-end {
+    border-radius: 0 4px 4px 0
+}
+
+.datepicker-cell.range {
+    border-radius: 0;
+    background-color: $grey-light
+}
+
+.datepicker-cell.range:not(.disabled):not(.focused):not(.today):hover {
+    background-color: $grey-light
+}
+
+.datepicker-cell.range.disabled {
+    color: $grey
+}
+
+.datepicker-cell.range.focused {
+    background-color: $grey
+}
+
+.datepicker-view.datepicker-grid .datepicker-cell {
+    height: 4.5rem;
+    line-height: 4.5rem
+}
+
+.datepicker-input.in-edit {
+    border-color: $grey-dark
+}
+

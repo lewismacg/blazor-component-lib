@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+		<Version>1.0.0$(VersionSuffix)</Version>
+		<Authors>Lewis.MacGillivray</Authors>
+		<Description>Blazor Component Library</Description>
+		<AssemblyVersion>1.0.0</AssemblyVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="DataTableDynamic\Helpers\**" />
+	  <Content Remove="DataTableDynamic\Helpers\**" />
+	  <EmbeddedResource Remove="DataTableDynamic\Helpers\**" />
+	  <None Remove="DataTableDynamic\Helpers\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Remove="compilerconfig.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="compilerconfig.json" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+		<PackageReference Include="BlazorDownloadFile" Version="2.4.0.2" />
+		<PackageReference Include="Blazored.Typeahead" Version="4.6.0" />
+		<PackageReference Condition="'$(OS)' == 'Windows_NT'" Include="BuildWebCompiler" Version="1.12.394" />
+		<PackageReference Include="CsvHelper" Version="27.1.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.6" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.6" />
+		<PackageReference Include="LINQKit.Core" Version="1.1.22" />
+		<PackageReference Include="Microsoft.Extensions.Localization" Version="6.0.6" />
+	</ItemGroup>
+
+</Project>

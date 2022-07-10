@@ -1,0 +1,20 @@
+﻿@namespace BlazorComponents
+@inherits PredictiveInputBase
+
+<div class="@(IsSmall ? "blazored-small" : "")">
+    <BlazoredTypeahead SearchMethod="@Search"
+                       TValue="string"
+                       TItem="string"
+                       Value="SelectedResult"
+                       ValueChanged="@SelectedResultChanged"
+                       ValueExpression="@(() => SelectedResult)"
+                       MaximumSuggestions="@MaxSuggestions"
+                       placeholder="@Placeholder">
+        <SelectedTemplate>
+            @context.ToString()
+        </SelectedTemplate>
+        <ResultTemplate>
+            @context.ToString()
+        </ResultTemplate>
+    </BlazoredTypeahead>
+</div>

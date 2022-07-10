@@ -1,0 +1,116 @@
+﻿@page "/DataTableDemo"
+@using ComponentDemo.Models
+@using BlazorComponents
+
+<h3>DataTable Demo</h3>
+
+<DataTable Items="@Items" Striped="true" ShowPaging="false" PageSize="15" SlimRows="true" ShowPageSizeSelect="false" ShowFilter="true" FieldToFilter="CustomerName" RowClassFunction="@GetRowStyle" TTableItem="SaleModel">
+    <DataTableHeader>
+        <th>Sales Person</th>
+        <th>Customer Name</th>
+        <th>Product Count</th>
+        <th>Sale Name</th>
+        <th>Sale Profit</th>
+        <th>Sale Value</th>
+    </DataTableHeader>
+    <DataTableRow>
+        <td>@context.SalesPerson</td>
+        <td>@context.CustomerName</td>
+        <td>@context.ProductCount</td>
+        <td>@context.SaleName</td>
+        <td>@($"{context.SaleProfit:c}")</td>
+        <td>@($"{context.SaleValue:c}")</td>
+    </DataTableRow>
+</DataTable>
+
+@code {
+    public List<SaleModel> Items { get; private set; }
+
+    protected override void OnInitialized()
+    {
+        Items = new List<SaleModel>
+        {
+            new ()
+            {
+                SalesPerson = "Mr Salesman",
+                CustomerName = "Joe Blogs",
+                ProductCount = 3,
+                SaleName = "First Sale",
+                SaleProfit = 123.45m,
+                SaleValue = 200m
+            },
+            new ()
+            {
+                SalesPerson = "Mr Salesman",
+                CustomerName = "Jane Doe",
+                ProductCount = 1,
+                SaleName = "Lost Sale",
+                SaleProfit = 13.45m,
+                SaleValue = 10m
+            },
+            new ()
+            {
+                SalesPerson = "Barry",
+                CustomerName = "Jeff",
+                ProductCount = 5,
+                SaleName = "First Sale",
+                SaleProfit = 123.45m,
+                SaleValue = 32.123m
+            },
+            new ()
+            {
+                SalesPerson = "Jerry",
+                CustomerName = "Tom",
+                ProductCount = 355,
+                SaleName = "Black Friday",
+                SaleProfit = -93.45m,
+                SaleValue = -130m
+            },
+            new ()
+            {
+                SalesPerson = "Bob",
+                CustomerName = "Smith",
+                ProductCount = 35,
+                SaleName = "Tuesday",
+                SaleProfit = 3.85m,
+                SaleValue = 19m
+            },
+            new ()
+            {
+                SalesPerson = "Steve",
+                CustomerName = "Smith",
+                ProductCount = 8,
+                SaleName = "50% off",
+                SaleProfit = 9.85m,
+                SaleValue = 9m
+            }
+        };
+
+        var rand = new Random();
+        var names = new string[] {"Jeff", "Bob", "Matt", "Alan", "Rash"};
+        var lastNames = new string[] {"Jones", "Doe", "Smith"};
+
+        var saleNames = new string[] {"Office", "Super", "Sale", "Discount", "Phone"};
+
+        for (int i = 0; i < 100; i++)
+        {
+            Items.Add(new SaleModel
+            {
+                SalesPerson = $"{names[rand.Next(names.Length)]} {lastNames[rand.Next(lastNames.Length)]}",
+                CustomerName = $"{names[rand.Next(names.Length)]} {lastNames[rand.Next(lastNames.Length)]}",
+                ProductCount = rand.Next(150),
+                SaleName = $"{saleNames[rand.Next(saleNames.Length)]} {saleNames[rand.Next(saleNames.Length)]} {saleNames[rand.Next(saleNames.Length)]}",
+                SaleProfit = (decimal) (rand.NextDouble() * 1000),
+                SaleValue = (decimal) (rand.NextDouble() * 1000)
+            });
+        }
+    }
+
+    protected string GetRowStyle(SaleModel model)
+    {
+        if (model.SaleProfit > 600) return "alert-success";
+        if (model.SaleProfit > 400) return "alert-warning";
+
+        return "alert-danger";
+    }
+}

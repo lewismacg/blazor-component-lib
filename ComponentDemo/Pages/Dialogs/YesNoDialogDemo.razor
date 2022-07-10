@@ -1,0 +1,45 @@
+﻿@page "/Dialogs/YesNo"
+
+@using BlazorComponents
+
+<h4>Yes/No Dialog</h4>
+<LoadingWrapper Condition="() => IsLoading == false">
+	<div>
+		<button class="btn btn-success" @onclick="() => ShowingDialog = true">Show Dialog</button>
+		<button class="btn btn-success" @onclick="() => ShowingAsyncDialog = true">Show Async Dialog</button>
+	</div>
+</LoadingWrapper>
+<div>
+    Last Dialog Action: @LastResult
+</div>
+
+<YesNoDialog ShowDialog="ShowingDialog" OnYes="()=> OnDialogClick(true)" OnNo="()=>OnDialogClick(false)">Are you sure?</YesNoDialog>
+<YesNoAsyncDialog ShowDialog="ShowingAsyncDialog" OnYes="async () => await OnDialogClickAsync(true)" OnNo="async () => await OnDialogClickAsync(false)">Are you sure?</YesNoAsyncDialog>
+
+
+@code {
+    public bool ShowingDialog { get; set; }
+    public bool ShowingAsyncDialog { get; set; }
+	public bool IsLoading { get; set; }
+	public string LastResult { get; set; } = string.Empty;
+
+    protected void OnDialogClick(bool yes)
+    {
+        LastResult = yes ? "Yes" : "No";
+        StateHasChanged();
+
+        ShowingDialog = false;
+    }
+
+    protected async Task OnDialogClickAsync(bool yes)
+    {
+        IsLoading = true;
+        await Task.Delay(5000);
+
+        LastResult = yes ? "Yes" : "No";
+        StateHasChanged();
+
+        ShowingAsyncDialog = false;
+        IsLoading = false;
+    }
+}

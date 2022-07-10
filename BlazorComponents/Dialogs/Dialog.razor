@@ -1,0 +1,33 @@
+﻿@namespace BlazorComponents
+@inherits BaseDialog
+
+@if (ShowDialog)
+{
+    <div class="dialog-container"></div>
+    <div class="dialog @AdditionalClass" id="@DialogId">
+        @if (!string.IsNullOrWhiteSpace(DialogTitle) && IsDraggable)
+        {
+            <div class="dialogTitle flex-row justify-content-between">
+                <span>@DialogTitle</span>
+                <div class="float-right">
+                    <Icon IconName="open_with" IconColour="Colour.White" IconId="@DialogHandleId" />
+                </div>
+            </div>
+        }
+        else if (IsDraggable)
+        {
+            <div class="dialogTitle flex-row justify-content-between">
+                <div class="float-right">
+                    <Icon IconName="open_with" IconColour="Colour.White" IconId="@DialogHandleId" />
+                </div>
+            </div>
+        }
+        else if (!string.IsNullOrWhiteSpace(DialogTitle))
+        {
+            <div class="dialogTitle">
+                @DialogTitle
+            </div>
+        }
+        @ChildContent
+    </div>
+}

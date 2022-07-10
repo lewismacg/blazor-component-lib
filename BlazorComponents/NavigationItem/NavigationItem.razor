@@ -1,0 +1,19 @@
+﻿@namespace BlazorComponents
+@inherits NavigationItemBase
+
+<li>
+    <ConditionalWrapper Condition="() => ChildContent != null">
+        <input type="checkbox" id="@Id">
+    </ConditionalWrapper>
+
+    <label for="@Id" class="nav-item" @onclick="@Navigate">
+        <Icon IconTitle="@IconTitle" IconColour="@Colour.White">@Icon</Icon>
+        <span>@LinkText</span>
+    </label>
+
+<ConditionalWrapper Condition="() => ChildContent != null">
+    <ul>
+        @ChildContent
+    </ul>
+</ConditionalWrapper>
+</li>

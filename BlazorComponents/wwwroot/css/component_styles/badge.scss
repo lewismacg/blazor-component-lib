@@ -1,0 +1,88 @@
+﻿@import 'colours.scss';
+
+.badge {
+    display: inline-block;
+    padding: 0.2em 1em;
+    font-size: 75%;
+    font-family: 'Lato-Bold', sans-serif;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .badge {
+        transition: none;
+    }
+}
+
+a.badge:hover, a.badge:focus {
+    text-decoration: none;
+}
+
+.badge:empty {
+    display: none;
+}
+
+.btn .badge {
+    position: relative;
+    top: -1px;
+}
+
+.badge-pill {
+    padding-right: 0.6em;
+    padding-left: 0.6em;
+    border-radius: 10rem;
+}
+
+.badge-primary {
+    color: $white;
+    background-color: $blue;
+}
+
+a.badge-primary:hover, a.badge-primary:focus {
+    color: $white;
+    background-color: $dark-blue;
+}
+
+.badge-secondary {
+    color: $black;
+    background-color: $yellow;
+}
+
+a.badge-secondary:hover, a.badge-secondary:focus {
+    color: $black;
+    background-color: $dark-yellow;
+}
+
+.badge-success {
+    color: $white;
+    background-color: $primary-green;
+}
+
+a.badge-success:hover, a.badge-success:focus {
+    color: $white;
+    background-color: $dark-green;
+}
+
+.badge-info {
+    color: $black;
+    background-color: $light-blue;
+}
+
+a.badge-info:hover, a.badge-info:focus {
+    background-color: $blue;
+}
+
+.badge-danger {
+    color: $primary-red;
+    background-color: $white;
+    border: 1px solid $primary-red;
+}
+
+a.badge-danger:hover, a.badge-danger:focus {
+    background-color: $grey-lightest;
+}

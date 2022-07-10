@@ -1,0 +1,7 @@
+﻿@namespace BlazorComponents
+@typeparam TTableItem
+@inherits BlazorComponents.BaseDataTableRow<TTableItem>
+
+<CascadingValue Value="@this">
+    <tr class="data-table-row @((Table?.SlimRows ?? false) ? "slim-row": "") @Class" @onclick="OnClickHandler">@ChildContent</tr>
+</CascadingValue>

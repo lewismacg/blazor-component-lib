@@ -1,0 +1,300 @@
+﻿@page "/FormComponents"
+@using Blazored.FluentValidation
+@using ComponentDemo.Models
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-12">
+			<h1>Components</h1>
+		</div>
+	</div>
+	<div class="row justify-content-center text-center">
+		<div class="col-sm-12 pb-5">
+			<h5>Buttons</h5>
+		</div>
+		<div class="col-sm-12">
+			<div class="row">
+				<div class="col-sm-3">
+					<b>Primary</b>
+				</div>
+				<div class="col-sm-3">
+					<button class="btn btn-primary">Button</button>
+				</div>
+				<div class="col-sm-3">
+					<button class="btn btn-primary btn-sm">Button</button>
+				</div>
+				<div class="col-sm-3">
+					<button class="btn btn-primary" disabled>Button</button>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-12">
+			<div class="row">
+				<div class="col-sm-3">
+					<b>Secondary</b>
+				</div>
+				<div class="col-sm-3">
+					<button class="btn btn-secondary">Button</button>
+				</div>
+				<div class="col-sm-3">
+					<button class="btn btn-secondary btn-sm">Button</button>
+				</div>
+				<div class="col-sm-3">
+					<button class="btn btn-secondary" disabled>Button</button>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-12">
+			<div class="row">
+				<div class="col-sm-3">
+					<b>Success</b>
+				</div>
+				<div class="col-sm-3">
+					<button class="btn btn-success">Button</button>
+				</div>
+				<div class="col-sm-3">
+					<button class="btn btn-success btn-sm">Button</button>
+				</div>
+				<div class="col-sm-3">
+					<button class="btn btn-success" disabled>Button</button>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-12">
+			<div class="row">
+				<div class="col-sm-3">
+					<b>Danger</b>
+				</div>
+				<div class="col-sm-3">
+					<button class="btn btn-danger">Button</button>
+				</div>
+				<div class="col-sm-3">
+					<button class="btn btn-danger btn-sm">Button</button>
+				</div>
+				<div class="col-sm-3">
+					<button class="btn btn-danger" disabled>Button</button>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-12">
+			<div class="row">
+				<div class="col-sm-3">
+					<b>Info</b>
+				</div>
+				<div class="col-sm-3">
+					<button class="btn btn-info">Button</button>
+				</div>
+				<div class="col-sm-3">
+					<button class="btn btn-info btn-sm">Button</button>
+				</div>
+				<div class="col-sm-3">
+					<button class="btn btn-info" disabled>Button</button>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-12">
+			<div class="row">
+				<div class="col-sm-3">
+					<b>Link</b>
+				</div>
+				<div class="col-sm-3">
+					<button class="btn btn-link">Button</button>
+				</div>
+				<div class="col-sm-3">
+					<button class="btn btn-link btn-sm">Button</button>
+				</div>
+				<div class="col-sm-3">
+					<button class="btn btn-link" disabled>Button</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<hr />
+	<div class="row pt-5 pb-5">
+		<div class="col-sm-12">
+			<h5>Forms</h5>
+		</div>
+		<div class="col-sm-12">
+			<div class="form-group">
+				<label>Label</label>
+				<input placeholder="Placeholder..." class="form-control is-invalid" type="text" required />
+				<small class="form-text text-muted">Help text.</small>
+			</div>
+			<div class="form-group">
+				<label>Label</label>
+				<input placeholder="Placeholder..." class="form-control form-control-sm is-valid" type="text" />
+			</div>
+			<div class="form-group">
+				<label>Label</label>
+				<input placeholder="Placeholder..." class="form-control form-control-lg" type="text" />
+			</div>
+			<div class="form-group">
+				<label>Label</label>
+				<input disabled="disabled" placeholder="Placeholder..." class="form-control" type="text" />
+			</div>
+		</div>
+		<div class="col-sm-12">
+			<EditForm Model="Model" OnValidSubmit="Validate">
+				<FluentValidationValidator @ref="ModelValidator" DisableAssemblyScanning="@true" />
+
+				<div class="form-row">
+					<div class="form-group col-sm-6">
+						<label>Label</label>
+						<DateInput @bind-Value="@Model.Date" DatepickerTitle="Title" class="form-control editable" />
+						<p>Bound value: @Model.Date</p>
+						<ValidationMessage For="() => Model.Date"></ValidationMessage>
+					</div>
+					<div class="form-group col-sm-6">
+						<label>Label</label>
+						<DateInput @bind-Value="@Model.Date2" placeholder="Text" disabled="true" class="form-control" />
+						<p>Bound value: @Model.Date2</p>
+						<ValidationMessage For="() => Model.Date2"></ValidationMessage>
+					</div>
+				</div>
+				<button class="btn btn-primary" type="submit">Validate</button>
+
+			</EditForm>
+			<div class="form-group form-row">
+				<label>Label</label>
+				<input placeholder="1000" class="form-control" type="number" min="10" max="1000" />
+			</div>
+			<div class="form-row">
+				<div class="custom-checkbox custom-control ">
+					<input class="custom-control-input" id="customControlValidation1" type="checkbox" checked />
+					<label class="custom-control-label" for="customControlValidation1">Label</label>
+				</div>
+			</div>
+			<div class="dropdown form-row">
+				<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+					Dropdown
+				</button>
+				<div class="dropdown-menu">
+					<div class="dropdown-item" href='#'>A</div>
+					<div class="dropdown-item active" href='#'>B</div>
+					<div class="dropdown-item disabled" href='#'>C</div>
+				</div>
+			</div>
+			<div class="form-group form-row">
+				<label for="exampleFormControlSelect1">Select</label>
+				<select class="form-control" id="exampleFormControlSelect1">
+					<option value="1">Option A</option>
+					<option value="2">Option B</option>
+					<option value="3">Option C</option>
+				</select>
+			</div>
+			<div class="form-group form-row">
+				<div class="custom-control custom-switch">
+					<input type="checkbox" class="custom-control-input" id="3433" />
+					<label class="custom-control-label" for="3433"> Edit</label>
+				</div>
+			</div>
+		</div>
+	</div>
+	<hr />
+	<div class="row">
+		<div class="col-sm-12">
+			<h5>Typography</h5>
+		</div>
+		<div class="col-sm-12">
+			<p>This is regular text in a P tag</p>
+			<b>This is bolded text in a B tag</b><br />
+			<i>This is italicised text in an I tag</i><br />
+			<strong>This is strong text in a strong tag</strong><br />
+			<b><i>This is italicised bold text in a B and I tag</i></b><br />
+			<h1>This is an H1</h1><br />
+			<h2>This is an H2</h2><br />
+			<h3>This is an H3</h3><br />
+			<h4>This is an H4</h4><br />
+			<h5>This is an H5</h5><br />
+		</div>
+	</div>
+	<hr />
+	<div class="row">
+		<div class="col-sm-12">
+			<h5>Alerts and Badges</h5>
+		</div>
+		<div class="col-sm-12">
+			<div class="alert alert-success">
+				<h4>Success!</h4>
+				<p>This is a success alert <a href='#'>with a link</a></p>
+			</div>
+			<div class="alert alert-info">
+				<h4>Info!</h4>
+				<p>This is an info alert <a href='#'>with a link</a></p>
+			</div>
+			<div class="alert alert-warning">
+				<h4>Warning!</h4>
+				<p>This is a warning alert <a href='#'>with a link</a></p>
+			</div>
+			<div class="alert alert-danger">
+				<h4>Danger!</h4>
+				<p>This is a danger alert <a href='#'>with a link</a></p>
+			</div>
+			<div class="badge badge-pill badge-primary">
+				Primary badge
+			</div>
+			<div class="badge badge-pill badge-secondary">
+				Secondary badge
+			</div>
+			<div class="badge badge-pill badge-success">
+				Success badge
+			</div>
+			<div class="badge badge-pill badge-info">
+				Info badge
+			</div>
+			<div class="badge badge-pill badge-danger">
+				Danger badge
+			</div>
+		</div>
+	</div>
+	<hr />
+	<div class="row pt-5">
+		<div class="col-sm-12">
+			<h5>Cards</h5>
+		</div>
+		<div class="col-sm-12">
+			<div class="card-group">
+				<div class="card">
+					<div class="card-header">
+						<b>Header</b>
+					</div>
+					<div class="card-body">
+						<b>Title</b>
+						<p class="card-text">Some supporting text</p>
+						<a href='#' class="btn btn-primary">Go Somewhere</a>
+					</div>
+					<div class="card-footer">Footer of the card</div>
+				</div>
+				<Card>
+					<CardHeader>Card title</CardHeader>
+					<CardBody>
+						<h5 class="card-title">Card title</h5>
+						<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+						<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+					</CardBody>
+				</Card>
+
+				<Card ClassOverride="p-5">
+					<CardHeader ClassOverride="text-uppercase">Card title</CardHeader>
+					<CardBody ClassOverride="bg-secondary">
+						<h5 class="card-title">Card title</h5>
+						<p class="card-text">This is a card with ClassOverrides p-5 on Card, text-uppercase on CardHeader and bg-secondary on CardBody.</p>
+						<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+					</CardBody>
+				</Card>
+			</div>
+		</div>
+	</div>
+</div>
+
+@code {
+	public FluentValidationValidator ModelValidator;
+
+	public DateModel Model { get; set; } = new();
+
+	public void Validate()
+	{
+		var isValid = ModelValidator.Validate(x => x.IncludeAllRuleSets());
+		if (isValid == false) return;
+	}
+}

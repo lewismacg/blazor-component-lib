@@ -1,0 +1,185 @@
+﻿@page "/DataTableDynamicDemo"
+
+@using ComponentDemo.Models
+@using System.ComponentModel
+
+<h3>DataTable Dynamic Demo</h3>
+
+<Table @ref="table" AllowExport="true" ExportAtTop="true" TableItem="SaleModel" Items="Items" PageSize="15" ColumnReorder="true" ShowSearchBar="true" SearchPlaceholder="Search by column values">
+	<Column Hideable="true" TableItem="SaleModel" Title="Sales Person" Field="@(x => x.SalesPerson)" Sortable="true" Filterable="true" Width="15%" DefaultSortColumn="true" />
+	<Column Hideable="true" TableItem="SaleModel" Title="Customer Name" Field="@(x => x.CustomerName)" Sortable="true" Filterable="true" Width="15%" />
+	<Column Hideable="true" TableItem="SaleModel" Title="Product Count" Field="@(x => x.ProductCount)" Sortable="true" Filterable="true" Width="15%" />
+	<Column Hideable="true" TableItem="SaleModel" Title="Sale Name" Field="@(x => x.SaleName)" Sortable="true" Filterable="true" Width="15%" />
+	<Column Hideable="true" TableItem="SaleModel" Title="Processed" Field="@(x => x.Processed)" Sortable="true" Filterable="true" Width="15%" />
+	<Column Show="false" Hideable="true" TableItem="SaleModel" Title="Sale Profit" Field="@(x => x.SaleProfit)" Sortable="true" Filterable="true" Width="15%">
+		<Template>
+			@context.SaleProfit.ToString("0.00")
+		</Template>
+	</Column>
+	<Column TableItem="SaleModel" Title="Sale Value" Field="@(x => x.SaleValue)" Sortable="true" Filterable="true" Width="15%">
+		<Template>
+			@context.SaleValue.ToString("0.00")
+		</Template>
+	</Column>
+	<Pager ShowPageNumber="true" ShowTotalCount="true" ShowPageSizes="true" />
+</Table>
+<br />
+<div class="mt-2 mb-2 float-left">
+	<button class="btn btn-primary" @onclick="UpdateList">Update List</button>
+</div>
+@code
+{
+	private ITable<SaleModel> table = new Table<SaleModel>();
+	public List<SaleModel> Items { get; private set; }
+
+	protected override void OnInitialized()
+	{
+		Items = new List<SaleModel>
+		{
+			new ()
+			{
+				SalesPerson = "Mr Salesman",
+				CustomerName = "Joe Blogs",
+				ProductCount = 3,
+				SaleName = "First Sale",
+				SaleProfit = 123.45m,
+				SaleValue = 200m,
+				Processed = DateTime.Now
+			},
+			new ()
+			{
+				SalesPerson = "Mr Salesman",
+				CustomerName = null,
+				ProductCount = 1,
+				SaleName = "Lost Sale",
+				SaleProfit = 13.45m,
+				SaleValue = 10m
+			},
+			new ()
+			{
+				SalesPerson = "Barry",
+				CustomerName = "",
+				ProductCount = 5,
+				SaleName = "First Sale",
+				SaleProfit = 123.45m,
+				SaleValue = 32.123m
+			},
+			new ()
+			{
+				SalesPerson = "Jerry",
+				CustomerName = "Tom",
+				ProductCount = 355,
+				SaleName = "Black Friday",
+				SaleProfit = -93.45m,
+				SaleValue = -130m
+			},
+			new ()
+			{
+				SalesPerson = "Bob",
+				CustomerName = "Smith",
+				ProductCount = 35,
+				SaleName = "Tuesday",
+				SaleProfit = 3.85m,
+				SaleValue = 19m
+			},
+			new ()
+			{
+				SalesPerson = "Steve",
+				CustomerName = "Smith",
+				ProductCount = 8,
+				SaleName = "50% off",
+				SaleProfit = 9.85m,
+				SaleValue = 9m
+			}
+		};
+		var rand = new Random();
+		var names = new string[] { "Jeff", "Bob", "Matt", "Alan", "Rash" };
+		var lastNames = new string[] { "Jones", "Doe", "Smith" };
+
+		var saleNames = new string[] { "Office", "Super", "Sale", "Discount", "Phone" };
+
+		for (int i = 0; i < 100; i++)
+		{
+			Items.Add(new SaleModel
+			{
+				SalesPerson = $"{names[rand.Next(names.Length)]} {lastNames[rand.Next(lastNames.Length)]}",
+				CustomerName = $"{names[rand.Next(names.Length)]} {lastNames[rand.Next(lastNames.Length)]}",
+				ProductCount = rand.Next(150),
+				SaleName = $"{saleNames[rand.Next(saleNames.Length)]} {saleNames[rand.Next(saleNames.Length)]} {saleNames[rand.Next(saleNames.Length)]}",
+				SaleProfit = (decimal)(rand.NextDouble() * 1000),
+				SaleValue = (decimal)(rand.NextDouble() * 1000)
+			});
+		}
+
+		Random random = new Random(123);
+	}
+
+	public void UpdateList()
+	{
+		Items = new List<SaleModel>
+		{
+			new SaleModel()
+			{
+				SalesPerson = "Mr Salesman",
+				CustomerName = "Joe Blogs",
+				ProductCount = 4,
+				SaleName = "First Sale",
+				SaleProfit = 123.45m,
+				SaleValue = 200m
+			},
+			new SaleModel()
+			{
+				SalesPerson = "Mr Salesman",
+				CustomerName = "Jane Doe",
+				ProductCount = 5,
+				SaleName = "Lost Sale",
+				SaleProfit = 13.45m,
+				SaleValue = 10m
+			},
+			new SaleModel()
+			{
+				SalesPerson = "Barry",
+				CustomerName = "Jeff",
+				ProductCount = 6,
+				SaleName = "First Sale",
+				SaleProfit = 123.45m,
+				SaleValue = 32.123m
+			},
+			new SaleModel()
+			{
+				SalesPerson = "Jerry",
+				CustomerName = "Tom",
+				ProductCount = 355,
+				SaleName = "Black Friday",
+				SaleProfit = -93.45m,
+				SaleValue = -130m
+			},
+			new SaleModel()
+			{
+				SalesPerson = "Bob",
+				CustomerName = "Smith",
+				ProductCount = 35,
+				SaleName = "Tuesday",
+				SaleProfit = 3.85m,
+				SaleValue = 19m
+			},
+			new SaleModel()
+			{
+				SalesPerson = "Steve",
+				CustomerName = "Smith",
+				ProductCount = 8,
+				SaleName = "50% off",
+				SaleProfit = 9.85m,
+				SaleValue = 9m
+			}
+		};
+	}
+
+	public enum CreditCard
+	{
+		none = 0,
+		[Description("MasterCard")]
+		MasterCard = 1,
+		Visa = 2
+	}
+}

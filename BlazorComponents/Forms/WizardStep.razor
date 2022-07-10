@@ -1,0 +1,34 @@
+﻿@namespace BlazorComponents
+
+@if (Parent.ActiveStep == this)
+{
+    <div id="step-@(Parent.StepsIndex(this) + 1)">
+        @ChildContent
+    </div>
+    <div class="d-flex justify-content-end">
+        @if (Parent.ActiveStepIx > 0)
+        {
+            <button class="btn btn-primary mr-auto @ExtraButtonClasses" type="button" disabled="@(Parent.ActiveStepIx == 0)" @onclick="Parent.GoBack">
+                @if (ShowIcons)
+                {
+                    <span class="pr-1">
+                        <Icon IconColour="Colour.White">west</Icon>
+                    </span>
+                }
+                @BackwardsButtonText
+            </button>
+        }
+        @if (!Parent.IsLastStep || !Parent.HideFinalStep)
+        {
+            <button class="btn btn-primary @ExtraButtonClasses" type="@(Parent.IsLastStep ? "submit" : "button")" @onclick="Parent.IsLastStep ? OnFinalAction : Parent.GoNext" disabled="@DisableForwardButton">
+                @ForwardButtonText
+                @if (ShowIcons)
+                {
+                    <span class="pl-1">
+                        <Icon IconColour="Colour.White">east</Icon>
+                    </span>
+                }
+            </button>
+        }
+    </div>
+}

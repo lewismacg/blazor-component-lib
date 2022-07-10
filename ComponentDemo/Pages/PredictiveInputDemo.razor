@@ -1,0 +1,55 @@
+﻿@page "/PredictiveInput"
+
+<h3>Predictive search</h3>
+<br />
+<h4>Search product names</h4>
+
+<div class="row">
+    <div class="col-4">
+        <PredictiveInput DataList="Testdata" ValueChangedCallback="@AssignValue" MaxSuggestions="25" Placeholder="Please choose a name..."></PredictiveInput>
+    </div>
+</div>
+
+<br />
+
+<h5>you have chosen: @ChosenValue</h5>
+
+@code {
+    // NOTE: The list you pass this component MUST NOT have any duplicate values in it or else it will cause the search to freeze. 
+    // Ensure that .Distinct() is applied prior to passing anything into this component. 
+
+    public List<string> Testdata { get; set; }
+    public string ChosenValue { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Testdata = new List<string>()
+        {
+	        "cRlIkk", 
+			"CntNvX",
+	        "zyRXzR",
+	        "MLQSlN",
+	        "rShcem",
+	        "axXDDU",
+	        "gQsWTb",
+	        "RLPypi",
+	        "ReJEUJ",
+	        "trgBsO",
+	        "hICInw",
+	        "nEtKCC",
+	        "CsgbHj",
+	        "tttBVG",
+	        "gDgArq",
+	        "vcAgjW",
+	        "qHhveV",
+	        "LvnfYi",
+	        "UpPupC",
+	        "xqQPbr",
+        };
+    }
+
+    public void AssignValue(string value)
+    {
+        ChosenValue = value;
+    }
+}

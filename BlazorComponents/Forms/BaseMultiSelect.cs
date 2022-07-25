@@ -14,6 +14,7 @@ namespace BlazorComponents
 		[Parameter] public List<TValue> Options { get; set; } = new();
 		[Parameter] public string DateTimeStringFormat { get; set; } = "dd/MM/yyyy";
 		[Parameter] public bool IsSmall { get; set; }
+		[Parameter] public string Placeholder { get; set; } = "Choose values from list...";
 
 		#endregion
 

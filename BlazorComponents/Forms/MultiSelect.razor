@@ -3,7 +3,7 @@
 @typeparam TValue where TValue : IConvertible
 
 <button class="multidrop no-default-styles w-100 @(IsActive ? "active" : "") @(IsSmall ? "smalldrop" : string.Empty)" @onclick="() => IsActive = !IsActive" @onfocusout="() => IsActive = false">
-	<div class="multidrop-text form-control @(IsSmall ? "form-control-sm" : string.Empty)" data-placeholder="Choose values from list...">
+	<div class="multidrop-text form-control @(IsSmall ? "form-control-sm" : string.Empty)" data-placeholder="@Placeholder">
 		@Value
 	</div>
 	<div class="multidrop-content">

@@ -1,0 +1,17 @@
+﻿@namespace BlazorComponents
+@inherits BaseMultiSelect<TValue>
+@typeparam TValue where TValue : IConvertible
+
+<button class="multidrop no-default-styles w-100 @(IsActive ? "active" : "") @(IsSmall ? "smalldrop" : string.Empty)" @onclick="() => IsActive = !IsActive" @onfocusout="() => IsActive = false">
+	<div class="multidrop-text form-control @(IsSmall ? "form-control-sm" : string.Empty)" data-placeholder="Choose values from list...">
+		@Value
+	</div>
+	<div class="multidrop-content">
+		@foreach (var option in Options)
+		{
+			<div class="multidrop-item @(SelectedValues.Contains(option) ? "selected" : string.Empty)" @onclick="async () => await OnClick(option)" @onclick:stopPropagation="true">
+				@GetStringRepresentation(option)
+			</div>
+		}
+	</div>
+</button>

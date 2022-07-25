@@ -2945,6 +2945,10 @@ hr {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+.no-default-styles {
+  all: unset;
+}
+
 .container,
 .container-fluid,
 .container-sm,
@@ -9666,4 +9670,99 @@ h3 {
   color: white;
   text-align: center;
   vertical-align: central;
+}
+
+.multidrop {
+  padding: 0;
+  border: none;
+}
+.multidrop div:empty:before {
+  content: attr(data-placeholder);
+  color: #717171;
+}
+.multidrop.smalldrop:not(.active) > .multidrop-text::after {
+  font-size: 14px !important;
+}
+.multidrop.smalldrop .multidrop-text {
+  padding: 0.5rem 0rem 0.5rem 0.75rem !important;
+}
+.multidrop.smalldrop .multidrop-text::after {
+  font-size: 14px !important;
+}
+.multidrop.smalldrop .multidrop-content {
+  font-size: 0.875rem;
+}
+.multidrop.smalldrop .multidrop-content .multidrop-item {
+  padding: 0.1rem 0.75rem !important;
+}
+.multidrop.smalldrop .multidrop-content .multidrop-item.selected::after {
+  font-size: 14px !important;
+}
+.multidrop.smalldrop .multidrop-content .multidrop-item:not(.selected)::after {
+  font-size: 14px !important;
+}
+.multidrop.active {
+  border-color: #717171;
+  outline: 0;
+}
+.multidrop.active .multidrop-text {
+  border: 2px solid rgba(56, 56, 56, 0.5);
+}
+.multidrop.active .multidrop-content {
+  display: block !important;
+}
+.multidrop:not(.active) > .multidrop-text::after {
+  font-family: "Material Icons";
+  content: "expand_more";
+  -webkit-font-feature-settings: "liga";
+  float: right;
+  font-size: 18px;
+  color: #383838;
+}
+.multidrop .multidrop-text {
+  display: block;
+  white-space: nowrap;
+  min-height: 1.2em;
+  padding: 0.75rem 0rem 0.75rem 1rem;
+}
+.multidrop .multidrop-text::after {
+  font-family: "Material Icons";
+  content: "expand_less";
+  -webkit-font-feature-settings: "liga";
+  float: right;
+  font-size: 18px;
+  color: #383838;
+}
+.multidrop .multidrop-content {
+  display: none;
+  background-clip: padding-box;
+  border: 2px solid rgba(212, 212, 212, 0.5);
+  border-radius: 0.1rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.multidrop .multidrop-content .multidrop-item {
+  min-height: 2em;
+  padding: 0.2rem 1rem;
+}
+.multidrop .multidrop-content .multidrop-item.selected {
+  background-color: #b7e4c7;
+}
+.multidrop .multidrop-content .multidrop-item.selected::after {
+  font-family: "Material Icons";
+  content: "check_circle";
+  -webkit-font-feature-settings: "liga";
+  float: right;
+  font-size: 18px;
+  color: #2d6a4f;
+}
+.multidrop .multidrop-content .multidrop-item:not(.selected)::after {
+  font-family: "Material Icons";
+  content: "radio_button_unchecked";
+  -webkit-font-feature-settings: "liga";
+  float: right;
+  font-size: 18px;
+  color: #717171;
+}
+.multidrop .multidrop-content .multidrop-item:not(.selected):hover {
+  background-color: #F6F6F6;
 }

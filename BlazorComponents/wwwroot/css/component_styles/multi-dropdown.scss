@@ -1,0 +1,128 @@
+﻿@import 'colours.scss';
+
+.multidrop {
+	padding: 0;
+	border: none;
+
+	div:empty:before {
+		content: attr(data-placeholder);
+		color: $grey-dark;
+	}
+
+	&.smalldrop {
+		&:not(.active) > .multidrop-text {
+			&::after {
+				font-size: 14px !important;
+			}
+		}
+
+		.multidrop-text {
+			padding: .5rem 0rem .5rem .75rem !important;
+
+			&::after {
+				font-size: 14px !important;
+			}
+		}
+
+		.multidrop-content {
+			font-size: 0.875rem;
+
+			.multidrop-item {
+				padding: .1rem 0.75rem !important;
+
+				&.selected {
+					&::after {
+						font-size: 14px !important;
+					}
+				}
+
+				&:not(.selected) {
+					&::after {
+						font-size: 14px !important;
+					}
+				}
+			}
+		}
+	}
+
+	&.active {
+		.multidrop-text {
+			border: 2px solid rgba($grey-darkest, 0.5);
+		}
+
+		.multidrop-content {
+			display: block !important;
+		}
+
+		border-color: $grey-dark;
+		outline: 0;
+	}
+
+	&:not(.active) > .multidrop-text {
+		&::after {
+			font-family: 'Material Icons';
+			content: "expand_more";
+			-webkit-font-feature-settings: 'liga';
+			float: right;
+			font-size: 18px;
+			color: $grey-darkest
+		}
+	}
+
+	.multidrop-text {
+		display: block;
+		white-space: nowrap;
+		min-height: 1.2em;
+		padding: .75rem 0rem .75rem 1rem;
+
+		&::after {
+			font-family: 'Material Icons';
+			content: "expand_less";
+			-webkit-font-feature-settings: 'liga';
+			float: right;
+			font-size: 18px;
+			color: $grey-darkest
+		}
+	}
+
+	.multidrop-content {
+		display: none;
+		background-clip: padding-box;
+		border: 2px solid rgba(212,212,212,.5);
+		border-radius: .1rem;
+		transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+
+		.multidrop-item {
+			min-height: 2em;
+			padding: .2rem 1rem;
+
+			&.selected {
+				background-color: $light-green;
+
+				&::after {
+					font-family: 'Material Icons';
+					content: "check_circle";
+					-webkit-font-feature-settings: 'liga';
+					float: right;
+					font-size: 18px;
+					color: $dark-green
+				}
+			}
+
+			&:not(.selected) {
+				&::after {
+					font-family: 'Material Icons';
+					content: "radio_button_unchecked";
+					-webkit-font-feature-settings: 'liga';
+					float: right;
+					font-size: 18px;
+					color: $grey-dark;
+				}
+
+				&:hover {
+					background-color: $grey-lightest;
+				}
+			}
+		}
+	}
+}

@@ -164,15 +164,12 @@
 					<label class="custom-control-label" for="customControlValidation1">Label</label>
 				</div>
 			</div>
-			<div class="dropdown form-row">
-				<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-					Dropdown
-				</button>
-				<div class="dropdown-menu">
-					<div class="dropdown-item" href='#'>A</div>
-					<div class="dropdown-item active" href='#'>B</div>
-					<div class="dropdown-item disabled" href='#'>C</div>
-				</div>
+			<div class="form-row">
+				<MultiSelect TValue="DateTime" Options="Options" ValueChanged="(e) => SelectedValues = e" DateTimeStringFormat="MMM yyyy"/>
+				@foreach (var val in SelectedValues)
+				{
+					<p>@val</p>
+				}
 			</div>
 			<div class="form-group form-row">
 				<label for="exampleFormControlSelect1">Select</label>
@@ -291,6 +288,8 @@
 	public FluentValidationValidator ModelValidator;
 
 	public DateModel Model { get; set; } = new();
+	public List<DateTime> Options { get; set; } = new() {DateTime.Now, DateTime.Today.AddDays(-3), DateTime.Today.AddDays(-3).AddMonths(-5)};
+	public List<DateTime> SelectedValues = new();
 
 	public void Validate()
 	{

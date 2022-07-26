@@ -9675,6 +9675,7 @@ h3 {
 .multidrop {
   padding: 0;
   border: none;
+  position: relative;
 }
 .multidrop div:empty:before {
   content: attr(data-placeholder);
@@ -9734,6 +9735,9 @@ h3 {
   color: #383838;
 }
 .multidrop .multidrop-content {
+  position: absolute;
+  background-color: #FFFFFF;
+  width: 100%;
   display: none;
   background-clip: padding-box;
   border: 2px solid rgba(212, 212, 212, 0.5);

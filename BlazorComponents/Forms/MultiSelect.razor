@@ -2,7 +2,7 @@
 @inherits BaseMultiSelect<TValue>
 @typeparam TValue where TValue : IConvertible
 
-<button class="multidrop no-default-styles w-100 @(IsActive ? "active" : "") @(IsSmall ? "smalldrop" : string.Empty)" @onclick="() => IsActive = !IsActive" @onfocusout="() => IsActive = false">
+<button class="multidrop no-default-styles w-100 @(IsActive ? "active" : "") @(IsSmall ? "smalldrop" : string.Empty)" @onclick="() => SetDisplayState(!IsActive)" @onfocusout="() => SetDisplayState(false)">
 	<div class="multidrop-text form-control @(IsSmall ? "form-control-sm" : string.Empty)" data-placeholder="@Placeholder">
 		@Value
 	</div>

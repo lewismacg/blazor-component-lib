@@ -12,6 +12,7 @@ namespace BlazorComponents
 
 		[Parameter] public EventCallback<List<TValue>> ValueChanged { get; set; }
 		[Parameter] public List<TValue> Options { get; set; } = new();
+		[Parameter] public EventCallback OnClose { get; set; }
 		[Parameter] public string DateTimeStringFormat { get; set; } = "dd/MM/yyyy";
 		[Parameter] public bool IsSmall { get; set; }
 		[Parameter] public string Placeholder { get; set; } = "Choose values from list...";
@@ -36,6 +37,12 @@ namespace BlazorComponents
 			Value = string.Join(", ", GetStringRepresentation(SelectedValues));
 
 			await ValueChanged.InvokeAsync(SelectedValues);
+		}
+
+		protected async Task SetDisplayState(bool display)
+		{
+			IsActive = display;
+			if (!IsActive) await OnClose.InvokeAsync();
 		}
 
 		private List<string> GetStringRepresentation(List<TValue> selectedValues)

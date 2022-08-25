@@ -5,7 +5,7 @@
 	border: none;
 	position: relative;
 
-	div:empty:before {
+	div:empty:after {
 		content: attr(data-placeholder);
 		color: $grey-dark;
 	}
@@ -31,16 +31,20 @@
 			.multidrop-item {
 				padding: .1rem 0.75rem !important;
 
-				&.selected {
-					&::after {
-						font-size: 14px !important;
-					}
+				&::after {
+					font-size: 14px !important;
+				}
+			}
+
+			.multidrop-input-wrapper {
+				.multidrop-search {
+					padding: 0 0 .1rem .75rem !important;
 				}
 
-				&:not(.selected) {
-					&::after {
-						font-size: 14px !important;
-					}
+				&::after {
+					font-size: 18px !important;
+					right: 10px !important;
+					top: 2px;
 				}
 			}
 		}
@@ -60,7 +64,7 @@
 	}
 
 	&:not(.active) > .multidrop-text {
-		&::after {
+		&::before {
 			font-family: 'Material Icons';
 			content: "expand_more";
 			-webkit-font-feature-settings: 'liga';
@@ -75,8 +79,10 @@
 		white-space: nowrap;
 		min-height: 1.2em;
 		padding: .75rem 0rem .75rem 1rem;
+		overflow: hidden;
+		text-overflow: ellipsis;
 
-		&::after {
+		&::before {
 			font-family: 'Material Icons';
 			content: "expand_less";
 			-webkit-font-feature-settings: 'liga';
@@ -87,6 +93,7 @@
 	}
 
 	.multidrop-content {
+		z-index: 1000;
 		position: absolute;
 		background-color: $white;
 		width: 100%;
@@ -95,6 +102,9 @@
 		border: 2px solid rgba(212,212,212,.5);
 		border-radius: .1rem;
 		transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+		max-height: 15rem;
+		overflow-y: scroll;
+		overflow-x: hidden;
 
 		.multidrop-item {
 			min-height: 2em;
@@ -126,6 +136,33 @@
 				&:hover {
 					background-color: $grey-lightest;
 				}
+			}
+		}
+
+		.multidrop-input-wrapper {
+			.multidrop-search {
+				display: inline-block;
+				position: relative;
+				min-height: 2em;
+				padding: 0 0 .2rem 1rem;
+				width: -webkit-fill-available;
+				width: -moz-available;
+				width: fill-available;
+				background-color: $grey-lightest;
+				border-bottom: 1px solid $grey;
+				cursor: text;
+			}
+
+			&::after {
+				font-family: 'Material Icons';
+				content: "search";
+				-webkit-font-feature-settings: 'liga';
+				float: right;
+				font-size: 25px;
+				color: $black;
+				position: absolute;
+				right: 12px;
+				pointer-events: none;
 			}
 		}
 	}

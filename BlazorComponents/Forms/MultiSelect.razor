@@ -2,12 +2,18 @@
 @inherits BaseMultiSelect<TValue>
 @typeparam TValue where TValue : IConvertible
 
-<button class="multidrop no-default-styles w-100 @(IsActive ? "active" : "") @(IsSmall ? "smalldrop" : string.Empty)" @onclick="() => SetDisplayState(!IsActive)" @onfocusout="() => SetDisplayState(false)">
+<button type="button" class="multidrop no-default-styles w-100 @(IsActive ? "active" : "") @(IsSmall ? "smalldrop" : string.Empty)" @onclick="() => SetDisplayState(!IsActive)" @onfocusout="() => SetDisplayState(false)">
 	<div class="multidrop-text form-control @(IsSmall ? "form-control-sm" : string.Empty)" data-placeholder="@Placeholder">
 		@Value
 	</div>
 	<div class="multidrop-content">
-		@foreach (var option in Options)
+		@if (AllowSearch)
+		{
+			<div class="multidrop-input-wrapper w-100">
+				<input type="text" class="multidrop-search no-default-styles" @oninput="FilterList" @onmousedown="SetFocus" @onfocusout="RemoveFocus" @onfocusout:stopPropagation="true" placeholder="Type here to filter the list..."/>
+			</div>
+		}
+		@foreach (var option in FilteredOptions)
 		{
 			<div class="multidrop-item @(SelectedValues.Contains(option) ? "selected" : string.Empty)" @onclick="async () => await OnClick(option)" @onclick:stopPropagation="true">
 				@GetStringRepresentation(option)

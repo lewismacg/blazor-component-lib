@@ -9677,7 +9677,7 @@ h3 {
   border: none;
   position: relative;
 }
-.multidrop div:empty:before {
+.multidrop div:empty:after {
   content: attr(data-placeholder);
   color: #717171;
 }
@@ -9696,11 +9696,16 @@ h3 {
 .multidrop.smalldrop .multidrop-content .multidrop-item {
   padding: 0.1rem 0.75rem !important;
 }
-.multidrop.smalldrop .multidrop-content .multidrop-item.selected::after {
+.multidrop.smalldrop .multidrop-content .multidrop-item::after {
   font-size: 14px !important;
 }
-.multidrop.smalldrop .multidrop-content .multidrop-item:not(.selected)::after {
-  font-size: 14px !important;
+.multidrop.smalldrop .multidrop-content .multidrop-input-wrapper .multidrop-search {
+  padding: 0 0 0.1rem 0.75rem !important;
+}
+.multidrop.smalldrop .multidrop-content .multidrop-input-wrapper::after {
+  font-size: 18px !important;
+  right: 10px !important;
+  top: 2px;
 }
 .multidrop.active {
   border-color: #717171;
@@ -9712,7 +9717,7 @@ h3 {
 .multidrop.active .multidrop-content {
   display: block !important;
 }
-.multidrop:not(.active) > .multidrop-text::after {
+.multidrop:not(.active) > .multidrop-text::before {
   font-family: "Material Icons";
   content: "expand_more";
   -webkit-font-feature-settings: "liga";
@@ -9725,8 +9730,10 @@ h3 {
   white-space: nowrap;
   min-height: 1.2em;
   padding: 0.75rem 0rem 0.75rem 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.multidrop .multidrop-text::after {
+.multidrop .multidrop-text::before {
   font-family: "Material Icons";
   content: "expand_less";
   -webkit-font-feature-settings: "liga";
@@ -9735,6 +9742,7 @@ h3 {
   color: #383838;
 }
 .multidrop .multidrop-content {
+  z-index: 1000;
   position: absolute;
   background-color: #FFFFFF;
   width: 100%;
@@ -9743,6 +9751,9 @@ h3 {
   border: 2px solid rgba(212, 212, 212, 0.5);
   border-radius: 0.1rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  max-height: 15rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 .multidrop .multidrop-content .multidrop-item {
   min-height: 2em;
@@ -9769,4 +9780,27 @@ h3 {
 }
 .multidrop .multidrop-content .multidrop-item:not(.selected):hover {
   background-color: #F6F6F6;
+}
+.multidrop .multidrop-content .multidrop-input-wrapper .multidrop-search {
+  display: inline-block;
+  position: relative;
+  min-height: 2em;
+  padding: 0 0 0.2rem 1rem;
+  width: -webkit-fill-available;
+  width: -moz-available;
+  width: fill-available;
+  background-color: #F6F6F6;
+  border-bottom: 1px solid #B3B3B3;
+  cursor: text;
+}
+.multidrop .multidrop-content .multidrop-input-wrapper::after {
+  font-family: "Material Icons";
+  content: "search";
+  -webkit-font-feature-settings: "liga";
+  float: right;
+  font-size: 25px;
+  color: #000814;
+  position: absolute;
+  right: 12px;
+  pointer-events: none;
 }

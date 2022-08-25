@@ -165,7 +165,7 @@
 				</div>
 			</div>
 			<div class="form-row">
-				<MultiSelect TValue="DateTime" Options="Options" ValueChanged="(e) => SelectedValues = e" DateTimeStringFormat="MMM yyyy"/>
+				<MultiSelect TValue="DateTime" AllowSearch="true" Options="Options" ValueChanged="(e) => SelectedValues = e" DateTimeStringFormat="MMM yyyy"/>
 				@foreach (var val in SelectedValues)
 				{
 					<p>@val</p>

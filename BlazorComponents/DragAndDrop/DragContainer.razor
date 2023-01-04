@@ -1,0 +1,8 @@
+﻿@namespace BlazorComponents
+@typeparam TModel where TModel : class
+
+<div class="drop-container">
+	<CascadingValue Value="this">
+		@ChildContent
+	</CascadingValue>
+</div>

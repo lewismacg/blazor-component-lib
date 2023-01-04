@@ -1,0 +1,6 @@
+﻿@namespace BlazorComponents
+@typeparam TModel where TModel : class
+
+<li class="drag-and-droppable @_dragClass" draggable="true" title="@_text" @ondragstart="@OnDragStart" @ondragend="OnDragEnd">
+	<p class="text-center">@_text</p>
+</li>

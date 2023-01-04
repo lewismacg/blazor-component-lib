@@ -1,0 +1,62 @@
+﻿@page "/DragAndDrop"
+@using ComponentDemo.Models
+
+<DragContainer TModel="JobModel" Models="Jobs" OnStatusUpdated="HandleStatusUpdated" OnDrop="(x, y) => x.Category = y" TextFunction="@(x => x.Name)" CategoryFunction="@(x => x.Category)">
+	<DragColumn TModel="JobModel" CategoryName="Todo" ColumnType="NotificationType.Error" BodyContentHeight="40">
+		<HeaderContent>
+			<Icon>expand_less</Icon>
+			<Icon>delete</Icon>
+		</HeaderContent>
+		<BodyContent>
+			<span class="align-self-end">Todo Jobs</span>
+		</BodyContent>
+	</DragColumn>
+	<DragColumn TModel="JobModel" CategoryName="Started" ShowCount="true" ColumnType="NotificationType.Success">
+		<BodyContent>
+			Could put anything here, even another component.
+		</BodyContent>
+	</DragColumn>
+	<DragColumn TModel="JobModel" CategoryName="Completed" ColumnType="NotificationType.Success">
+		<BodyContent>
+			<p>Proactively envisioned multimedia based expertise and cross-media growth strategies. Seamlessly visualize quality intellectual capital without superior collaboration and idea-sharing. Holistically pontificate installed base portals after maintainable products.</p>
+		</BodyContent>
+	</DragColumn>
+</DragContainer>
+
+<div class="p-3">
+	<div class="border rounded">
+		<ul>
+			@foreach (var log in Logs)
+			{
+				<li>@log</li>
+			}
+		</ul>
+	</div>
+</div>
+
+@code {
+	private static Random random = new Random();
+
+	List<JobModel> Jobs = new();
+	List<string> AllStatuses = new() { "Todo", "Started", "Completed" };
+	List<string> Logs = new();
+
+	protected override void OnInitialized()
+	{
+		Jobs.Add(GenerateJobModel("Mow the lawn", AllStatuses[random.Next(AllStatuses.Count)]));
+		Jobs.Add(GenerateJobModel("Do the dishes", AllStatuses[random.Next(AllStatuses.Count)]));
+		Jobs.Add(GenerateJobModel("Cook dinner", AllStatuses[random.Next(AllStatuses.Count)]));
+		Jobs.Add(GenerateJobModel("Repress childhood memories", AllStatuses[random.Next(AllStatuses.Count)]));
+		Jobs.Add(GenerateJobModel("Walk the dog", AllStatuses[random.Next(AllStatuses.Count)]));
+	}
+
+	void HandleStatusUpdated(JobModel updatedJob)
+	{
+		Logs.Add($"{updatedJob.Name} = {updatedJob.Category}");
+	}
+
+	JobModel GenerateJobModel(string title, string category)
+	{
+		return new JobModel { Name = title, Category = category};
+	}
+}

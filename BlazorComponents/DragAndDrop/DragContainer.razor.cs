@@ -20,10 +20,10 @@ namespace BlazorComponents
 		/// <summary>
 		/// Callback function upon updating the column for a model.
 		/// </summary>
-		[Parameter] public EventCallback<TModel> OnStatusUpdated { get; set; }
+		[Parameter] public EventCallback<TModel> OnCategoryUpdated { get; set; }
 
 		/// <summary>
-		/// A setter function for setting a property value on a model upon status update.
+		/// A setter function for setting a property value on a model upon category update.
 		/// </summary>
 		[Parameter] public Func<TModel, string, string> OnDrop { get; set; }
 
@@ -50,14 +50,14 @@ namespace BlazorComponents
 
 		#region Methods
 
-		public async Task UpdateJobAsync(string newStatus)
+		public async Task UpdateModelAsync(string newStatus)
 		{
 			var model = Models.SingleOrDefault(x => x == ActiveModel);
 
 			if (model != null)
 			{
 				OnDrop.Invoke(model, newStatus);
-				await OnStatusUpdated.InvokeAsync(ActiveModel);
+				await OnCategoryUpdated.InvokeAsync(ActiveModel);
 			}
 		}
 

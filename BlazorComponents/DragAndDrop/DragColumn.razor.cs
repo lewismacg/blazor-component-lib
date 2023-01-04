@@ -102,7 +102,7 @@ namespace BlazorComponents
 			_dropClass = string.Empty;
 
 			if (CategoryName == Container.CategoryFunction.Invoke(Container.ActiveModel)) return;
-			await Container.UpdateJobAsync(CategoryName);
+			await Container.UpdateModelAsync(CategoryName);
 		}
 
 		#endregion

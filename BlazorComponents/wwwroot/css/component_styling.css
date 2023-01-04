@@ -2140,7 +2140,7 @@ input[type="button"].btn-block {
       .drop-container .column-category .drop-column .drag-and-droppable {
         margin-bottom: 0.5rem;
         padding: 0.5rem 1.2rem;
-        border: 1px solid #001d3d;
+        border: 1px solid #003566;
         cursor: grab;
         background: #FFFFFF;
         border-radius: 0.2rem; }
@@ -2150,9 +2150,9 @@ input[type="button"].btn-block {
         opacity: 0.6;
         background-color: #94d2bd; }
   .drop-container .no-drop {
-    border: 2px #9b2226; }
+    border: 2px solid #9b2226 !important; }
   .drop-container .can-drop {
-    border: 2px #2d6a4f; }
+    border: 2px solid #2d6a4f !important; }
 
 /*#endregion*/
 *,

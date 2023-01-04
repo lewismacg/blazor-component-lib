@@ -1880,11 +1880,11 @@ input[type="button"].btn-block {
     }
 
     .no-drop {
-        border: 2px $dark-red;
+        border: 2px solid $dark-red !important;
     }
 
     .can-drop {
-        border: 2px $dark-green;
+        border: 2px solid $dark-green !important;
     }
 }
 

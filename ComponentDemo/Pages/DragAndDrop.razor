@@ -1,7 +1,7 @@
 ﻿@page "/DragAndDrop"
 @using ComponentDemo.Models
 
-<DragContainer TModel="JobModel" Models="Jobs" OnStatusUpdated="HandleStatusUpdated" OnDrop="(x, y) => x.Category = y" TextFunction="@(x => x.Name)" CategoryFunction="@(x => x.Category)">
+<DragContainer TModel="JobModel" Models="Jobs" OnCategoryUpdated="HandleStatusUpdated" OnDrop="(x, y) => x.Category = y" TextFunction="@(x => x.Name)" CategoryFunction="@(x => x.Category)">
 	<DragColumn TModel="JobModel" CategoryName="Todo" ColumnType="NotificationType.Error" BodyContentHeight="40">
 		<HeaderContent>
 			<Icon>expand_less</Icon>

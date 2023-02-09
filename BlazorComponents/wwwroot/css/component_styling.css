@@ -2117,38 +2117,42 @@ input[type="button"].btn-block {
   gap: 1rem; }
   .drop-container .column-category {
     flex-direction: column;
-    border: 2px solid #D4D4D4;
     flex-basis: 0;
     flex: 1 1 0px;
     display: flex; }
-    .drop-container .column-category .body-content {
-      padding: 1rem 1rem 0rem;
-      overflow-y: auto;
-      display: flex; }
-    .drop-container .column-category .drop-column {
-      padding: 1rem;
-      height: 100%; }
-      .drop-container .column-category .drop-column .dropzone {
-        border: 2px solid #D4D4D4;
-        min-height: 80px;
-        background-color: #F6F6F6;
-        list-style: none;
-        margin-bottom: 0;
+    .drop-container .column-category .column-body {
+      height: 100%;
+      justify-content: flex-end;
+      display: flex;
+      flex-direction: column; }
+      .drop-container .column-category .column-body .body-content {
+        padding: 1rem 1rem 0rem;
+        overflow-y: auto;
+        display: flex; }
+      .drop-container .column-category .column-body .drop-column {
         padding: 1rem;
-        height: 100%;
-        flex: 1 100%; }
-      .drop-container .column-category .drop-column .drag-and-droppable {
-        margin-bottom: 0.5rem;
-        padding: 0.5rem 1.2rem;
-        border: 1px solid #003566;
-        cursor: grab;
-        background: #FFFFFF;
-        border-radius: 0.2rem; }
-      .drop-container .column-category .drop-column .drag-and-droppable:active {
-        cursor: grabbing; }
-      .drop-container .column-category .drop-column .drag-and-droppable.dragged {
-        opacity: 0.6;
-        background-color: #94d2bd; }
+        height: 100%; }
+        .drop-container .column-category .column-body .drop-column .dropzone {
+          border: 2px solid #D4D4D4;
+          min-height: 80px;
+          background-color: #F6F6F6;
+          list-style: none;
+          margin-bottom: 0;
+          padding: 1rem;
+          height: 100%;
+          flex: 1 100%; }
+        .drop-container .column-category .column-body .drop-column .drag-and-droppable {
+          margin-bottom: 0.5rem;
+          padding: 0.5rem 0.5rem;
+          border: 1px solid #003566;
+          cursor: grab;
+          background: #FFFFFF;
+          border-radius: 0.2rem; }
+        .drop-container .column-category .column-body .drop-column .drag-and-droppable:active {
+          cursor: grabbing; }
+        .drop-container .column-category .column-body .drop-column .drag-and-droppable.dragged {
+          opacity: 0.6;
+          background-color: #94d2bd; }
   .drop-container .no-drop {
     border: 2px solid #9b2226 !important; }
   .drop-container .can-drop {
@@ -4599,6 +4603,21 @@ button.bg-success:focus {
 
 .border-white {
   border-color: #FFFFFF !important; }
+
+.bold-border {
+  border: 2px solid #D4D4D4; }
+
+.bold-border-left {
+  border-left: 2px solid #D4D4D4; }
+
+.bold-border-right {
+  border-right: 2px solid #D4D4D4; }
+
+.bold-border-bottom {
+  border-bottom: 2px solid #D4D4D4; }
+
+.bold-border-top {
+  border-top: 2px solid #D4D4D4; }
 
 .rounded-sm {
   border-radius: 0.2rem !important; }
@@ -7138,7 +7157,7 @@ a.text-black:hover, a.text-black:focus {
   .multidrop.smalldrop:not(.active) > .multidrop-text::after {
     font-size: 14px !important; }
   .multidrop.smalldrop .multidrop-text {
-    padding: .5rem 0rem .5rem .75rem !important; }
+    padding: .5rem 0rem 0rem .75rem !important; }
     .multidrop.smalldrop .multidrop-text::after {
       font-size: 14px !important; }
   .multidrop.smalldrop .multidrop-content {

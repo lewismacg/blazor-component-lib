@@ -2,7 +2,7 @@
 @typeparam TModel where TModel : class
 
 <div class="column-category">
-	<div class="alert alert-@_alertClass mb-0 text-center rounded-0">
+	<div class="alert alert-@_alertClass mb-0 text-center rounded-0 bold-border">
 		<b>
 			@CategoryName
 			@HeaderContent
@@ -12,23 +12,26 @@
 			}
 		</b>
 	</div>
-	@if (BodyContent != null) {
-		<div class="body-content" style="height: @(BodyContentHeight)px">
-			@BodyContent
-		</div>
-	}
-	<div class="drop-column">
-		<ul class="dropzone @_dropClass"
-			ondragover="event.preventDefault();event.dataTransfer.dropEffect='link'"
-			ondragstart="event.dataTransfer.setData('', event.target.id);"
-			@ondrop="HandleDrop"
-			@ondragenter="HandleDragEnter"
-			@ondragleave="HandleDragLeave">
+	<div class="column-body bold-border-right bold-border-left bold-border-bottom @(ShowBody ? "" : "d-none")">
+		@if (BodyContent != null)
+		{
+			<div class="body-content" style="height: @(BodyContentHeight)px">
+				@BodyContent
+			</div>
+		}
+		<div class="drop-column">
+			<ul class="dropzone @_dropClass"
+				ondragover="event.preventDefault();event.dataTransfer.dropEffect='link'"
+				ondragstart="event.dataTransfer.setData('', event.target.id);"
+				@ondrop="HandleDrop"
+				@ondragenter="HandleDragEnter"
+				@ondragleave="HandleDragLeave">
 
-			@foreach (var model in _models)
-			{
-				<DragBox TModel="TModel" Model="model" />
-			}
-		</ul>
+				@foreach (var model in _models)
+				{
+					<DragBox TModel="TModel" Model="model" />
+				}
+			</ul>
+		</div>
 	</div>
 </div>

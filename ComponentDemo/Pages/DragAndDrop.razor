@@ -2,9 +2,9 @@
 @using ComponentDemo.Models
 
 <DragContainer TModel="JobModel" Models="Jobs" OnCategoryUpdated="HandleStatusUpdated" OnDrop="(x, y) => x.Category = y" TextFunction="@(x => x.Name)" CategoryFunction="@(x => x.Category)">
-	<DragColumn TModel="JobModel" CategoryName="Todo" ColumnType="NotificationType.Error" BodyContentHeight="40">
+	<DragColumn TModel="JobModel" CategoryName="Todo" ColumnType="NotificationType.Error" BodyContentHeight="40" ShowBody="ShowColumn">
 		<HeaderContent>
-			<Icon>expand_less</Icon>
+			<Icon OnClickAction="(e) => CollapseColumn()">expand_less</Icon>
 			<Icon>delete</Icon>
 		</HeaderContent>
 		<BodyContent>
@@ -23,8 +23,9 @@
 	</DragColumn>
 </DragContainer>
 
-<div class="p-3">
-	<div class="border rounded">
+
+<div class="border rounded">
+	<div class="p-3">
 		<ul>
 			@foreach (var log in Logs)
 			{
@@ -40,6 +41,7 @@
 	List<JobModel> Jobs = new();
 	List<string> AllStatuses = new() { "Todo", "Started", "Completed" };
 	List<string> Logs = new();
+	protected bool ShowColumn { get; set; } = true;
 
 	protected override void OnInitialized()
 	{
@@ -58,5 +60,11 @@
 	JobModel GenerateJobModel(string title, string category)
 	{
 		return new JobModel { Name = title, Category = category};
+	}
+
+	void CollapseColumn()
+	{
+		ShowColumn = !ShowColumn;
+		StateHasChanged();
 	}
 }

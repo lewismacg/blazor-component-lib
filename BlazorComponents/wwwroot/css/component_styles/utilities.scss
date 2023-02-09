@@ -314,6 +314,26 @@ button.bg-success:focus {
     border-color: $white !important;
 }
 
+.bold-border {
+    border: 2px solid $grey-light;
+}
+
+.bold-border-left {
+    border-left: 2px solid $grey-light;
+}
+
+.bold-border-right {
+    border-right: 2px solid $grey-light;
+}
+
+.bold-border-bottom {
+    border-bottom: 2px solid $grey-light;
+}
+
+.bold-border-top {
+    border-top: 2px solid $grey-light;
+}
+
 .rounded-sm {
     border-radius: 0.2rem !important;
 }

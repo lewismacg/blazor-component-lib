@@ -41,6 +41,11 @@ namespace BlazorComponents
 		/// </summary>
 		[Parameter] public int BodyContentHeight { get; set; } = 100;
 
+		/// <summary>
+		/// Show or hide the body of the column.
+		/// </summary>
+		[Parameter] public bool ShowBody { get; set; } = true;
+
 		#endregion
 
 		#region Properties and Fields

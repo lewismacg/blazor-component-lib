@@ -70,9 +70,9 @@
 					<div class="data-table-filter">
 						<div class="float-right">
 							<div class="form-group row">
-							<label class="col-form-label col-sm-4">Filter</label>
-							<input class="form-control col-sm-8" type="text" placeholder="@SearchPlaceholder" @onchange=@(x => { GlobalSearch = x.Value.ToString(); UpdateAsync(); })/>
-						</div>
+								<label class="col-form-label col-sm-4">Filter</label>
+								<input class="form-control col-sm-8" type="text" placeholder="@SearchPlaceholder" @onchange=@(x => { GlobalSearch = x.Value.ToString(); UpdateAsync(); }) />
+							</div>
 						</div>
 					</div>
 				</div>
@@ -82,7 +82,7 @@
 
 		<table aria-readonly="@(IsEditMode ? "false" : "true")" role="grid" class="@TableClass" @attributes="UnknownParameters">
 			<thead class="@TableHeadClass" style="cursor: pointer;">
-				@if (_detailTemplate != null)
+				@if (_detailTemplate != null && DetailViewAvailable)
 				{
 				<th style="width: 1%"></th>
 				}
@@ -135,12 +135,12 @@
 												<EnumFilter TableItem="TableItem" />
 													@if (column.CustomIFilters != null)
 													{
-										@column.CustomIFilters(column)
+														@column.CustomIFilters(column)
 													}
-							</FilterManager>
-						</div>
-					</Popover>
-				</CascadingValue>
+											</FilterManager>
+										</div>
+									</Popover>
+								</CascadingValue>
 								}
 
 								@if (column.Hideable)
@@ -186,22 +186,25 @@
 										int locali = i;
 										if (!detailsViewOpen.ContainsKey(locali))
 										{
-											detailsViewOpen[locali] = false;
+											detailsViewOpen[locali] = _detailTemplate?.ExpandedByDefault ?? false;
 										}
 									}
-									@if (detailViewActive)
+									@if (detailViewActive && DetailViewAvailable)
 									{
 										<td>
-											<a href="javascript:;" style="text-decoration: none" @onclick="@(() => { detailsViewOpen[locali] = !detailsViewOpen[locali]; StateHasChanged(); })" title="Details View" aria-expanded="@(detailsViewOpen[locali] ? "true" : "false")">
-												@if (detailsViewOpen[locali])
-												{
-													<span aria-hidden="true"><Icon IconColour="Colour.Black" IconName="remove" /></span>
-												}
-												else
-												{
-													<span aria-hidden="true"><Icon IconColour="Colour.Black" IconName="add" /></span>
-												}
-											</a>
+											@if (_detailTemplate.ShowDetailView.Compile().Invoke(item))
+											{
+												<a href="javascript:;" style="text-decoration: none" @onclick="@(() => { detailsViewOpen[locali] = !detailsViewOpen[locali]; StateHasChanged(); })" title="@(detailsViewOpen[i] ? "Close" : "Open")" aria-expanded="@(detailsViewOpen[locali] ? "true" : "false")">
+													@if (detailsViewOpen[locali])
+													{
+														<span aria-hidden="true"><Icon IconColour="Colour.Black" IconName="expand_less" /></span>
+													}
+													else
+													{
+														<span aria-hidden="true"><Icon IconColour="Colour.Black" IconName="expand_more" /></span>
+													}
+												</a>
+											}
 										</td>
 									}
 
@@ -232,12 +235,7 @@
 
 								if (detailViewActive && detailsViewOpen[i])
 								{
-									<tr>
-										<td></td>
-										<td colspan="@(Columns.Count)">
-											@_detailTemplate(item)
-										</td>
-									</tr>
+									@_detailTemplate.ChildContent(item)
 								}
 							}
 

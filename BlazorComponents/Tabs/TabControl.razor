@@ -2,7 +2,7 @@
 
 <CascadingValue Value="this">
 	<ul class="nav nav-tabs">
-		@foreach (TabPage tabPage in _pages)
+		@foreach (TabPageBase tabPage in _pages)
 		{
 			<li class="nav-item">
 				<a class="nav-link @GetButtonClass(tabPage)" @onclick=@(() => ActivatePage(tabPage))>
@@ -31,23 +31,25 @@
 	#region Parameters
 
 	[Parameter] public RenderFragment ChildContent { get; set; }
+	[Parameter] public bool DisableNavigation { get; set; }
+	[Parameter] public EventCallback<TabPageBase> OnNavigationCallback { get; set; }
 
 	#endregion
 
 	#region Properties and Fields
 
-	public TabPage ActivePage { get; set; }
-	List<TabPage> _pages = new();
+	public TabPageBase ActivePage { get; set; }
+	List<TabPageBase> _pages = new();
 
 	#endregion
 
 	#region Methods
 
-	internal void AddPage(TabPage tabPage)
+	internal void AddPage(TabPageBase tabPage)
 	{
 		_pages.Add(tabPage);
 
-		if (_pages.Count == 1) ActivePage = tabPage;
+		if (_pages.Count == 1) tabPage.ActivatePage();
 		StateHasChanged();
 	}
 
@@ -59,17 +61,23 @@
 
 		if (_pages.Any())
 		{
-			if (activePageIndex < _pages.Count) ActivePage = _pages[activePageIndex];
-			else if (activePageIndex - 1 < _pages.Count) ActivePage = _pages[activePageIndex - 1];
-			else ActivePage = _pages.First();
+			if (activePageIndex < _pages.Count) _pages[activePageIndex].ActivatePage();
+			else if (activePageIndex - 1 < _pages.Count) _pages[activePageIndex - 1].ActivatePage();
+			else _pages.First().ActivatePage();
 		}
 
 		StateHasChanged();
 	}
 
-	string GetButtonClass(TabPage page) => page == ActivePage ? "active" : "";
+	string GetButtonClass(TabPageBase page) => page == ActivePage ? "active" : "";
 
-	void ActivatePage(TabPage page) => ActivePage = page;
+	void ActivatePage(TabPageBase page)
+	{
+		if (OnNavigationCallback.HasDelegate) OnNavigationCallback.InvokeAsync(page);
+		if (DisableNavigation) return;
+
+		page.ActivatePage();
+	}
 
 	#endregion
 }

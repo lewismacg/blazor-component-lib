@@ -112,6 +112,9 @@
 	}
 
 	.dialogButtons {
+		position: sticky;
+		text-align: center;
+		bottom: 0;
 		height: 4rem;
 		flex-shrink: 0;
 		display: flex;
@@ -119,6 +122,15 @@
 		background-color: $grey-lightest;
 		padding: 0 1rem;
 		justify-content: space-evenly;
+		z-index: 1001;
+	}
+
+	.card {
+		flex: 1 1 auto;
+	}
+
+	.multidrop .multidrop-content {
+		z-index: 1002;
 	}
 }
 

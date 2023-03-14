@@ -12,9 +12,14 @@ namespace BlazorComponents
 		[CascadingParameter] DragContainer<TModel> Container { get; set; }
 
 		/// <summary>
+		/// The text to display on top of the column.
+		/// </summary>
+		[Parameter] public string ColumnTitle { get; set; }
+
+		/// <summary>
 		/// The category value this column is responsible for.
 		/// </summary>
-		[Parameter] public string CategoryName { get; set; }
+		[Parameter] public string CategoryValue { get; set; }
 
 		/// <summary>
 		/// Additional functions for the column header area.
@@ -29,7 +34,7 @@ namespace BlazorComponents
 		/// <summary>
 		/// Gets styling for the header using an alert type (i.e. success, danger, info etc).
 		/// </summary>
-		[Parameter] public NotificationType ColumnType { get; set; } = NotificationType.Success;
+		[Parameter] public NotificationType ColumnType { get; set; }
 
 		/// <summary>
 		/// Display a count of the number of models within the column.
@@ -39,12 +44,17 @@ namespace BlazorComponents
 		/// <summary>
 		/// The height in px allowed for any additional body content.
 		/// </summary>
-		[Parameter] public int BodyContentHeight { get; set; } = 100;
+		[Parameter] public int? BodyContentHeight { get; set; }
 
 		/// <summary>
 		/// Show or hide the body of the column.
 		/// </summary>
 		[Parameter] public bool ShowBody { get; set; } = true;
+
+		/// <summary>
+		/// Additional class for the drag boxes within the dropzone.
+		/// </summary>
+		[Parameter] public string AdditionalDragItemClass { get; set; }
 
 		#endregion
 
@@ -77,20 +87,23 @@ namespace BlazorComponents
 		protected override void OnParametersSet()
 		{
 			_models.Clear();
-			_models.AddRange(Container.Models.Where(x => Container.CategoryFunction.Invoke(x) == CategoryName));
+			_models.AddRange(Container.Models.Where(x => Container.CategoryFunction.Invoke(x).Equals(CategoryValue)));
 
 			_alertClass = ColumnType switch
 			{
 				NotificationType.Info => "info",
 				NotificationType.Warning => "warning",
 				NotificationType.Error => "danger",
-				_ => "success"
+				NotificationType.Success => "success",
+				_ => ""
 			};
 		}
 
 		private void HandleDragEnter()
 		{
-			if (CategoryName == Container.CategoryFunction.Invoke(Container.ActiveModel)) return;
+			if (Container.ActiveModel == null) return;
+			if (CategoryValue.Equals(Container.CategoryFunction.Invoke(Container.ActiveModel))) return;
+
 			_counter++;
 			_dropClass = "can-drop";
 		}
@@ -103,11 +116,13 @@ namespace BlazorComponents
 
 		private async Task HandleDrop()
 		{
+			if (Container.ActiveModel == null) return;
+
 			_counter = 0;
 			_dropClass = string.Empty;
 
-			if (CategoryName == Container.CategoryFunction.Invoke(Container.ActiveModel)) return;
-			await Container.UpdateModelAsync(CategoryName);
+			if (CategoryValue.Equals(Container.CategoryFunction.Invoke(Container.ActiveModel))) return;
+			await Container.UpdateModelAsync(CategoryValue);
 		}
 
 		#endregion

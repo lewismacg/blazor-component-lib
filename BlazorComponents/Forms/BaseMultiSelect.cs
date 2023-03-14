@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlazorComponents
 {
-	public class BaseMultiSelect<TValue> : ComponentBase where TValue : IConvertible
+	public class BaseMultiSelect<TValue> : ComponentBase
 	{
 		#region Parameters
 

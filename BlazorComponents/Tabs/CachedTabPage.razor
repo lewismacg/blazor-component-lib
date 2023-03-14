@@ -1,0 +1,9 @@
+﻿@inherits BlazorComponents.TabPageBase
+
+@if (ChildContentRendered)
+{
+	<span hidden="@(Parent.ActivePage != this)">
+		<div class="pb-3"></div>
+		@ChildContent
+	</span>
+}

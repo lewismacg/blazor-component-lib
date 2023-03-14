@@ -8,10 +8,15 @@ namespace BlazorComponents
 
 		[Parameter] public string Heading { get; set; }
 		[Parameter] public RenderFragment ChildContent { get; set; }
-
-		protected bool _expansionState;
+		[Parameter] public string ClassOverride { get; set; }
 		[Parameter] public bool ExpansionState { get; set; }
 		[Parameter] public bool ShowLine { get; set; } = true;
+
+		#endregion
+
+		#region Properties and Fields
+
+		protected bool _expansionState;
 
 		#endregion
 

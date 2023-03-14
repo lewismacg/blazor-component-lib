@@ -1,8 +1,8 @@
 ﻿@page "/DragAndDrop"
 @using ComponentDemo.Models
 
-<DragContainer TModel="JobModel" Models="Jobs" OnCategoryUpdated="HandleStatusUpdated" OnDrop="(x, y) => x.Category = y" TextFunction="@(x => x.Name)" CategoryFunction="@(x => x.Category)">
-	<DragColumn TModel="JobModel" CategoryName="Todo" ColumnType="NotificationType.Error" BodyContentHeight="40" ShowBody="ShowColumn">
+<DragContainer TModel="JobModel" Models="Jobs" OnCategoryUpdated="HandleStatusUpdated" OnDrop="(x, y) => x.Category = y.ToString()" TextFunction="@(x => x.Name)" CategoryFunction="@(x => x.Category)">
+	<DragColumn TModel="JobModel" CategoryValue="@("Todo")" ColumnType="NotificationType.Error" BodyContentHeight="40" AdditionalDragItemClass="d-inline-block mr-3">
 		<HeaderContent>
 			<Icon OnClickAction="(e) => CollapseColumn()">expand_less</Icon>
 			<Icon>delete</Icon>
@@ -11,12 +11,12 @@
 			<span class="align-self-end">Todo Jobs</span>
 		</BodyContent>
 	</DragColumn>
-	<DragColumn TModel="JobModel" CategoryName="Started" ShowCount="true" ColumnType="NotificationType.Success">
+	<DragColumn TModel="JobModel" CategoryValue="@("Started")" ColumnTitle="Start" ShowCount="true" ColumnType="NotificationType.Success">
 		<BodyContent>
 			Could put anything here, even another component.
 		</BodyContent>
 	</DragColumn>
-	<DragColumn TModel="JobModel" CategoryName="Completed" ColumnType="NotificationType.Success">
+	<DragColumn TModel="JobModel" CategoryValue="@("Completed")" ColumnType="NotificationType.Success">
 		<BodyContent>
 			<p>Proactively envisioned multimedia based expertise and cross-media growth strategies. Seamlessly visualize quality intellectual capital without superior collaboration and idea-sharing. Holistically pontificate installed base portals after maintainable products.</p>
 		</BodyContent>

@@ -1,7 +1,7 @@
 ﻿@namespace BlazorComponents
 @inherits ExpansionPanelBase
 
-<div class="expansion-panel @(_expansionState ? "expansion-panel-expanded" : "expansion-panel-collapsed")">
+<div class="expansion-panel @(_expansionState ? "expansion-panel-expanded" : "expansion-panel-collapsed") @ClassOverride">
     <div class="expansion-panel-heading" @onclick="ExpansionHeadingClicked">
         <div>@Heading</div>
         <Icon IconName="@GetExpansionIcon()"></Icon>

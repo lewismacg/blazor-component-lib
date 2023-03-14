@@ -25,7 +25,7 @@ namespace BlazorComponents
 		public void AddToast(string toastTitle, string toastBody, NotificationType toastLevel, DateTime? toastAddedTime = null)
 		{
 			var hideTimeMilliseconds = GetAutoHideMillisecondsFromToastLevel(toastLevel);
-			Toasts.Add(new ToastModel { Title = toastTitle, Body = toastBody, Level = toastLevel, Time = toastAddedTime == null ? DateTime.Now : toastAddedTime.Value, AutoHideSeconds = hideTimeMilliseconds });
+			Toasts.Add(new ToastModel { Title = toastTitle, Body = toastBody, Level = toastLevel, Time = toastAddedTime ?? DateTime.Now, AutoHideSeconds = hideTimeMilliseconds });
 
 			ToastAdded?.Invoke(this, EventArgs.Empty);
 		}

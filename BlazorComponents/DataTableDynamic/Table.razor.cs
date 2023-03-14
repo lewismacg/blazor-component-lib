@@ -126,6 +126,9 @@ namespace BlazorComponents
 		public bool ExportAtTop { get; set; }
 
 		[Parameter]
+		public string CsvTitleText { get; set; } = "SearchResults.csv";
+
+		[Parameter]
 		public EventCallback<List<string>> CustomDownloadMethodCallback { get; set; }
 
 		[Inject]
@@ -165,6 +168,8 @@ namespace BlazorComponents
 		/// Is Table in Edit mode
 		/// </summary>
 		public bool IsEditMode { get; private set; }
+
+		private bool DetailViewAvailable { get; set; }
 
 		/// <summary>
 		/// Total Pages
@@ -459,10 +464,11 @@ namespace BlazorComponents
 		/// <param name="detailTemplate"></param>
 		public void SetDetailTemplate(DetailTemplate<TableItem> detailTemplate)
 		{
-			_detailTemplate = detailTemplate?.ChildContent;
+			_detailTemplate = detailTemplate;
+			DetailViewAvailable = Items.Any(x => detailTemplate.ShowDetailView.Compile().Invoke(x));
 		}
 
-		private RenderFragment<TableItem> _detailTemplate;
+		private DetailTemplate<TableItem> _detailTemplate;
 
 		private SelectionType _selectionType;
 
@@ -593,7 +599,7 @@ namespace BlazorComponents
 				else
 				{
 					var result = WriteCsvToMemory(includeColumns);
-					BlazorDownloadFileService.DownloadFile("SearchResults.csv", result, "text/csv");
+					BlazorDownloadFileService.DownloadFile(CsvTitleText, result, "text/csv");
 				}
 			}
 			catch (Exception e)

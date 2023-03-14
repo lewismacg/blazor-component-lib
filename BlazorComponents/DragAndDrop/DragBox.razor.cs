@@ -8,6 +8,7 @@ namespace BlazorComponents
 
 		[CascadingParameter] public DragContainer<TModel> Container { get; set; }
 		[Parameter] public TModel Model { get; set; }
+		[Parameter] public string AdditionalClass { get; set; }
 
 		#endregion
 
@@ -41,6 +42,7 @@ namespace BlazorComponents
 		protected void OnDragEnd()
 		{
 			_dragClass = string.Empty;
+			Container.ActiveModel = null;
 		}
 
 		#endregion

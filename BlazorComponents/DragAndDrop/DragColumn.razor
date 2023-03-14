@@ -4,7 +4,7 @@
 <div class="column-category">
 	<div class="alert alert-@_alertClass mb-0 text-center rounded-0 bold-border">
 		<b>
-			@CategoryName
+			@(ColumnTitle ?? CategoryValue.ToString())
 			@HeaderContent
 			@if (ShowCount)
 			{
@@ -15,7 +15,7 @@
 	<div class="column-body bold-border-right bold-border-left bold-border-bottom @(ShowBody ? "" : "d-none")">
 		@if (BodyContent != null)
 		{
-			<div class="body-content" style="height: @(BodyContentHeight)px">
+			<div class="body-content" style="height: @(BodyContentHeight.HasValue ? $"{BodyContentHeight}px" : "auto")">
 				@BodyContent
 			</div>
 		}
@@ -29,7 +29,7 @@
 
 				@foreach (var model in _models)
 				{
-					<DragBox TModel="TModel" Model="model" />
+					<DragBox TModel="TModel" Model="model" AdditionalClass="@AdditionalDragItemClass" />
 				}
 			</ul>
 		</div>

@@ -1,6 +1,6 @@
 ﻿@namespace BlazorComponents
 @inherits BaseMultiSelect<TValue>
-@typeparam TValue where TValue : IConvertible
+@typeparam TValue
 
 <button type="button" class="multidrop no-default-styles w-100 @(IsActive ? "active" : "") @(IsSmall ? "smalldrop" : string.Empty)" @onclick="() => SetDisplayState(!IsActive)" @onfocusout="() => SetDisplayState(false)">
 	<div class="multidrop-text form-control @(IsSmall ? "form-control-sm" : string.Empty)" data-placeholder="@Placeholder">

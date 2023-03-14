@@ -25,7 +25,7 @@ namespace BlazorComponents
 		/// <summary>
 		/// A setter function for setting a property value on a model upon category update.
 		/// </summary>
-		[Parameter] public Func<TModel, string, string> OnDrop { get; set; }
+		[Parameter] public Func<TModel, object, object> OnDrop { get; set; }
 
 		/// <summary>
 		/// A get function for getting the text to be displayed for a model.
@@ -35,7 +35,7 @@ namespace BlazorComponents
 		/// <summary>
 		/// A get function for getting the models current category to discern it's appropriate column.
 		/// </summary>
-		[Parameter] public Func<TModel, string> CategoryFunction { get; set; }
+		[Parameter] public Func<TModel, object> CategoryFunction { get; set; }
 
 		#endregion
 
@@ -50,13 +50,13 @@ namespace BlazorComponents
 
 		#region Methods
 
-		public async Task UpdateModelAsync(string newStatus)
+		public async Task UpdateModelAsync(object newCategoryValue)
 		{
 			var model = Models.SingleOrDefault(x => x == ActiveModel);
 
 			if (model != null)
 			{
-				OnDrop.Invoke(model, newStatus);
+				OnDrop.Invoke(model, newCategoryValue);
 				await OnCategoryUpdated.InvokeAsync(ActiveModel);
 			}
 		}

@@ -1,0 +1,11 @@
+﻿@namespace BlazorComponents
+@typeparam TModel where TModel : class
+
+<div class="@DropzoneClass @_dropClass"
+     ondragover="event.preventDefault();event.dataTransfer.dropEffect='link'"
+     ondragstart="event.dataTransfer.setData('', event.target.id);"
+     @ondrop="HandleDrop"
+     @ondragenter="HandleDragEnter"
+     @ondragleave="HandleDragLeave">
+	@ChildContent
+</div>

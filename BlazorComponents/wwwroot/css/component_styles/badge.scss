@@ -1,6 +1,4 @@
-﻿@import 'colours.scss';
-
-.badge {
+﻿.badge {
     display: inline-block;
     padding: 0.2em 1em;
     font-size: 75%;
@@ -39,50 +37,50 @@ a.badge:hover, a.badge:focus {
 }
 
 .badge-primary {
-    color: $white;
-    background-color: $blue;
+    color: var(--white);
+    background-color: var(--blue);
 }
 
 a.badge-primary:hover, a.badge-primary:focus {
-    color: $white;
-    background-color: $dark-blue;
+    color: var(--white);
+    background-color: var(--darkBlue);
 }
 
 .badge-secondary {
-    color: $black;
-    background-color: $yellow;
+    color: var(--black);
+    background-color: var(--yellow);
 }
 
 a.badge-secondary:hover, a.badge-secondary:focus {
-    color: $black;
-    background-color: $dark-yellow;
+    color: var(--black);
+    background-color: var(--darkYellow);
 }
 
 .badge-success {
-    color: $white;
-    background-color: $primary-green;
+    color: var(--white);
+    background-color: var(--green);
 }
 
 a.badge-success:hover, a.badge-success:focus {
-    color: $white;
-    background-color: $dark-green;
+    color: var(--white);
+    background-color: var(--darkGreen);
 }
 
 .badge-info {
-    color: $black;
-    background-color: $light-blue;
+    color: var(--black);
+    background-color: var(--lightBlue);
 }
 
 a.badge-info:hover, a.badge-info:focus {
-    background-color: $blue;
+    background-color: var(--blue);
 }
 
 .badge-danger {
-    color: $primary-red;
-    background-color: $white;
-    border: 1px solid $primary-red;
+    color: var(--red);
+    background-color: var(--white);
+    border: 1px solid var(--red);
 }
 
 a.badge-danger:hover, a.badge-danger:focus {
-    background-color: $grey-lightest;
+    background-color: var(--greyLightest);
 }

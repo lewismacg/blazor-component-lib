@@ -1,38 +1,57 @@
 ﻿@inherits LayoutComponentBase
-@inject ToasterManager ToasterManger
+@inject ToasterManager ToasterManager
 
-<DefaultLayout FixNav="true">
-    <SearchBar>
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search..." />
-            <div class="input-group-append my-auto">
-                <!-- Obvs make this perform whatever search logic you need. -->
-	            <span class="g-search-icon">
-		            <i class="material-icons text-primary large-icon" @onclick="@(() => Console.WriteLine(""))">search</i>
-	            </span>
-            </div>
-        </div>
-    </SearchBar>
-    <DropdownMenu>
-        <div class="dropdown-wrapper">
-            <Icon IsLarge="true">menu</Icon>
-            <div class="dropdown-content">
-                <div class="ddc-item">
-                    You are logged in as: {User}
-                </div>
-                <a class="ddc-item">
-                    <Icon OnClickAction="(e) => Console.WriteLine('H')">logout</Icon> Logout
-                </a>
-            </div>
-        </div>
-    </DropdownMenu>
-    <NavMenu>
-        <NavMenu />
-    </NavMenu>
-    <Content>
-        <CascadingValue Value="@ToasterManger">
-            <Toaster />
-            @Body
-        </CascadingValue>
-    </Content>
-</DefaultLayout>
+<theme data-theme="@Theme">
+	<DefaultLayout FixNav="true">
+		<SearchBar>
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="Search..." />
+				<div class="input-group-append my-auto">
+					<!-- Obvs make this perform whatever search logic you need. -->
+					<span class="g-search-icon">
+						<i class="material-icons text-primary large-icon" @onclick="@(() => Console.WriteLine(""))">search</i>
+					</span>
+				</div>
+			</div>
+		</SearchBar>
+		<DropdownMenu>
+			<div class="dropdown-wrapper">
+				<Icon IsLarge="true">menu</Icon>
+				<div class="dropdown-content">
+					<div class="ddc-item">
+						You are logged in as: {User}
+					</div>
+					<a class="ddc-item" @onclick="@((e) => SetTheme("light"))">
+						<Icon>wb_sunny</Icon> Light Mode
+					</a>
+					<a class="ddc-item" @onclick="@((e) => SetTheme("dark"))">
+						<Icon>nights_stay</Icon> Dark Mode
+					</a>
+					<a class="ddc-item">
+						<Icon OnClickAction="(e) => Console.WriteLine('H')">logout</Icon> Logout
+					</a>
+				</div>
+			</div>
+		</DropdownMenu>
+		<NavMenu>
+			<NavMenu />
+		</NavMenu>
+		<Content>
+			<CascadingValue Value="@ToasterManager">
+				<Toaster />
+				@Body
+			</CascadingValue>
+		</Content>
+	</DefaultLayout>
+</theme>
+
+@code
+{
+	public string Theme { get; set; }
+
+	public void SetTheme(string theme)
+	{
+		Theme = theme;
+		StateHasChanged();
+	}
+}

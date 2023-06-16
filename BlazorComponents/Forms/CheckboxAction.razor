@@ -1,0 +1,13 @@
+﻿@namespace BlazorComponents
+
+<button type="button" @attributes="@AdditionalAttributes" @onclick="async () => await OnClick.InvokeAsync()">
+	<Icon IconColour="IconColour" IsLarge="@LargeIcon">@(CheckedPredicate.Invoke() ? "check_box" : "check_box_outline_blank")</Icon>
+</button>
+
+@code {
+	[Parameter] public EventCallback OnClick { get; set; }
+	[Parameter] public bool LargeIcon { get; set; } = true;
+	[Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
+	[Parameter] public Func<bool> CheckedPredicate { get; set; }
+	[Parameter] public Colour IconColour { get; set; } = Colour.Black;
+}

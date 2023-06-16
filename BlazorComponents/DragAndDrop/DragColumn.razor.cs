@@ -32,6 +32,11 @@ namespace BlazorComponents
 		[Parameter] public RenderFragment BodyContent { get; set; }
 
 		/// <summary>
+		/// A more customisable dropzone using a renderfragment
+		/// </summary>
+		[Parameter] public RenderFragment CustomDropzone { get; set; }
+
+		/// <summary>
 		/// Gets styling for the header using an alert type (i.e. success, danger, info etc).
 		/// </summary>
 		[Parameter] public NotificationType ColumnType { get; set; }

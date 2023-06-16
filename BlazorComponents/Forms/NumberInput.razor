@@ -1,0 +1,5 @@
+﻿@namespace BlazorComponents
+@inherits BaseNumberInput<TValue>
+@typeparam TValue
+
+<input type="number" @attributes="@AdditionalAttributes" @onchange="BindValue" onkeydown="javascript: return ['e','E','+'].includes(event.key) ? false : true" />

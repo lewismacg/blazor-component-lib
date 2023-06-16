@@ -1,6 +1,4 @@
-﻿@import 'colours.scss';
-
-.nav {
+﻿.nav {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
@@ -13,21 +11,21 @@
 .nav-link {
     display: block;
     padding: 0.5rem 1.5rem;
-    color: $black !important;
+    color: var(--black) !important;
 
     &:hover, &:focus {
         text-decoration: none;
     }
 
     .disabled {
-        color: $grey-dark;
+        color: var(--greyDark);
         pointer-events: none;
         cursor: default;
     }
 }
 
 .nav-tabs {
-    border-bottom: 1px solid $grey-light;
+    border-bottom: 1px solid var(--greyLight);
 
     .nav-link {
         margin-bottom: -1px;
@@ -42,14 +40,14 @@
 }
 
 .nav-tabs .nav-link.disabled {
-    color: $grey-dark;
+    color: var(--greyDark);
     background-color: transparent;
     border-color: transparent;
 }
 
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
-    border-color: $grey-light $grey-light $white;
+    border-color: var(--greyLight) var(--greyLight) var(--white);
     font-family: 'Lato-Bold';
     border-bottom-width: 2px;
 }

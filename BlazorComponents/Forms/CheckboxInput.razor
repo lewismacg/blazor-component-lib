@@ -1,0 +1,6 @@
+﻿@namespace BlazorComponents
+@inherits BaseCheckboxInput
+
+<button @attributes="@AdditionalAttributes" type="button" @onclick="() => CurrentValue = !CurrentValue">
+	<Icon IconColour="IconColour" IsLarge="true">@GetCheckboxIcon()</Icon>
+</button>

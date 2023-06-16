@@ -51,6 +51,8 @@ function _instanceof(left, right) { if (right != null && typeof Symbol !== "unde
 
 // Be aware custom edits exist in this file and so any changes should be cautious see codepen.io/incentive/pen/KKqvrjj for base
 // LM: added 'datepicker.element.dispatchEvent(new CustomEvent('change', { modelValue }));' to allow for blazor model binding.
+// LM: added custom styling to 'today' button html string.
+// LM: changed container to be 'theme' if available, otherwise default body location.
 (function () {
     'use strict';
 
@@ -524,7 +526,7 @@ function _instanceof(left, right) { if (right != null && typeof Symbol !== "unde
         maxDate: null,
         maxNumberOfDates: 1,
         maxView: 3,
-        minDate: null,
+        minDate: '01/01/1900',
         nextArrow: '»',
         orientation: 'auto',
         pickLevel: 0,
@@ -534,8 +536,8 @@ function _instanceof(left, right) { if (right != null && typeof Symbol !== "unde
         showOnFocus: true,
         startView: 0,
         title: '',
-        todayBtn: false,
-        todayBtnMode: 0,
+        todayBtn: true,
+        todayBtnMode: 1,
         todayHighlight: false,
         updateOnBlur: true,
         weekStart: 0
@@ -888,7 +890,7 @@ function _instanceof(left, right) { if (right != null && typeof Symbol !== "unde
         return config;
     }
 
-    var pickerTemplate = optimizeTemplateHTML("<div class=\"datepicker\">\n  <div class=\"datepicker-picker\">\n    <div class=\"datepicker-header\">\n      <div class=\"datepicker-title\"></div>\n      <div class=\"datepicker-controls\">\n        <button type=\"button\" class=\"%buttonClass% prev-btn\"></button>\n        <button type=\"button\" class=\"%buttonClass% view-switch\"></button>\n        <button type=\"button\" class=\"%buttonClass% next-btn\"></button>\n      </div>\n    </div>\n    <div class=\"datepicker-main\"></div>\n    <div class=\"datepicker-footer\">\n      <div class=\"datepicker-controls\">\n        <button type=\"button\" class=\"%buttonClass% today-btn\"></button>\n        <button type=\"button\" class=\"%buttonClass% clear-btn\"></button>\n      </div>\n    </div>\n  </div>\n</div>");
+    var pickerTemplate = optimizeTemplateHTML("<div class=\"datepicker\">\n  <div class=\"datepicker-picker\">\n    <div class=\"datepicker-header\">\n      <div class=\"datepicker-title\"></div>\n      <div class=\"datepicker-controls\">\n        <button type=\"button\" class=\"%buttonClass% prev-btn\"></button>\n        <button type=\"button\" class=\"%buttonClass% view-switch\"></button>\n        <button type=\"button\" class=\"%buttonClass% next-btn\"></button>\n      </div>\n    </div>\n    <div class=\"datepicker-main\"></div>\n    <div class=\"datepicker-footer\">\n      <div class=\"datepicker-controls\">\n        <button type=\"button\" class=\"%buttonClass% strong border-primary today-btn\"></button>\n        <button type=\"button\" class=\"%buttonClass% clear-btn\"></button>\n      </div>\n    </div>\n  </div>\n</div>");
     var daysTemplate = optimizeTemplateHTML("<div class=\"days\">\n  <div class=\"days-of-week\">".concat(createTagRepeat('span', 7, {
         class: 'dow'
     }), "</div>\n  <div class=\"datepicker-grid\">").concat(createTagRepeat('span', 42), "</div>\n</div>"));
@@ -2324,10 +2326,12 @@ function _instanceof(left, right) { if (right != null && typeof Symbol !== "unde
                     break;
 
                 case 'Enter':
-                    datepicker.exitEditMode({
-                        update: true,
-                        autohide: datepicker.config.autohide
-                    });
+                    if (new Date(datepicker.inputField.value) >= new Date(datepicker.config.minDate)) {
+                        datepicker.exitEditMode({
+                            update: true,
+                            autohide: datepicker.config.autohide
+                        });
+					}
                     break;
 
                 default:
@@ -2520,7 +2524,9 @@ function _instanceof(left, right) { if (right != null && typeof Symbol !== "unde
 
             if (isInRange(date, config.minDate, config.maxDate) && !dates.includes(date) && !config.datesDisabled.includes(date) && !config.daysOfWeekDisabled.includes(new Date(date).getDay())) {
                 dates.push(date);
-            }
+            } else {
+                datepicker.hide();
+			}
 
             return dates;
         }, []);
@@ -2623,11 +2629,12 @@ function _instanceof(left, right) { if (right != null && typeof Symbol !== "unde
 
             var config = this.config = Object.assign({
                 buttonClass: options.buttonClass && String(options.buttonClass) || 'button',
-                container: document.body,
+                container: document.getElementsByTagName("theme").length > 0 ? document.getElementsByTagName("theme")[0] : document.body,
                 defaultViewDate: today(),
                 maxDate: undefined,
                 minDate: undefined
             }, processOptions(defaultOptions, this));
+
             this._options = options;
             Object.assign(config, processOptions(options, this)); // configure by type
 

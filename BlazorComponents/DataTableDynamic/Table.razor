@@ -18,52 +18,48 @@
 		{
 			<div class="flex flex-row mb-3">
 				<div class="flex-grow-0">
-					@if (Columns.Exists(column => !column.Visible))
-					{
-						<div class="float-left" @onclick="@(_ => VisibilityMenuOpen = !VisibilityMenuOpen)">
-							<div class="column-visibility-section px-3 pt-3">
-								<Popover IsOpen="@VisibilityMenuOpen" Placement="Placement.Bottom" DismissOnNextClick="false" Reference="VisibilityMenuIconRef">
-									<h3 class="popover-header">Column Visibility</h3>
-									<div class="popover-body">
-										<table class="table table-borderless">
-											@foreach (IColumn<TableItem> column in Columns.Where(column => !column.Visible))
-											{
-												<tr>
-													<td>
-														@(column.Title)
-													</td>
-													<td>
-														<div class="float-right" @onclick="@(_ => { column.Visible = true; if (!Columns.Exists(column => !column.Visible)) VisibilityMenuOpen = false;})">
-															<a href="javascript:;">
-																<span aria-hidden="true">
-																	<Icon IconColour="Colour.Black" IconName="add" />
-																</span>
-															</a>
-														</div>
-													</td>
-												</tr>
+					<div class="float-left px-3 pt-3">
+						@if (Columns.Exists(column => !column.Visible))
+						{
+							<a class="btn btn-danger" href="javascript:;" @ref="VisibilityMenuIconRef" @onclick="@(_ => VisibilityMenuOpen = !VisibilityMenuOpen)">
+								Column Visibility
+							</a>
+							<Popover IsOpen="@VisibilityMenuOpen" Placement="Placement.Bottom" DismissOnNextClick="false" Reference="VisibilityMenuIconRef">
+								<h3 class="popover-header">Column Visibility</h3>
+								<div class="popover-body">
+									<table class="table table-borderless">
+										@foreach (IColumn<TableItem> column in Columns.Where(column => !column.Visible))
+										{
+											<tr>
+												<td>
+													@(column.Title)
+												</td>
+												<td>
+													<div class="float-right" @onclick="@(_ => { column.Visible = true; if (!Columns.Exists(column => !column.Visible)) VisibilityMenuOpen = false;})">
+														<a href="javascript:;">
+															<span aria-hidden="true">
+																<Icon IconColour="Colour.Black" IconName="add" />
+															</span>
+														</a>
+													</div>
+												</td>
+											</tr>
 
-											}
-										</table>
-										<button class="btn btn-sm btn-secondary" @onclick="@(_ => VisibilityMenuOpen = false)">
-											Close
-										</button>
-									</div>
-								</Popover>
-								<a class="btn btn-secondary" href="javascript:;" @ref="VisibilityMenuIconRef">
-									Column Visibility
-								</a>
-							</div>
-						</div>
-					}
-					@if (AllowExport && ExportAtTop)
-					{
-						<div class="px-3 pt-3">
-							<button class="btn btn-primary" type="button" @onclick="@DownloadCsv">
-								Export
-							</button>
-						</div>
-					}
+										}
+									</table>
+									<button class="btn btn-sm btn-secondary" @onclick="@(_ => VisibilityMenuOpen = false)">
+										Close
+									</button>
+								</div>
+							</Popover>
+						}
+						@if (AllowExport && ExportAtTop)
+						{
+							<span class="px-1">
+								<button class="btn btn-primary" @onclick="DownloadCsv">Export</button>
+							</span>
+						}
+					</div>
 				</div>
 
 				<div class="flex-grow-1">

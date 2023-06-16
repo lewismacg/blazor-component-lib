@@ -1,13 +1,11 @@
-﻿@import 'colours.scss';
-
-.multidrop {
+﻿.multidrop {
 	padding: 0;
 	border: none;
-	position: relative;
+	position: relative !important;
 
 	div:empty:after {
 		content: attr(data-placeholder);
-		color: $grey-dark;
+		color: var(--greyDark);
 	}
 
 	&.smalldrop {
@@ -52,14 +50,14 @@
 
 	&.active {
 		.multidrop-text {
-			border: 2px solid rgba($grey-darkest, 0.5);
+			border: 2px solid #{'rgba(var(--greyDarkestRgb), 0.5)'};
 		}
 
 		.multidrop-content {
 			display: block !important;
 		}
 
-		border-color: $grey-dark;
+		border-color: var(--greyDark);
 		outline: 0;
 	}
 
@@ -70,7 +68,7 @@
 			-webkit-font-feature-settings: 'liga';
 			float: right;
 			font-size: 18px;
-			color: $grey-darkest
+			color: var(--greyDarkest)
 		}
 	}
 
@@ -88,14 +86,14 @@
 			-webkit-font-feature-settings: 'liga';
 			float: right;
 			font-size: 18px;
-			color: $grey-darkest
+			color: var(--greyDarkest)
 		}
 	}
 
 	.multidrop-content {
 		z-index: 1000;
 		position: absolute;
-		background-color: $white;
+		background-color: var(--white);
 		width: 100%;
 		display: none;
 		background-clip: padding-box;
@@ -111,7 +109,7 @@
 			padding: .2rem 1rem;
 
 			&.selected {
-				background-color: $light-green;
+				background-color: var(--lightGreen);
 
 				&::after {
 					font-family: 'Material Icons';
@@ -119,7 +117,7 @@
 					-webkit-font-feature-settings: 'liga';
 					float: right;
 					font-size: 18px;
-					color: $dark-green
+					color: var(--darkGreen)
 				}
 			}
 
@@ -130,11 +128,11 @@
 					-webkit-font-feature-settings: 'liga';
 					float: right;
 					font-size: 18px;
-					color: $grey-dark;
+					color: var(--greyDark);
 				}
 
 				&:hover {
-					background-color: $grey-lightest;
+					background-color: var(--greyLightest);
 				}
 			}
 		}
@@ -148,8 +146,8 @@
 				width: -webkit-fill-available;
 				width: -moz-available;
 				width: fill-available;
-				background-color: $grey-lightest;
-				border-bottom: 1px solid $grey;
+				background-color: var(--greyLightest);
+				border-bottom: 1px solid var(--grey);
 				cursor: text;
 			}
 
@@ -159,7 +157,7 @@
 				-webkit-font-feature-settings: 'liga';
 				float: right;
 				font-size: 25px;
-				color: $black;
+				color: var(--black);
 				position: absolute;
 				right: 12px;
 				pointer-events: none;

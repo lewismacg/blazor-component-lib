@@ -1,6 +1,4 @@
-﻿@import 'colours.scss';
-
-.blazored-typeahead {
+﻿.blazored-typeahead {
     position: relative;
     width: 100%;
     border: 2px solid rgba(212,212,212,.5);
@@ -8,12 +6,12 @@
 
     .valid.modified {
         outline: none !important;
-        border: 1px solid $primary-green;
+        border: 1px solid var(--green);
     }
 
     .invalid {
         outline: none !important;
-        border: 1px solid $dark-red;
+        border: 1px solid var(--darkRed);
     }
 
     .blazored-typeahead__controls {
@@ -33,7 +31,7 @@
 
     &:focus-within {
         box-shadow: none;
-        border-color: $grey-dark;
+        border-color: var(--greyDark);
     }
 
     .blazored-typeahead__input:focus {
@@ -50,7 +48,7 @@
     }
 
     .invalid {
-        border-color: $dark-red !important;
+        border-color: var(--darkRed) !important;
     }
 
     .blazored-typeahead__input-mask-wrapper {
@@ -66,10 +64,10 @@
     }
 
     .blazored-typeahead__input-mask-wrapper--disabled {
-        background-color: $grey;
+        background-color: var(--grey);
         cursor: not-allowed;
         border-radius: 5px 0 0 5px;
-        color: $black;
+        color: var(--black);
         min-height: 40px;
     }
 
@@ -96,15 +94,15 @@
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        color: $grey-light;
+        color: var(--greyLight);
     }
 
     .blazored-typeahead__clear:hover {
-        color: $black;
+        color: var(--black);
     }
 
     .blazored-typeahead__down-arrow path {
-        fill: $grey-light;
+        fill: var(--greyLight);
     }
 
     .blazored-typeahead__input-icon {
@@ -118,30 +116,30 @@
 
     .blazored-typeahead__input-icon:focus {
         outline: none;
-        box-shadow: 0 0 0 0.2rem $yellow;
+        box-shadow: 0 0 0 0.2rem var(--yellow);
     }
 
     .blazored-typeahead__input-icon:hover {
-        background-color: $grey-light;
+        background-color: var(--greyLight);
     }
 
     .blazored-typeahead__input-icon:hover .blazored-typeahead__down-arrow path {
-        fill: $black;
+        fill: var(--black);
     }
 
     .blazored-typeahead__input-icon--disabled,
     .blazored-typeahead__input-icon--disabled:hover {
-        background-color: $grey;
+        background-color: var(--grey);
         cursor: not-allowed;
     }
 
     .blazored-typeahead__input-icon--disabled .blazored-typeahead__down-arrow path,
     .blazored-typeahead__input-icon--disabled:hover .blazored-typeahead__down-arrow path {
-        fill: $black;
+        fill: var(--black);
     }
 
     .blazored-typeahead__multi-value {
-        background-color: $grey-light;
+        background-color: var(--greyLight);
         display: flex;
         align-items: center;
         min-width: 0px;
@@ -180,19 +178,19 @@
 
     .blazored-typeahead__multi-value-clear:hover {
         background-color: rgb(212, 212, 212);
-        color: $yellow;
+        color: var(--yellow);
     }
 
     .blazored-typeahead__results {
         position: absolute;
         box-shadow: 0 5px 10px rgba(0,0,0,.2);
-        border: 1px solid $grey-light;
+        border: 1px solid var(--greyLight);
         min-height: 2rem;
         max-height: 30rem;
         overflow-y: auto;
         z-index: 1002;
         width: 100%;
-        background: $white;
+        background: var(--white);
     }
 
     .blazored-typeahead__result,
@@ -201,23 +199,23 @@
     .blazored-typeahead__results-header,
     .blazored-typeahead__results-footer {
         padding: .5rem;
-        border-top: 1px solid $white;
-        border-bottom: 1px solid $white;
+        border-top: 1px solid var(--white);
+        border-bottom: 1px solid var(--white);
     }
 
     .blazored-typeahead__result:hover,
     .blazored-typeahead__result:focus {
-        background-color: $yellow !important;
-        border-top: 1px solid $yellow !important;
-        border-bottom: 1px solid $yellow !important;
-        color: $black !important;
+        background-color: var(--yellow) !important;
+        border-top: 1px solid var(--yellow) !important;
+        border-bottom: 1px solid var(--yellow) !important;
+        color: var(--black) !important;
         cursor: pointer;
     }
 
     .blazored-typeahead__loader {
         width: 24px;
         height: 24px;
-        background-color: $black;
+        background-color: var(--black);
         border-radius: 100%;
         -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
         animation: sk-scaleout 1.0s infinite ease-in-out;

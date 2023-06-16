@@ -1,6 +1,4 @@
-﻿@import 'colours.scss';
-
-/* #region Toast */
+﻿/* #region Toast */
 
 .toaster {
 	position: fixed;
@@ -46,7 +44,7 @@
 	-ms-flex-align: center;
 	align-items: center;
 	padding: 0.25rem 0.75rem;
-	color: $grey-dark;
+	color: var(--greyDark);
 	background-color: rgba(255, 255, 255, 0.85);
 	background-clip: padding-box;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.05);
@@ -59,7 +57,7 @@
 }
 
 .dialog-container {
-	background: $black;
+	background: var(--black);
 	opacity: 0.7;
 	position: fixed;
 	top: 0;
@@ -70,7 +68,7 @@
 }
 
 .dialog {
-	background: $white;
+	background: var(--white);
 	width: 50%;
 	max-width: 850px;
 	max-height: 100%;
@@ -91,8 +89,8 @@
 	overflow: auto;
 
 	.dialogTitle {
-		background-color: $black;
-		color: $white;
+		background-color: var(--black);
+		color: var(--white);
 		padding: 1.3rem 1rem;
 		font-size: 1.4rem;
 		margin: 0;
@@ -119,7 +117,7 @@
 		flex-shrink: 0;
 		display: flex;
 		align-items: center;
-		background-color: $grey-lightest;
+		background-color: var(--greyLightest);
 		padding: 0 1rem;
 		justify-content: space-evenly;
 		z-index: 1001;
@@ -181,33 +179,33 @@
 	}
 
 	&.Info {
-		background-color: $light-blue;
-		color: $black;
-		border: 2px solid $blue;
+		background-color: var(--lightBlue);
+		color: var(--black);
+		border: 2px solid var(--blue);
 	}
 
 	&.Success {
-		background-color: $light-green;
-		color: $black;
-		border: 2px solid $primary-green;
+		background-color: var(--lightGreen);
+		color: var(--black);
+		border: 2px solid var(--green);
 	}
 
 	&.Warning {
-		background-color: $light-yellow;
-		color: $black;
-		border: 2px solid $yellow;
+		background-color: var(--lightYellow);
+		color: var(--black);
+		border: 2px solid var(--yellow);
 	}
 
 	&.Error {
-		background-color: $light-red;
-		color: $black;
-		border: 2px solid $primary-red;
+		background-color: var(--lightRed);
+		color: var(--black);
+		border: 2px solid var(--red);
 	}
 
 	&.None {
-		background-color: $white;
-		color: $black;
-		border: 2px solid $black;
+		background-color: var(--white);
+		color: var(--black);
+		border: 2px solid var(--black);
 	}
 
 	.banner-content {

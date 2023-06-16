@@ -1,0 +1,40 @@
+﻿@namespace BlazorComponents
+
+<CascadingValue Value="this">
+	<li>
+		@if (_navItems.Any())
+		{
+			<label class="nav-item @(Show ? "show" : "")" @onclick="@ToggleShowChildren">
+				<Icon IconTitle="@IconTitle" IconColour="@Colour.White">@Icon</Icon>
+				<span>@LinkText</span>
+			</label>
+		}
+
+		<ul>
+			@ChildContent
+		</ul>
+	</li>
+</CascadingValue>
+
+@code
+{
+	[Parameter] public RenderFragment ChildContent { get; set; }
+	[Parameter] public string Icon { get; set; }
+	[Parameter] public string IconTitle { get; set; }
+	[Parameter] public string LinkText { get; set; }
+
+	protected bool Show { get; set; }
+
+	List<NavigationItemBase> _navItems = new();
+	internal void AddNavItem(NavigationItemBase navItem)
+	{
+		_navItems.Add(navItem);
+		StateHasChanged();
+	}
+
+	private void ToggleShowChildren()
+	{
+		Show = !Show;
+		_navItems.ForEach(x => x.Show = Show);
+	}
+}

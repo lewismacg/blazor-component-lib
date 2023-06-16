@@ -1,9 +1,7 @@
-﻿@import 'colours.scss';
-
-.data-table-wrapper {
+﻿.data-table-wrapper {
     background-color: transparent;
-    border-top: 1px solid $grey-light;
-    border-bottom: 1px solid $grey-light;
+    border-top: 1px solid var(--greyLight);
+    border-bottom: 1px solid var(--greyLight);
 
     table {
         &.data-table {
@@ -28,7 +26,7 @@
                 }
 
                 &:hover {
-                    background: $grey-light;
+                    background: var(--greyLight);
                 }
             }
 
@@ -47,10 +45,10 @@
 
             &.striped {
                 tr:nth-child(odd) {
-                    background: $grey-lightest;
+                    background: var(--greyLightest);
 
                     &:hover {
-                        background: $grey-light;
+                        background: var(--greyLight);
                     }
                 }
             }
@@ -123,19 +121,6 @@ select {
 
 .popover {
     width: 228px;
-}
-
-.column-visibility-section {
-    position: relative;
-
-    .popover {
-        top: 2.1rem;
-        left: 1.2rem;
-    }
-
-    .bs-popover-bottom {
-        margin-top: 1.7rem;
-    }
 }
 
 .column-header {

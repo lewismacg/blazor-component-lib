@@ -1,6 +1,4 @@
-﻿@import 'colours.scss';
-
-*,
+﻿*,
 *::before,
 *::after {
     box-sizing: border-box;
@@ -10,7 +8,38 @@ html {
     font-family: Lato-Regular, sans-serif;
     line-height: 1.15;
     -webkit-text-size-adjust: 100%;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: #{'rgba(var(--blackRgb), 0)'};
+    --red: #ae2012;
+    --redRgb: 174, 32, 18;
+    --darkRed: #9b2226;
+    --lightRed: #f28482;
+    --green: #52b788;
+    --greenRgb: 82, 183, 136;
+    --darkGreen: #2d6a4f;
+    --lightGreen: #b7e4c7;
+    --darkBlue: #001d3d;
+    --blue: #003566;
+    --lightBlue: #94d2bd;
+    --darkYellow: #ffc300;
+    --yellow: #ffd60a;
+    --lightYellow: #fcf6bd;
+    --black: #000814;
+    --white: #FFFFFF;
+    --greyDarkest: #383838;
+    --greyDark: #717171;
+    --greyDarkRgb: 113, 113, 113;
+    --grey: #B3B3B3;
+    --greyLight: #D4D4D4;
+    --greyLightRgb: 212, 212, 212;
+    --greyLightest: #F6F6F6;
+    overflow-y: hidden;
+}
+
+theme {
+    display: inherit;
+    background-color: var(--white);
+    color: var(--black);
+    overflow-x: auto;
 }
 
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
@@ -23,9 +52,7 @@ body {
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    color: $black;
     text-align: left;
-    background-color: $white;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -43,7 +70,7 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 0.5rem;
 }
 
-b, strong {
+b, strong, .strong {
     font-family: 'Lato-Bold';
 }
 
@@ -125,14 +152,14 @@ sup {
 }
 
 a {
-    color: $blue;
+    color: var(--blue);
     text-decoration: none;
     background-color: transparent;
     cursor: pointer;
 }
 
 a:hover {
-    color: $dark-blue;
+    color: var(--darkBlue);
     text-decoration: underline;
 }
 
@@ -182,7 +209,7 @@ table {
 caption {
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
-    color: $grey-dark;
+    color: var(--greyDark);
     text-align: left;
     caption-side: bottom;
 }
@@ -219,6 +246,10 @@ textarea {
 button,
 input {
     overflow: visible;
+}
+
+input {
+    color: var(--baseBlack);
 }
 
 button,

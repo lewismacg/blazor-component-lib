@@ -8,18 +8,16 @@ else
 {
 	<div class="flex flex-column justify-content-center h-100">
 		<div class="flex flex-row">
-			<LoadingSpinner Width="Width" Height="Height" />
+			<LoadingSpinner Width="Width" Height="Height" Colour="@Colour" />
 		</div>
 	</div>
 }
 
 @code {
 	[Parameter] public Func<bool> Condition { get; set; }
-
 	[Parameter] public int Width { get; set; } = 65;
-
 	[Parameter] public int Height { get; set; } = 65;
-
+	[Parameter] public string Colour { get; set; } = "var(--grey)";
 	[Parameter] public RenderFragment ChildContent { get; set; }
 
 	protected override void OnInitialized()

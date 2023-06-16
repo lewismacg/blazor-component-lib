@@ -151,7 +151,38 @@
 						<ValidationMessage For="() => Model.Date2"></ValidationMessage>
 					</div>
 				</div>
+				<div class="form-row">
+		            <div class="form-group col-sm-3">
+			            <label>Int</label>
+			            <NumberInput @bind-Value="@Model.MyInt" class="form-control"/>
+			            <p>Bound value: @Model.MyInt</p>
+			            <ValidationMessage For="() => Model.MyInt"></ValidationMessage>
+		            </div>
+		            <div class="form-group col-sm-3">
+			            <label>Nullable Int</label>
+			            <NumberInput @bind-Value="@Model.MyNullableInt" class="form-control" />
+			            <p>Bound value: @Model.MyNullableInt</p>
+			            <ValidationMessage For="() => Model.MyNullableInt"></ValidationMessage>
+		            </div>
+		            <div class="form-group col-sm-3">
+			            <label>Decimal</label>
+			            <NumberInput @bind-Value="@Model.MyDecimal" class="form-control"/>
+			            <p>Bound value: @Model.MyDecimal</p>
+			            <ValidationMessage For="() => Model.MyDecimal"></ValidationMessage>
+		            </div>
+		            <div class="form-group col-sm-3">
+			            <label>Nullable Decimal</label>
+                        <NumberInput @bind-Value="@Model.MyNullableDecimal" class="form-control" placeholder="ayy lmao" />
+			            <p>Bound value: @Model.MyNullableDecimal</p>
+			            <ValidationMessage For="() => Model.MyNullableDecimal"></ValidationMessage>
+		            </div>
+	            </div>
 				<button class="btn btn-primary" type="submit">Validate</button>
+				
+				@foreach (var date in DateModels)
+				{
+					<CheckboxAction style="all:unset" OnClick="() => ToggleAddToDateList(date)" CheckedPredicate="() => SelectedDateModels.Contains(date)" />
+				}
 
 			</EditForm>
 			<div class="form-group form-row">
@@ -287,7 +318,7 @@
 @code {
 	public FluentValidationValidator ModelValidator;
 
-	public DateModel Model { get; set; } = new();
+	public TestModel Model { get; set; } = new();
 	public List<DateTime> Options { get; set; } = new() {DateTime.Now, DateTime.Today.AddDays(-3), DateTime.Today.AddDays(-3).AddMonths(-5)};
 	public List<DateTime> SelectedValues = new();
 
@@ -296,4 +327,14 @@
 		var isValid = ModelValidator.Validate(x => x.IncludeAllRuleSets());
 		if (isValid == false) return;
 	}
+
+	protected void ToggleAddToDateList(TestModel model)
+	{
+		if (SelectedDateModels.Contains(model)) SelectedDateModels.Remove(model);
+		else SelectedDateModels.Add(model);
+	}
+
+
+	public List<TestModel> SelectedDateModels = new();
+	public List<TestModel> DateModels = new() { new(), new() {Date2 = DateTime.Now}, new() { Date = DateTime.Now } };
 }

@@ -1,6 +1,4 @@
-﻿@import 'colours.scss';
-
-.datepicker {
+﻿.datepicker {
     display: none
 }
 
@@ -24,11 +22,11 @@
 .datepicker-picker {
     display: inline-block;
     border-radius: 4px;
-    background-color: $white;
+    background-color: var(--white);
 }
 
 .datepicker-dropdown .datepicker-picker {
-    box-shadow: 0 2px 3px $grey-light,0 0 0 1px $grey-light;
+    box-shadow: 0 2px 3px var(--greyLight),0 0 0 1px var(--greyLight);
 }
 
 .datepicker-picker span {
@@ -50,8 +48,8 @@
 }
 
 .datepicker-footer {
-    box-shadow: inset 0 1px 1px $grey-light;
-    background-color: $grey-lightest;
+    box-shadow: inset 0 1px 1px var(--greyLight);
+    background-color: var(--greyLightest);
 }
 
 .datepicker-controls, .datepicker-grid, .datepicker-view, .datepicker-view .days-of-week {
@@ -76,8 +74,8 @@
 }
 
 .datepicker-title {
-    box-shadow: inset 0 -1px 1px $grey-light;
-    background-color: $grey-lightest;
+    box-shadow: inset 0 -1px 1px var(--greyLight);
+    background-color: var(--greyLightest);
     padding: .375rem .75rem;
     text-align: center;
     font-weight: 700
@@ -93,10 +91,10 @@
     align-items: center;
     justify-content: center;
     margin: 0;
-    border: 1px solid $grey;
+    border: 1px solid var(--grey);
     border-radius: 4px;
     box-shadow: none;
-    background-color: $white;
+    background-color: var(--white);
     cursor: pointer;
     padding: calc(.375em - 1px) .75em;
     height: 2.25em;
@@ -104,7 +102,7 @@
     text-align: center;
     line-height: 1.5;
     white-space: nowrap;
-    color: $black;
+    color: var(--black);
     font-size: 1rem
 }
 
@@ -113,22 +111,22 @@
 }
 
 .datepicker-controls .button:hover {
-    border-color: $grey-dark;
-    color: $black
+    border-color: var(--greyDark);
+    color: var(--black)
 }
 
 .datepicker-controls .button:focus {
-    border-color: $grey;
-    color: $black
+    border-color: var(--grey);
+    color: var(--black)
 }
 
 .datepicker-controls .button:focus:not(:active) {
-    box-shadow: 0 0 0 .125em $grey-light;
+    box-shadow: 0 0 0 .125em var(--greyLight);
 }
 
 .datepicker-controls .button:active {
-    border-color: $grey-darkest;
-    color: $black
+    border-color: var(--greyDarkest);
+    color: var(--black)
 }
 
 .datepicker-controls .button[disabled] {
@@ -141,7 +139,7 @@
 }
 
 .datepicker-header .datepicker-controls .button:hover {
-    background-color: $grey-lightest
+    background-color: var(--greyLightest)
 }
 
 .datepicker-header .datepicker-controls .button:focus:not(:active) {
@@ -149,7 +147,7 @@
 }
 
 .datepicker-header .datepicker-controls .button:active {
-    background-color: $grey-lightest
+    background-color: var(--greyLightest)
 }
 
 .datepicker-header .datepicker-controls .button[disabled] {
@@ -186,7 +184,7 @@
 
 .datepicker-view .week {
     width: 2.25rem;
-    color: $grey;
+    color: var(--grey);
     font-size: .75rem
 }
 
@@ -207,60 +205,60 @@
 }
 
 .datepicker-cell:not(.disabled):hover {
-    background-color: $dark-yellow;
+    background-color: var(--darkYellow);
     cursor: pointer
 }
 
 .datepicker-cell.selected, .datepicker-cell.selected:hover {
-    background-color: $light-yellow;
-    color: $black;
+    background-color: var(--lightYellow);
+    color: var(--black);
     font-weight: 600
 }
 
 .datepicker-cell.disabled {
-    color: $grey
+    color: var(--grey)
 }
 
 .datepicker-cell.next:not(.disabled), .datepicker-cell.prev:not(.disabled) {
-    color: $grey-dark
+    color: var(--greyDark)
 }
 
 .datepicker-cell.next.selected, .datepicker-cell.prev.selected {
-    color: $grey-light
+    color: var(--greyLight)
 }
 
 .datepicker-cell.highlighted:not(.selected):not(.range):not(.today) {
     border-radius: 0;
-    background-color: $grey-light
+    background-color: var(--greyLight)
 }
 
 .datepicker-cell.highlighted:not(.selected):not(.range):not(.today):not(.disabled):hover {
-    background-color: $grey
+    background-color: var(--grey)
 }
 
 .datepicker-cell.highlighted:not(.selected):not(.range):not(.today).focused {
-    background-color: $grey-lightest
+    background-color: var(--greyLightest)
 }
 
 .datepicker-cell.today:not(.selected) {
-    background-color: $blue
+    background-color: var(--blue)
 }
 
 .datepicker-cell.today:not(.selected):not(.disabled) {
-    color: $white
+    color: var(--white)
 }
 
 .datepicker-cell.today.focused:not(.selected) {
-    background-color: $light-blue
+    background-color: var(--lightBlue)
 }
 
 .datepicker-cell.range-end:not(.selected), .datepicker-cell.range-start:not(.selected) {
-    background-color: $grey;
-    color: $white
+    background-color: var(--grey);
+    color: var(--white)
 }
 
 .datepicker-cell.range-end.focused:not(.selected), .datepicker-cell.range-start.focused:not(.selected) {
-    background-color: $grey
+    background-color: var(--grey)
 }
 
 .datepicker-cell.range-start {
@@ -273,19 +271,19 @@
 
 .datepicker-cell.range {
     border-radius: 0;
-    background-color: $grey-light
+    background-color: var(--greyLight)
 }
 
 .datepicker-cell.range:not(.disabled):not(.focused):not(.today):hover {
-    background-color: $grey-light
+    background-color: var(--greyLight)
 }
 
 .datepicker-cell.range.disabled {
-    color: $grey
+    color: var(--grey)
 }
 
 .datepicker-cell.range.focused {
-    background-color: $grey
+    background-color: var(--grey)
 }
 
 .datepicker-view.datepicker-grid .datepicker-cell {
@@ -294,6 +292,6 @@
 }
 
 .datepicker-input.in-edit {
-    border-color: $grey-dark
+    border-color: var(--greyDark)
 }
 

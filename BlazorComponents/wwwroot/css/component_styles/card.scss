@@ -1,6 +1,4 @@
-﻿@import 'colours.scss';
-
-.card {
+﻿.card {
     position: relative;
     display: -ms-flexbox;
     display: flex;
@@ -8,9 +6,9 @@
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: $white;
+    background-color: var(--white);
     background-clip: border-box;
-    border: 1px solid $grey-light;
+    border: 1px solid var(--greyLight);
     border-radius: 0.25rem;
     margin: 0.5rem;
 }
@@ -73,8 +71,8 @@
 .card-header {
     padding: 0.75rem 1.25rem;
     margin-bottom: 0;
-    background-color: $grey-lightest;
-    border-bottom: 1px solid $grey-light;
+    background-color: var(--greyLightest);
+    border-bottom: 1px solid var(--greyLight);
 }
 
 .card-header:first-child {
@@ -83,8 +81,8 @@
 
 .card-footer {
     padding: 0.75rem 1.25rem;
-    background-color: $grey-lightest;
-    border-top: 1px solid $grey-light;
+    background-color: var(--greyLightest);
+    border-top: 1px solid var(--greyLight);
 }
 
 .card-footer:last-child {
@@ -258,7 +256,7 @@
 
 .expansion-panel {
     width: 100%;
-    border: 1px solid $grey-light;
+    border: 1px solid var(--greyLight);
     border-radius: .25rem;
     padding: 5px;
 

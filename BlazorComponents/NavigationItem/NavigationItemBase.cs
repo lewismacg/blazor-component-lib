@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using System;
 
 namespace BlazorComponents
 {
@@ -6,14 +7,13 @@ namespace BlazorComponents
 	{
 		#region Parameters
 
+		[CascadingParameter] public NavigationParent Parent { get; set; }
 		[Parameter] public RenderFragment ChildContent { get; set; }
-		[Parameter] public bool HasChildren { get; set; }
 		[Parameter] public string Icon { get; set; }
 		[Parameter] public string IconTitle { get; set; }
 		[Parameter] public string LinkText { get; set; }
 		[Parameter] public string Destination { get; set; }
 		[Parameter] public bool ForceReload { get; set; }
-		[Parameter] public string Id { get; set; }
 
 		#endregion
 
@@ -23,11 +23,25 @@ namespace BlazorComponents
 
 		#endregion
 
+		#region Properties and Fields
+
+		public bool Show { get; set; }
+
+		#endregion
+
 		#region Methods
+
+		protected override void OnInitialized()
+		{
+			if (string.IsNullOrWhiteSpace(Destination)) throw new Exception("A destination is required for a navigation item");
+
+			if (Parent == null) Show = true;
+			else Parent.AddNavItem(this);
+		}
 
 		public void Navigate()
 		{
-			if (!HasChildren) NavManager?.NavigateTo(Destination, ForceReload);
+			NavManager?.NavigateTo(Destination, ForceReload);
 		}
 
 		#endregion

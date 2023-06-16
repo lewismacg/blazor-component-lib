@@ -1,25 +1,28 @@
-﻿@import 'colours.scss';
-
-.tooltip-wrapper {
+﻿.tooltip-wrapper {
 	position: relative;
 	display: inline-block;
+	font-size: 1rem;
 
 	.tooltip-text {
 		visibility: hidden;
 		position: absolute;
-		background-color: $black;
-		color: $white;
+		background-color: var(--black);
+		color: var(--white);
 		text-align: center;
 		border-radius: 6px;
 		padding: 5px;
 		width: max-content;
 		z-index: 1000;
+		font-weight: normal;
+		font-style: normal;
+		font-family: 'SourceSansPro-Regular', sans-serif;
+		text-transform: none;
 		font-size: 80%;
 
 		&.tooltip-up {
-			bottom: 120%;
 			left: 50%;
-			margin-left: -60px;
+			bottom: 150%;
+			transform: translate(-50%, 0%);
 			max-width: 120px;
 
 			&::after {
@@ -30,15 +33,15 @@
 				margin-left: -5px;
 				border-width: 5px;
 				border-style: solid;
-				border-color: $black transparent transparent transparent;
+				border-color: var(--black) transparent transparent transparent;
 			}
 		}
 
 		&.tooltip-down {
-			top: 150%;
-			left: 50%;
-			margin-left: -60px;
 			max-width: 120px;
+			left: 50%;
+			top: 150%;
+			transform: translate(-50%, 0%);
 
 			&::after {
 				content: " ";
@@ -48,14 +51,14 @@
 				margin-left: -5px;
 				border-width: 5px;
 				border-style: solid;
-				border-color: transparent transparent $black transparent;
+				border-color: transparent transparent var(--black) transparent;
 			}
 		}
 
 		&.tooltip-left {
-			top: -5px;
-			right: 100%;
-			margin-right: 15px;
+			right: 110%;
+			top: 50%;
+			transform: translate(0%,-50%);
 
 			&::after {
 				content: " ";
@@ -65,14 +68,14 @@
 				margin-top: -5px;
 				border-width: 5px;
 				border-style: solid;
-				border-color: transparent transparent transparent $black;
+				border-color: transparent transparent transparent var(--black);
 			}
 		}
 
 		&.tooltip-right {
-			top: -5px;
-			left: 100%;
-			margin-left: 15px;
+			left: 110%;
+			top: 50%;
+			transform: translate(0%,-50%);
 
 			&::after {
 				content: " ";
@@ -82,7 +85,7 @@
 				margin-top: -5px;
 				border-width: 5px;
 				border-style: solid;
-				border-color: transparent $black transparent transparent;
+				border-color: transparent var(--black) transparent transparent;
 			}
 		}
 	}
@@ -94,8 +97,6 @@
 
 .popover {
 	position: absolute;
-	top: 0;
-	left: 0;
 	z-index: 1060;
 	display: block;
 	max-width: 276px;

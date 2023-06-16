@@ -1,6 +1,4 @@
-﻿@import 'colours.scss';
-
-/*#region Base Form*/
+﻿/*#region Base Form*/
 
 .form-control {
 	display: block;
@@ -10,10 +8,10 @@
 	font-size: 1rem;
 	font-weight: 400;
 	line-height: 1.5;
-	color: $black;
-	background-color: $white;
+	color: var(--black);
+	background-color: var(--white);
 	background-clip: padding-box;
-	border: 2px solid rgba($grey-light, 0.5);
+	border: 2px solid #{'rgba(var(--greyLightRgb), 0.5)'};
 	border-radius: 0.1rem;
 	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
@@ -31,43 +29,43 @@
 
 .form-control:-moz-focusring {
 	color: transparent;
-	text-shadow: 0 0 0 $grey;
+	text-shadow: 0 0 0 var(--grey);
 }
 
 .form-control:focus {
-	color: $black;
-	background-color: $white;
-	border-color: $grey-dark;
+	color: var(--black);
+	background-color: var(--white);
+	border-color: var(--greyDark);
 	outline: 0;
 }
 
 .form-control::-webkit-input-placeholder {
-	color: $grey-dark;
+	color: var(--greyDark);
 	opacity: 1;
 }
 
 .form-control::-moz-placeholder {
-	color: $grey-dark;
+	color: var(--greyDark);
 	opacity: 1;
 }
 
 .form-control:-ms-input-placeholder {
-	color: $grey-dark;
+	color: var(--greyDark);
 	opacity: 1;
 }
 
 .form-control::-ms-input-placeholder {
-	color: $grey-dark;
+	color: var(--greyDark);
 	opacity: 1;
 }
 
 .form-control::placeholder {
-	color: $grey-dark;
+	color: var(--greyDark);
 	opacity: 1;
 }
 
 .form-control:disabled, .form-control[readonly] {
-	background-color: $grey-light;
+	background-color: var(--greyLight);
 	opacity: 1;
 }
 
@@ -81,8 +79,8 @@ input[type="month"].form-control {
 }
 
 select.form-control:focus::-ms-value {
-	color: $black;
-	background-color: $white;
+	color: var(--black);
+	background-color: var(--white);
 }
 
 .form-control-file,
@@ -120,7 +118,7 @@ select.form-control:focus::-ms-value {
 	margin-bottom: 0;
 	font-size: 1rem;
 	line-height: 1.5;
-	color: $black;
+	color: var(--black);
 	background-color: transparent;
 	border: solid transparent;
 	border-width: 1px 0;
@@ -196,7 +194,7 @@ textarea.form-control {
 
 .form-check-input[disabled] ~ .form-check-label,
 .form-check-input:disabled ~ .form-check-label {
-	color: $grey-dark;
+	color: var(--greyDark);
 }
 
 .form-check-label {
@@ -224,7 +222,7 @@ textarea.form-control {
 	width: 100%;
 	margin-top: 0.25rem;
 	font-size: 80%;
-	color: $primary-green;
+	color: var(--green);
 }
 
 .valid-tooltip {
@@ -238,7 +236,7 @@ textarea.form-control {
 	margin-top: .1rem;
 	font-size: 0.875rem;
 	line-height: 1.5;
-	color: $white;
+	color: var(--white);
 	background-color: rgba(40, 167, 69, 0.9);
 	border-radius: 0.25rem;
 }
@@ -256,7 +254,7 @@ textarea.form-control {
 }
 
 .was-validated .form-control:valid, .form-control.is-valid {
-	border-color: rgba($primary-green, 0.5);
+	border-color: #{'rgba(var(--greenRgb), 0.9)'};
 	padding-right: calc(1.5em + 0.75rem);
 	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
 	background-repeat: no-repeat;
@@ -265,7 +263,7 @@ textarea.form-control {
 }
 
 .was-validated .form-control:valid:focus, .form-control.is-valid:focus {
-	border-color: $primary-green;
+	border-color: var(--green);
 }
 
 .was-validated textarea.form-control:valid, textarea.form-control.is-valid {
@@ -274,17 +272,17 @@ textarea.form-control {
 }
 
 .was-validated .custom-select:valid, .custom-select.is-valid {
-	border-color: $primary-green;
+	border-color: var(--green);
 	padding-right: calc(0.75em + 2.3125rem);
-	background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") right 0.75rem center/8px 10px no-repeat, $white url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e") center right 1.75rem/1.1rem calc(0.75rem + 0.375rem) no-repeat;
+	background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") right 0.75rem center/8px 10px no-repeat, var(--white) url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e") center right 1.75rem/1.1rem calc(0.75rem + 0.375rem) no-repeat;
 }
 
 .was-validated .custom-select:valid:focus, .custom-select.is-valid:focus {
-	border-color: $primary-green;
+	border-color: var(--green);
 }
 
 .was-validated .form-check-input:valid ~ .form-check-label, .form-check-input.is-valid ~ .form-check-label {
-	color: $primary-green;
+	color: var(--green);
 }
 
 .was-validated .form-check-input:valid ~ .valid-feedback,
@@ -294,32 +292,32 @@ textarea.form-control {
 }
 
 .was-validated .custom-control-input:valid ~ .custom-control-label, .custom-control-input.is-valid ~ .custom-control-label {
-	color: $primary-green;
+	color: var(--green);
 }
 
 .was-validated .custom-control-input:valid ~ .custom-control-label::before, .custom-control-input.is-valid ~ .custom-control-label::before {
-	border-color: $primary-green;
+	border-color: var(--green);
 }
 
 .was-validated .custom-control-input:valid:checked ~ .custom-control-label::before, .custom-control-input.is-valid:checked ~ .custom-control-label::before {
-	border-color: $primary-green;
-	background-color: $light-green;
+	border-color: var(--green);
+	background-color: var(--lightGreen);
 }
 
 .was-validated .custom-control-input:valid:focus ~ .custom-control-label::before, .custom-control-input.is-valid:focus ~ .custom-control-label::before {
-	border-color: $primary-green;
+	border-color: var(--green);
 }
 
 .was-validated .custom-control-input:valid:focus:not(:checked) ~ .custom-control-label::before, .custom-control-input.is-valid:focus:not(:checked) ~ .custom-control-label::before {
-	border-color: $primary-green;
+	border-color: var(--green);
 }
 
 .was-validated .custom-file-input:valid ~ .custom-file-label, .custom-file-input.is-valid ~ .custom-file-label {
-	border-color: $primary-green;
+	border-color: var(--green);
 }
 
 .was-validated .custom-file-input:valid:focus ~ .custom-file-label, .custom-file-input.is-valid:focus ~ .custom-file-label {
-	border-color: $light-green;
+	border-color: var(--lightGreen);
 }
 
 .invalid-feedback {
@@ -327,7 +325,7 @@ textarea.form-control {
 	width: 100%;
 	margin-top: 0.25rem;
 	font-size: 80%;
-	color: $primary-red;
+	color: var(--red);
 }
 
 .invalid-tooltip {
@@ -341,7 +339,7 @@ textarea.form-control {
 	margin-top: .1rem;
 	font-size: 0.875rem;
 	line-height: 1.5;
-	color: $white;
+	color: var(--white);
 	background-color: rgba(220, 53, 69, 0.9);
 	border-radius: 0.25rem;
 }
@@ -359,7 +357,7 @@ textarea.form-control {
 }
 
 .was-validated .form-control:invalid, .form-control.is-invalid {
-	border-color: rgba($primary-red, 0.5);
+	border-color: #{'rgba(var(--redRgb), 0.5)'};
 	padding-right: calc(1.5em + 0.75rem);
 	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23dc3545' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
 	background-repeat: no-repeat;
@@ -368,7 +366,7 @@ textarea.form-control {
 }
 
 .was-validated .form-control:invalid:focus, .form-control.is-invalid:focus {
-	border-color: $primary-red;
+	border-color: var(--red);
 }
 
 .was-validated textarea.form-control:invalid, textarea.form-control.is-invalid {
@@ -377,17 +375,17 @@ textarea.form-control {
 }
 
 .was-validated .custom-select:invalid, .custom-select.is-invalid {
-	border-color: $primary-red;
+	border-color: var(--red);
 	padding-right: calc(0.75em + 2.3125rem);
-	background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") right 0.75rem center/8px 10px no-repeat, $white url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23dc3545' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e") center right 1.75rem/1.1rem calc(0.75rem + 0.375rem) no-repeat;
+	background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") right 0.75rem center/8px 10px no-repeat, var(--white) url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23dc3545' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e") center right 1.75rem/1.1rem calc(0.75rem + 0.375rem) no-repeat;
 }
 
 .was-validated .custom-select:invalid:focus, .custom-select.is-invalid:focus {
-	border-color: $primary-red;
+	border-color: var(--red);
 }
 
 .was-validated .form-check-input:invalid ~ .form-check-label, .form-check-input.is-invalid ~ .form-check-label {
-	color: $primary-red;
+	color: var(--red);
 }
 
 .was-validated .form-check-input:invalid ~ .invalid-feedback,
@@ -397,32 +395,32 @@ textarea.form-control {
 }
 
 .was-validated .custom-control-input:invalid ~ .custom-control-label, .custom-control-input.is-invalid ~ .custom-control-label {
-	color: $primary-red;
+	color: var(--red);
 }
 
 .was-validated .custom-control-input:invalid ~ .custom-control-label::before, .custom-control-input.is-invalid ~ .custom-control-label::before {
-	border-color: $primary-red;
+	border-color: var(--red);
 }
 
 .was-validated .custom-control-input:invalid:checked ~ .custom-control-label::before, .custom-control-input.is-invalid:checked ~ .custom-control-label::before {
-	border-color: $primary-red;
-	background-color: $light-red;
+	border-color: var(--red);
+	background-color: var(--lightRed);
 }
 
 .was-validated .custom-control-input:invalid:focus ~ .custom-control-label::before, .custom-control-input.is-invalid:focus ~ .custom-control-label::before {
-	border-color: $primary-red;
+	border-color: var(--red);
 }
 
 .was-validated .custom-control-input:invalid:focus:not(:checked) ~ .custom-control-label::before, .custom-control-input.is-invalid:focus:not(:checked) ~ .custom-control-label::before {
-	border-color: $primary-red;
+	border-color: var(--red);
 }
 
 .was-validated .custom-file-input:invalid ~ .custom-file-label, .custom-file-input.is-invalid ~ .custom-file-label {
-	border-color: $primary-red;
+	border-color: var(--red);
 }
 
 .was-validated .custom-file-input:invalid:focus ~ .custom-file-label, .custom-file-input.is-invalid:focus ~ .custom-file-label {
-	border-color: $primary-red;
+	border-color: var(--red);
 }
 
 .form-inline {
@@ -549,10 +547,10 @@ textarea.form-control {
 	padding: 0.5rem 0;
 	margin: 0.125rem 0 0;
 	font-size: 1rem;
-	color: $black;
+	color: var(--black);
 	text-align: left;
 	list-style: none;
-	background-color: $white;
+	background-color: var(--white);
 	background-clip: padding-box;
 	border: 1px solid rgba(0, 0, 0, 0.15);
 	border-radius: 0.25rem;
@@ -711,7 +709,7 @@ textarea.form-control {
 	height: 0;
 	margin: 0.5rem 0;
 	overflow: hidden;
-	border-top: 1px solid $grey-lightest;
+	border-top: 1px solid var(--greyLightest);
 }
 
 .dropdown-item {
@@ -720,7 +718,7 @@ textarea.form-control {
 	padding: 0.25rem 1.5rem;
 	clear: both;
 	font-weight: 400;
-	color: $black;
+	color: var(--black);
 	text-align: inherit;
 	white-space: nowrap;
 	background-color: transparent;
@@ -728,19 +726,19 @@ textarea.form-control {
 }
 
 .dropdown-item:hover, .dropdown-item:focus {
-	color: $black;
+	color: var(--black);
 	text-decoration: none;
-	background-color: $grey-lightest;
+	background-color: var(--greyLightest);
 }
 
 .dropdown-item.active, .dropdown-item:active {
-	color: $white;
+	color: var(--white);
 	text-decoration: none;
-	background-color: $yellow;
+	background-color: var(--yellow);
 }
 
 .dropdown-item.disabled, .dropdown-item:disabled {
-	color: $grey-dark;
+	color: var(--greyDark);
 	pointer-events: none;
 	background-color: transparent;
 }
@@ -754,14 +752,14 @@ textarea.form-control {
 	padding: 0.5rem 1.5rem;
 	margin-bottom: 0;
 	font-size: 0.875rem;
-	color: $grey-dark;
+	color: var(--greyDark);
 	white-space: nowrap;
 }
 
 .dropdown-item-text {
 	display: block;
 	padding: 0.25rem 1.5rem;
-	color: $black;
+	color: var(--black);
 }
 
 /*#endregion*/
@@ -771,7 +769,7 @@ textarea.form-control {
 .btn {
 	display: inline-block;
 	font-weight: 400;
-	color: $black;
+	color: var(--black);
 	text-align: center;
 	vertical-align: middle;
 	-webkit-user-select: none;
@@ -793,7 +791,7 @@ textarea.form-control {
 }
 
 .btn:hover {
-	color: $black;
+	color: var(--black);
 	text-decoration: none;
 }
 
@@ -815,174 +813,174 @@ fieldset:disabled a.btn {
 }
 
 .btn-primary {
-	color: $white;
-	background-color: $blue;
-	border-color: $blue;
+	color: var(--white);
+	background-color: var(--blue);
+	border-color: var(--blue);
 }
 
 .btn-primary:hover {
-	color: $white;
-	background-color: $dark-blue;
-	border-color: $dark-blue;
+	color: var(--white);
+	background-color: var(--darkBlue);
+	border-color: var(--darkBlue);
 }
 
 .btn-primary:focus, .btn-primary.focus {
-	color: $white;
-	background-color: $dark-blue;
-	border-color: $dark-blue;
+	color: var(--white);
+	background-color: var(--darkBlue);
+	border-color: var(--darkBlue);
 }
 
 .btn-primary.disabled, .btn-primary:disabled {
-	color: $grey-dark;
-	background-color: $grey-lightest;
-	border-color: $grey-lightest;
+	color: var(--greyDark);
+	background-color: var(--greyLightest);
+	border-color: var(--greyLightest);
 }
 
 .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
 .show > .btn-primary.dropdown-toggle {
-	color: $white;
-	background-color: $blue;
-	border-color: $blue;
+	color: var(--white);
+	background-color: var(--blue);
+	border-color: var(--blue);
 }
 
 .btn-secondary {
-	color: $black;
-	background-color: $yellow;
-	border-color: $yellow;
+	color: var(--black);
+	background-color: var(--yellow);
+	border-color: var(--yellow);
 }
 
 .btn-secondary:hover {
-	color: $black;
-	background-color: $dark-yellow;
-	border-color: $dark-yellow;
+	color: var(--black);
+	background-color: var(--darkYellow);
+	border-color: var(--darkYellow);
 }
 
 .btn-secondary:focus, .btn-secondary.focus {
-	color: $black;
-	background-color: $dark-yellow;
-	border-color: $dark-yellow;
+	color: var(--black);
+	background-color: var(--darkYellow);
+	border-color: var(--darkYellow);
 }
 
 .btn-secondary.disabled, .btn-secondary:disabled {
-	color: $grey-dark;
-	background-color: $grey-darkest;
-	border-color: $grey-darkest;
+	color: var(--greyDark);
+	background-color: var(--greyDarkest);
+	border-color: var(--greyDarkest);
 }
 
 .btn-secondary:not(:disabled):not(.disabled):active, .btn-secondary:not(:disabled):not(.disabled).active,
 .show > .btn-secondary.dropdown-toggle {
-	color: $black;
-	background-color: $yellow;
-	border-color: $yellow;
+	color: var(--black);
+	background-color: var(--yellow);
+	border-color: var(--yellow);
 }
 
 .btn-success {
-	color: $white;
-	background-color: $primary-green;
-	border-color: $primary-green;
+	color: var(--white);
+	background-color: var(--green);
+	border-color: var(--green);
 }
 
 .btn-success:hover {
-	color: $white;
-	background-color: $dark-green;
-	border-color: $dark-green;
+	color: var(--white);
+	background-color: var(--darkGreen);
+	border-color: var(--darkGreen);
 }
 
 .btn-success:focus, .btn-success.focus {
-	color: $white;
-	background-color: $dark-green;
-	border-color: $dark-green;
+	color: var(--white);
+	background-color: var(--darkGreen);
+	border-color: var(--darkGreen);
 }
 
 .btn-success.disabled, .btn-success:disabled {
-	color: $grey-dark;
-	background-color: $grey-lightest;
-	border-color: $grey-lightest;
+	color: var(--greyDark);
+	background-color: var(--greyLightest);
+	border-color: var(--greyLightest);
 }
 
 .btn-success:not(:disabled):not(.disabled):active, .btn-success:not(:disabled):not(.disabled).active,
 .show > .btn-success.dropdown-toggle {
-	color: $white;
-	background-color: $primary-green;
-	border-color: $primary-green;
+	color: var(--white);
+	background-color: var(--green);
+	border-color: var(--green);
 }
 
 .btn-info {
-	color: $black;
-	background-color: $white;
-	border-color: $black;
+	color: var(--black);
+	background-color: var(--white);
+	border-color: var(--black);
 }
 
 .btn-info:hover {
-	color: $black;
-	background-color: $grey-lightest;
-	border-color: $black;
+	color: var(--black);
+	background-color: var(--greyLightest);
+	border-color: var(--black);
 }
 
 .btn-info:focus, .btn-info.focus {
-	color: $black;
-	background-color: $grey-lightest;
-	border-color: $black;
+	color: var(--black);
+	background-color: var(--greyLightest);
+	border-color: var(--black);
 }
 
 .btn-info.disabled, .btn-info:disabled {
-	color: $grey-dark;
-	background-color: $grey-darkest;
-	border-color: $grey-darkest;
+	color: var(--greyDark);
+	background-color: var(--greyDarkest);
+	border-color: var(--greyDarkest);
 }
 
 .btn-info:not(:disabled):not(.disabled):active, .btn-info:not(:disabled):not(.disabled).active,
 .show > .btn-info.dropdown-toggle {
-	color: $black;
-	background-color: $white;
-	border-color: $black;
+	color: var(--black);
+	background-color: var(--white);
+	border-color: var(--black);
 }
 
 .btn-danger {
-	color: $primary-red;
-	background-color: $white;
-	border-color: $primary-red;
+	color: var(--red);
+	background-color: var(--white);
+	border-color: var(--red);
 }
 
 .btn-danger:hover {
-	color: $primary-red;
-	background-color: $grey-lightest;
-	border-color: $primary-red;
+	color: var(--red);
+	background-color: var(--greyLightest);
+	border-color: var(--red);
 }
 
 .btn-danger:focus, .btn-danger.focus {
-	color: $primary-red;
-	background-color: $grey-lightest;
-	border-color: $primary-red;
+	color: var(--red);
+	background-color: var(--greyLightest);
+	border-color: var(--red);
 }
 
 .btn-danger.disabled, .btn-danger:disabled {
-	color: $grey-dark;
-	background-color: $grey-lightest;
-	border-color: $grey-lightest;
+	color: var(--greyDark);
+	background-color: var(--greyLightest);
+	border-color: var(--greyLightest);
 }
 
 .btn-danger:not(:disabled):not(.disabled):active, .btn-danger:not(:disabled):not(.disabled).active,
 .show > .btn-danger.dropdown-toggle {
-	color: $primary-red;
-	background-color: $white;
-	border-color: $primary-red;
+	color: var(--red);
+	background-color: var(--white);
+	border-color: var(--red);
 }
 
 .btn-link {
-	color: $blue;
+	color: var(--blue);
 }
 
 .btn-link:hover {
-	color: $dark-blue;
+	color: var(--darkBlue);
 }
 
 .btn-link:focus, .btn-link.focus {
-	color: $dark-blue;
+	color: var(--darkBlue);
 }
 
 .btn-link:disabled, .btn-link.disabled {
-	color: $grey-dark;
+	color: var(--greyDark);
 	pointer-events: none;
 }
 
@@ -1271,10 +1269,10 @@ input[type="button"].btn-block {
 	font-size: 1rem;
 	font-weight: 400;
 	line-height: 1.5;
-	color: $black;
+	color: var(--black);
 	text-align: center;
 	white-space: nowrap;
-	background-color: $grey-lightest;
+	background-color: var(--greyLightest);
 	border: 1px solid rgba(212,212,212,.5);
 	border-radius: 0.25rem;
 }
@@ -1371,9 +1369,9 @@ input[type="button"].btn-block {
 }
 
 .custom-control-input:checked ~ .custom-control-label::before {
-	color: $white;
-	border-color: $black;
-	background-color: $black;
+	color: var(--white);
+	border-color: var(--black);
+	background-color: var(--black);
 }
 
 .custom-control-input:focus ~ .custom-control-label::before {
@@ -1381,21 +1379,21 @@ input[type="button"].btn-block {
 }
 
 .custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
-	border-color: $black;
+	border-color: var(--black);
 }
 
 .custom-control-input:not(:disabled):active ~ .custom-control-label::before {
-	color: $white;
-	background-color: $black;
-	border-color: $black;
+	color: var(--white);
+	background-color: var(--black);
+	border-color: var(--black);
 }
 
 .custom-control-input[disabled] ~ .custom-control-label, .custom-control-input:disabled ~ .custom-control-label {
-	color: $grey-dark;
+	color: var(--greyDark);
 }
 
 .custom-control-input[disabled] ~ .custom-control-label::before, .custom-control-input:disabled ~ .custom-control-label::before {
-	background-color: $grey-lightest;
+	background-color: var(--greyLightest);
 }
 
 .custom-control-label {
@@ -1413,7 +1411,7 @@ input[type="button"].btn-block {
 	height: 1rem;
 	pointer-events: none;
 	content: "";
-	background-color: $white;
+	background-color: var(--white);
 	border: #adb5bd solid 1px;
 }
 
@@ -1437,13 +1435,13 @@ input[type="button"].btn-block {
 }
 
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
-	border-color: $white;
-	background-color: $black;
+	border-color: var(--white);
+	background-color: var(--black);
 }
 
 .custom-checkbox .custom-control-input:indeterminate ~ .custom-control-label::before {
-	border-color: $white;
-	background-color: $black;
+	border-color: var(--white);
+	background-color: var(--black);
 }
 
 .custom-checkbox .custom-control-input:indeterminate ~ .custom-control-label::after {
@@ -1451,11 +1449,11 @@ input[type="button"].btn-block {
 }
 
 .custom-checkbox .custom-control-input:disabled:checked ~ .custom-control-label::before {
-	background-color: rgba($grey-dark, 0.5);
+	background-color: #{'rgba(var(--greyDarkRgb), 0.5)'};
 }
 
 .custom-checkbox .custom-control-input:disabled:indeterminate ~ .custom-control-label::before {
-	background-color: rgba($grey-dark, 0.5);
+	background-color: #{'rgba(var(--greyDarkRgb), 0.5)'};
 }
 
 .custom-radio .custom-control-label::before {
@@ -1479,7 +1477,7 @@ input[type="button"].btn-block {
 	width: 1.75rem;
 	pointer-events: all;
 	border-radius: 0.5rem;
-	background-color: $grey;
+	background-color: var(--grey);
 }
 
 .custom-switch .custom-control-label::after {
@@ -1487,7 +1485,7 @@ input[type="button"].btn-block {
 	left: calc(-2.25rem + 2px);
 	width: calc(1rem - 4px);
 	height: calc(1rem - 4px);
-	background-color: $white;
+	background-color: var(--white);
 	border-radius: 0.5rem;
 	transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-transform 0.15s ease-in-out;
 	transition: transform 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -1501,7 +1499,7 @@ input[type="button"].btn-block {
 }
 
 .custom-switch .custom-control-input:checked ~ .custom-control-label::after {
-	background-color: $white;
+	background-color: var(--white);
 	-webkit-transform: translateX(0.75rem);
 	transform: translateX(0.75rem);
 }
@@ -1518,10 +1516,10 @@ input[type="button"].btn-block {
 	font-size: 1rem;
 	font-weight: 400;
 	line-height: 1.5;
-	color: $black;
+	color: var(--black);
 	vertical-align: middle;
-	background: $white url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") right 0.75rem center/8px 10px no-repeat;
-	border: 1px solid $black;
+	background: var(--white) url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") right 0.75rem center/8px 10px no-repeat;
+	border: 1px solid var(--black);
 	border-radius: 0.25rem;
 	-webkit-appearance: none;
 	-moz-appearance: none;
@@ -1529,14 +1527,14 @@ input[type="button"].btn-block {
 }
 
 .custom-select:focus {
-	border-color: $black;
+	border-color: var(--black);
 	outline: 0;
 	box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
 .custom-select:focus::-ms-value {
-	color: $black;
-	background-color: $white;
+	color: var(--black);
+	background-color: var(--white);
 }
 
 .custom-select[multiple], .custom-select[size]:not([size="1"]) {
@@ -1546,8 +1544,8 @@ input[type="button"].btn-block {
 }
 
 .custom-select:disabled {
-	color: $grey-dark;
-	background-color: $grey-lightest;
+	color: var(--greyDark);
+	background-color: var(--greyLightest);
 }
 
 .custom-select::-ms-expand {
@@ -1556,7 +1554,7 @@ input[type="button"].btn-block {
 
 .custom-select:-moz-focusring {
 	color: transparent;
-	text-shadow: 0 0 0 $black;
+	text-shadow: 0 0 0 var(--black);
 }
 
 .custom-select-sm {
@@ -1594,13 +1592,13 @@ input[type="button"].btn-block {
 }
 
 .custom-file-input:focus ~ .custom-file-label {
-	border-color: $yellow;
+	border-color: var(--yellow);
 	box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
 .custom-file-input[disabled] ~ .custom-file-label,
 .custom-file-input:disabled ~ .custom-file-label {
-	background-color: $grey-lightest;
+	background-color: var(--greyLightest);
 }
 
 .custom-file-input:lang(en) ~ .custom-file-label::after {
@@ -1622,8 +1620,8 @@ input[type="button"].btn-block {
 	overflow: hidden;
 	font-weight: 400;
 	line-height: 1.5;
-	color: $black;
-	background-color: $white;
+	color: var(--black);
+	background-color: var(--white);
 	border: 1px solid #ced4da;
 	border-radius: 0.25rem;
 }
@@ -1638,9 +1636,9 @@ input[type="button"].btn-block {
 	height: calc(1.5em + 0.75rem);
 	padding: 0.375rem 0.75rem;
 	line-height: 1.5;
-	color: $black;
+	color: var(--black);
 	content: "Browse";
-	background-color: $grey-lightest;
+	background-color: var(--greyLightest);
 	border-left: inherit;
 	border-radius: 0 0.25rem 0.25rem 0;
 }
@@ -1660,15 +1658,15 @@ input[type="button"].btn-block {
 }
 
 .custom-range:focus::-webkit-slider-thumb {
-	box-shadow: 0 0 0 1px $white, 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+	box-shadow: 0 0 0 1px var(--white), 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
 .custom-range:focus::-moz-range-thumb {
-	box-shadow: 0 0 0 1px $white, 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+	box-shadow: 0 0 0 1px var(--white), 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
 .custom-range:focus::-ms-thumb {
-	box-shadow: 0 0 0 1px $white, 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+	box-shadow: 0 0 0 1px var(--white), 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
 .custom-range::-moz-focus-outer {
@@ -1679,7 +1677,7 @@ input[type="button"].btn-block {
 	width: 1rem;
 	height: 1rem;
 	margin-top: -0.25rem;
-	background-color: $yellow;
+	background-color: var(--yellow);
 	border: 0;
 	border-radius: 1rem;
 	-webkit-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -1696,7 +1694,7 @@ input[type="button"].btn-block {
 }
 
 .custom-range::-webkit-slider-thumb:active {
-	background-color: $yellow;
+	background-color: var(--yellow);
 }
 
 .custom-range::-webkit-slider-runnable-track {
@@ -1704,7 +1702,7 @@ input[type="button"].btn-block {
 	height: 0.5rem;
 	color: transparent;
 	cursor: pointer;
-	background-color: $grey-light;
+	background-color: var(--greyLight);
 	border-color: transparent;
 	border-radius: 1rem;
 }
@@ -1712,7 +1710,7 @@ input[type="button"].btn-block {
 .custom-range::-moz-range-thumb {
 	width: 1rem;
 	height: 1rem;
-	background-color: $yellow;
+	background-color: var(--yellow);
 	border: 0;
 	border-radius: 1rem;
 	-moz-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -1729,7 +1727,7 @@ input[type="button"].btn-block {
 }
 
 .custom-range::-moz-range-thumb:active {
-	background-color: $yellow;
+	background-color: var(--yellow);
 }
 
 .custom-range::-moz-range-track {
@@ -1737,7 +1735,7 @@ input[type="button"].btn-block {
 	height: 0.5rem;
 	color: transparent;
 	cursor: pointer;
-	background-color: $grey-light;
+	background-color: var(--greyLight);
 	border-color: transparent;
 	border-radius: 1rem;
 }
@@ -1748,7 +1746,7 @@ input[type="button"].btn-block {
 	margin-top: 0;
 	margin-right: 0.2rem;
 	margin-left: 0.2rem;
-	background-color: $yellow;
+	background-color: var(--yellow);
 	border: 0;
 	border-radius: 1rem;
 	-ms-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -1764,7 +1762,7 @@ input[type="button"].btn-block {
 }
 
 .custom-range::-ms-thumb:active {
-	background-color: $dark-yellow;
+	background-color: var(--darkYellow);
 }
 
 .custom-range::-ms-track {
@@ -1778,18 +1776,18 @@ input[type="button"].btn-block {
 }
 
 .custom-range::-ms-fill-lower {
-	background-color: $grey-light;
+	background-color: var(--greyLight);
 	border-radius: 1rem;
 }
 
 .custom-range::-ms-fill-upper {
 	margin-right: 15px;
-	background-color: $grey-light;
+	background-color: var(--greyLight);
 	border-radius: 1rem;
 }
 
 .custom-range:disabled::-webkit-slider-thumb {
-	background-color: $grey-light;
+	background-color: var(--greyLight);
 }
 
 .custom-range:disabled::-webkit-slider-runnable-track {
@@ -1797,7 +1795,7 @@ input[type="button"].btn-block {
 }
 
 .custom-range:disabled::-moz-range-thumb {
-	background-color: $grey-light;
+	background-color: var(--greyLight);
 }
 
 .custom-range:disabled::-moz-range-track {
@@ -1805,7 +1803,7 @@ input[type="button"].btn-block {
 }
 
 .custom-range:disabled::-ms-thumb {
-	background-color: $grey-light;
+	background-color: var(--greyLight);
 }
 
 .custom-control-label::before,
@@ -1828,7 +1826,6 @@ input[type="button"].btn-block {
 
 .drop-container {
 	display: flex;
-	justify-content: space-around;
 	gap: 1rem;
 
 	.column-category {
@@ -1854,9 +1851,9 @@ input[type="button"].btn-block {
 				height: 100%;
 
 				.dropzone {
-					border: 2px solid $grey-light;
+					border: 2px solid var(--greyLight);
 					min-height: 80px;
-					background-color: $grey-lightest;
+					background-color: var(--greyLightest);
 					list-style: none;
 					margin-bottom: 0;
 					padding: 1rem;
@@ -1867,9 +1864,9 @@ input[type="button"].btn-block {
 				.drag-and-droppable {
 					margin-bottom: 0.5rem;
 					padding: 0.5rem 0.5rem;
-					border: 1px solid $blue;
+					border: 1px solid var(--blue);
 					cursor: grab;
-					background: $white;
+					background: var(--white);
 					border-radius: 0.2rem;
 				}
 
@@ -1879,18 +1876,18 @@ input[type="button"].btn-block {
 
 				.drag-and-droppable.dragged {
 					opacity: 0.6;
-					background-color: $light-blue;
+					background-color: var(--lightBlue);
 				}
 			}
 		}
 	}
 
 	.no-drop {
-		border: 2px solid $dark-red !important;
+		border: 2px solid var(--darkRed) !important;
 	}
 
 	.can-drop {
-		border: 2px solid $dark-green !important;
+		border: 2px solid var(--darkGreen) !important;
 	}
 }
 

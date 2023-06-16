@@ -2,36 +2,46 @@
 @typeparam TModel where TModel : class
 
 <div class="column-category">
-	<div class="alert alert-@_alertClass mb-0 text-center rounded-0 bold-border">
-		<b>
-			@(ColumnTitle ?? CategoryValue.ToString())
-			@HeaderContent
-			@if (ShowCount)
+	@if (CustomDropzone == null)
+	{
+		<div class="alert alert-@_alertClass mb-0 text-center rounded-0 bold-border">
+			<b>
+				@(ColumnTitle ?? CategoryValue.ToString())
+				@HeaderContent
+				@if (ShowCount)
+				{
+					@:(@_models.Count)
+				}
+			</b>
+		</div>
+		<div class="column-body bold-border-right bold-border-left bold-border-bottom @(ShowBody ? "" : "d-none")">
+			@if (BodyContent != null)
 			{
-				@:(@_models.Count)
+				<div class="body-content" style="height: @(BodyContentHeight.HasValue ? $"{BodyContentHeight}px" : "auto")">
+					@BodyContent
+				</div>
 			}
-		</b>
-	</div>
-	<div class="column-body bold-border-right bold-border-left bold-border-bottom @(ShowBody ? "" : "d-none")">
-		@if (BodyContent != null)
-		{
-			<div class="body-content" style="height: @(BodyContentHeight.HasValue ? $"{BodyContentHeight}px" : "auto")">
-				@BodyContent
-			</div>
-		}
-		<div class="drop-column">
-			<ul class="dropzone @_dropClass"
+			<div class="drop-column">
+				<ul class="dropzone @_dropClass"
 				ondragover="event.preventDefault();event.dataTransfer.dropEffect='link'"
 				ondragstart="event.dataTransfer.setData('', event.target.id);"
 				@ondrop="HandleDrop"
 				@ondragenter="HandleDragEnter"
 				@ondragleave="HandleDragLeave">
 
-				@foreach (var model in _models)
-				{
-					<DragBox TModel="TModel" Model="model" AdditionalClass="@AdditionalDragItemClass" />
-				}
-			</ul>
+					@foreach (var model in _models)
+					{
+						<DragBox TModel="TModel" Model="model" AdditionalClass="@AdditionalDragItemClass" />
+					}
+				</ul>
+			</div>
 		</div>
-	</div>
+	}
+	else
+	{
+		<div class="h-100 bold-border @_dropClass" ondragover="event.preventDefault();event.dataTransfer.dropEffect='link'" ondragstart="event.dataTransfer.setData('', event.target.id);"
+		 @ondrop="HandleDrop" @ondragenter="HandleDragEnter" @ondragleave="HandleDragLeave">
+			@CustomDropzone
+		</div>
+	}
 </div>

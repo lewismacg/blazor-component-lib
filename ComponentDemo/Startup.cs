@@ -27,7 +27,7 @@ namespace ComponentDemo
 			services.AddServerSideBlazor();
 
 			services.AddScoped<ToasterManager>();
-			services.AddTransient<IValidator<DateModel>, DateModelValidator>();
+			services.AddTransient<IValidator<TestModel>, TestModelValidator>();
 			services.AddBlazorDownloadFile();
 		}
 

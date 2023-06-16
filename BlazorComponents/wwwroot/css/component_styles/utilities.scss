@@ -1,6 +1,4 @@
-﻿@import 'colours.scss';
-
-small,
+﻿small,
 .small {
     font-size: 80%;
     font-weight: 400;
@@ -9,7 +7,7 @@ small,
 mark,
 .mark {
     padding: 0.2em;
-    background-color: $dark-yellow;
+    background-color: var(--darkYellow);
 }
 
 .list-unstyled {
@@ -47,7 +45,7 @@ mark,
 .blockquote-footer {
     display: block;
     font-size: 80%;
-    color: $grey-dark;
+    color: var(--greyDark);
 }
 
 .blockquote-footer::before {
@@ -61,8 +59,8 @@ mark,
 
 .img-thumbnail {
     padding: 0.25rem;
-    background-color: $white;
-    border: 1px solid $grey-lightest;
+    background-color: var(--white);
+    border: 1px solid var(--greyLightest);
     border-radius: 0.25rem;
     max-width: 100%;
     height: auto;
@@ -79,12 +77,12 @@ mark,
 
 .figure-caption {
     font-size: 90%;
-    color: $grey-dark;
+    color: var(--greyDark);
 }
 
 code {
     font-size: 87.5%;
-    color: $dark-blue;
+    color: var(--darkBlue);
     word-wrap: break-word;
 }
 
@@ -95,7 +93,7 @@ a > code {
 kbd {
     padding: 0.2rem 0.4rem;
     font-size: 87.5%;
-    color: $white;
+    color: var(--white);
     background-color: #212529;
     border-radius: 0.2rem;
 }
@@ -109,7 +107,7 @@ kbd kbd {
 pre {
     display: block;
     font-size: 87.5%;
-    color: $black;
+    color: var(--black);
 }
 
 pre code {
@@ -160,13 +158,13 @@ pre code {
     font-size: 1.5rem;
     font-family: 'Lato-Bold';
     line-height: 1;
-    color: $black;
-    text-shadow: 0 1px 0 $white;
+    color: var(--black);
+    text-shadow: 0 1px 0 var(--white);
     opacity: .5;
 }
 
 .close:hover {
-    color: $black;
+    color: var(--black);
     text-decoration: none;
 }
 
@@ -209,45 +207,45 @@ a.close.disabled {
 }
 
 .bg-primary {
-    background-color: $blue !important;
+    background-color: var(--blue) !important;
 }
 
 a.bg-primary:hover, a.bg-primary:focus,
 button.bg-primary:hover,
 button.bg-primary:focus {
-    background-color: $dark-blue !important;
+    background-color: var(--darkBlue) !important;
 }
 
 .bg-secondary {
-    background-color: $yellow !important;
+    background-color: var(--yellow) !important;
 }
 
 a.bg-secondary:hover, a.bg-secondary:focus,
 button.bg-secondary:hover,
 button.bg-secondary:focus {
-    background-color: $dark-yellow !important;
+    background-color: var(--darkYellow) !important;
 }
 
 .bg-success {
-    background-color: $primary-green !important;
+    background-color: var(--green) !important;
 }
 
 a.bg-success:hover, a.bg-success:focus,
 button.bg-success:hover,
 button.bg-success:focus {
-    background-color: $dark-green !important;
+    background-color: var(--darkGreen) !important;
 }
 
 .bg-white {
-    background-color: $white !important;
+    background-color: var(--white) !important;
 }
 
 .bg-black {
-    background-color: $black !important;
+    background-color: var(--black) !important;
 }
 
 .bg-grey {
-    background-color: $grey-light !important;
+    background-color: var(--greyLight) !important;
 }
 
 .bg-transparent {
@@ -255,23 +253,23 @@ button.bg-success:focus {
 }
 
 .border {
-    border: 1px solid $grey-light !important;
+    border: 1px solid var(--greyLight) !important;
 }
 
 .border-top {
-    border-top: 1px solid $grey-light !important;
+    border-top: 1px solid var(--greyLight) !important;
 }
 
 .border-right {
-    border-right: 1px solid $grey-light !important;
+    border-right: 1px solid var(--greyLight) !important;
 }
 
 .border-bottom {
-    border-bottom: 1px solid $grey-light !important;
+    border-bottom: 1px solid var(--greyLight) !important;
 }
 
 .border-left {
-    border-left: 1px solid $grey-light !important;
+    border-left: 1px solid var(--greyLight) !important;
 }
 
 .border-0 {
@@ -295,43 +293,43 @@ button.bg-success:focus {
 }
 
 .border-primary {
-    border-color: $blue !important;
+    border-color: var(--blue) !important;
 }
 
 .border-secondary {
-    border-color: $yellow !important;
+    border-color: var(--yellow) !important;
 }
 
 .border-success {
-    border-color: $primary-green !important;
+    border-color: var(--green) !important;
 }
 
 .border-black {
-    border-color: $black !important;
+    border-color: var(--black) !important;
 }
 
 .border-white {
-    border-color: $white !important;
+    border-color: var(--white) !important;
 }
 
 .bold-border {
-    border: 2px solid $grey-light;
+    border: 2px solid var(--greyLight);
 }
 
 .bold-border-left {
-    border-left: 2px solid $grey-light;
+    border-left: 2px solid var(--greyLight);
 }
 
 .bold-border-right {
-    border-right: 2px solid $grey-light;
+    border-right: 2px solid var(--greyLight);
 }
 
 .bold-border-bottom {
-    border-bottom: 2px solid $grey-light;
+    border-bottom: 2px solid var(--greyLight);
 }
 
 .bold-border-top {
-    border-top: 2px solid $grey-light;
+    border-top: 2px solid var(--greyLight);
 }
 
 .rounded-sm {
@@ -4049,51 +4047,51 @@ button.bg-success:focus {
 }
 
 .text-white {
-    color: $white !important;
+    color: var(--white) !important;
 }
 
 .text-primary {
-    color: $blue !important;
+    color: var(--blue) !important;
 }
 
 a.text-primary:hover, a.text-primary:focus {
-    color: $dark-blue !important;
+    color: var(--darkBlue) !important;
 }
 
 .text-secondary {
-    color: $yellow !important;
+    color: var(--yellow) !important;
 }
 
 a.text-secondary:hover, a.text-secondary:focus {
-    color: $dark-yellow !important;
+    color: var(--darkYellow) !important;
 }
 
 .text-success {
-    color: $primary-green !important;
+    color: var(--green) !important;
 }
 
 a.text-success:hover, a.text-success:focus {
-    color: $dark-green !important;
+    color: var(--darkGreen) !important;
 }
 
 .text-white {
-    color: $white !important;
+    color: var(--white) !important;
 }
 
 a.text-white:hover, a.text-white:focus {
-    color: $white !important;
+    color: var(--white) !important;
 }
 
 .text-black {
-    color: $black !important;
+    color: var(--black) !important;
 }
 
 a.text-black:hover, a.text-black:focus {
-    color: $black !important;
+    color: var(--black) !important;
 }
 
 .text-muted {
-    color: $grey-dark !important;
+    color: var(--greyDark) !important;
 }
 
 .text-black-50 {
@@ -4126,19 +4124,19 @@ a.text-black:hover, a.text-black:focus {
 }
 
 .red-fill {
-    fill: $primary-red;
+    fill: var(--red);
 }
 
 .green-fill {
-    fill: $primary-green;
+    fill: var(--green);
 }
 
 .yellow-fill {
-    fill: $yellow;
+    fill: var(--yellow);
 }
 
 .blue-fill {
-    fill: $blue;
+    fill: var(--blue);
 }
 
 .visible {
@@ -4222,7 +4220,7 @@ a.text-black:hover, a.text-black:focus {
 
     .table td,
     .table th {
-        background-color: $white !important;
+        background-color: var(--white) !important;
     }
 
     .table-bordered th,

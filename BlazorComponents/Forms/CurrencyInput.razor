@@ -1,0 +1,7 @@
+﻿@namespace BlazorComponents
+@inherits BaseCurrencyInput<TValue>
+@typeparam TValue
+
+<input type="@InputType" @attributes="@AdditionalAttributes" @onchange="BindValue" 
+       @onfocusin="@(() => ToggleType("number"))" @onblur="@(() => ToggleType("text"))" value="@ValueToDisplay"
+       onkeydown="javascript: return ['e','E','+'].includes(event.key) ? false : true" />

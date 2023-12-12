@@ -6,26 +6,26 @@
 <h3>DataTable Dynamic Demo</h3>
 
 <Table @ref="table" AllowExport="true" ExportAtTop="true" TableItem="SaleModel" Items="Items" PageSize="15" ColumnReorder="true" ShowSearchBar="true" SearchPlaceholder="Search by column values">
-	<Column Hideable="true" TableItem="SaleModel" Title="Sales Person" Field="@(x => x.SalesPerson)" Sortable="true" Filterable="true" Width="15%" DefaultSortColumn="true" />
-	<Column Hideable="true" TableItem="SaleModel" Title="Customer Name" Field="@(x => x.CustomerName)" Sortable="true" Filterable="true" Width="15%" />
-	<Column Hideable="true" TableItem="SaleModel" Title="Product Count" Field="@(x => x.ProductCount)" Sortable="true" Filterable="true" Width="15%" />
-	<Column Hideable="true" TableItem="SaleModel" Title="Sale Name" Field="@(x => x.SaleName)" Sortable="true" Filterable="true" Width="15%" />
-	<Column Hideable="true" TableItem="SaleModel" Title="Processed" Field="@(x => x.Processed)" Sortable="true" Filterable="true" Width="15%" />
-	<Column Show="false" Hideable="true" TableItem="SaleModel" Title="Sale Profit" Field="@(x => x.SaleProfit)" Sortable="true" Filterable="true" Width="15%">
+	<Column Hideable="true" TableItem="SaleModel" Title="Sales Person" Field="@(x => x.SalesPerson)" Sortable="true" Filterable="true" DefaultSortColumn="true" />
+	<Column Hideable="true" TableItem="SaleModel" Title="Customer Name" Field="@(x => x.CustomerName)" Sortable="true" Filterable="true" />
+	<Column Hideable="true" TableItem="SaleModel" Title="Product Count" Field="@(x => x.ProductCount)" Sortable="true" Filterable="true"/>
+	<Column Hideable="true" TableItem="SaleModel" Title="Sale Name" Field="@(x => x.SaleName)" Sortable="true" Filterable="true" />
+	<Column Hideable="true" TableItem="SaleModel" Title="Processed" Field="@(x => x.Processed)" Sortable="true" Filterable="true"/>
+	<Column Show="false" Hideable="true" TableItem="SaleModel" Title="Sale Profit" Field="@(x => x.SaleProfit)" Sortable="true" Filterable="true">
 		<Template>
 			@context.SaleProfit.ToString("0.00")
 		</Template>
 	</Column>
-	<Column TableItem="SaleModel" Title="Sale Value" Field="@(x => x.SaleValue)" Sortable="true" Filterable="true" Width="15%">
+	<Column TableItem="SaleModel" Title="Sale Value" Field="@(x => x.SaleValue)" Sortable="true" Filterable="true">
 		<Template>
 			@context.SaleValue.ToString("0.00")
 		</Template>
 	</Column>
-	<Pager ShowPageNumber="true" ShowTotalCount="true" ShowPageSizes="true" />
+	<Pager ShowPageNumber="true" AlwaysShow="true" ShowTotalCount="true" ShowPageSizes="true" />
 </Table>
 <br />
 <div class="mt-2 mb-2 float-left">
-	<button class="btn btn-primary" @onclick="UpdateList">Update List</button>
+	<button class="btn btn-blue" @onclick="UpdateList">Update List</button>
 </div>
 @code
 {

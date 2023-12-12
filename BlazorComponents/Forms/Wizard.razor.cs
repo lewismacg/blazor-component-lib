@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BlazorComponents
 {
@@ -8,11 +9,10 @@ namespace BlazorComponents
 	{
 		#region Parameters
 
+		[Parameter] public RenderFragment Nav { get; set; }
 		[Parameter] public RenderFragment ChildContent { get; set; }
 		[Parameter] public WizardStep ActiveStep { get; set; }
 		[Parameter] public int ActiveStepIx { get; set; }
-		[Parameter] public bool ShowNavAtTop { get; set; }
-		[Parameter] public bool ShowNavAtBottom { get; set; }
 		[Parameter] public bool HideFinalStep { get; set; }
 
 		#endregion
@@ -30,7 +30,7 @@ namespace BlazorComponents
 		{
 			if (firstRender)
 			{
-				SetActive(Steps[0]);
+				if (Steps.Any()) SetActive(Steps[0]);
 				StateHasChanged();
 			}
 		}
@@ -55,6 +55,8 @@ namespace BlazorComponents
 
 			if (ActiveStepIx == Steps.Count - 1) IsLastStep = true;
 			else IsLastStep = false;
+
+			StateHasChanged();
 		}
 
 		public int StepsIndex(WizardStep step) => StepsIndexInternal(step);
@@ -68,6 +70,5 @@ namespace BlazorComponents
 		protected internal void AddStep(WizardStep step) => Steps.Add(step);
 
 		#endregion
-
 	}
 }

@@ -44,7 +44,7 @@ namespace BlazorComponents
 			_counter = 0;
 			_dropClass = string.Empty;
 
-			if (CategoryValue.Equals(Container.CategoryFunction.Invoke(Container.ActiveModel))) return;
+			if (Container.CategoryFunction.Invoke(Container.ActiveModel) == CategoryValue) return;
 			await Container.UpdateModelAsync(CategoryValue);
 		}
 

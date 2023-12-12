@@ -5,8 +5,8 @@
 <h4>Dialog Demo</h4>
 
 <div>
-	<button class="btn btn-success" @onclick="()=>ShowingDialog=true">Show Dialog</button>
-	<button class="btn btn-secondary" @onclick="()=>ShowingDraggableDialog=true">Show Draggable Dialog</button>
+	<button class="btn btn-green" @onclick="()=>ShowingDialog=true">Show Dialog</button>
+	<button class="btn btn-yellow" @onclick="()=>ShowingDraggableDialog=true">Show Draggable Dialog</button>
 </div>
 
 <Dialog ShowDialog="ShowingDialog" DialogTitle="Test Title">
@@ -17,9 +17,9 @@
         </div>
     </div>
 	<div class="dialogButtons">
-		<button class="btn btn-primary" @onclick="() => ShowingDialog = false">Primary</button>
-		<button class="btn btn-secondary" @onclick="() => ShowingDialog = false">Secondary</button>
-		<button class="btn btn-danger" @onclick="() => ShowingDialog = false">Danger</button>
+		<button class="btn btn-blue" @onclick="() => ShowingDialog = false">Primary</button>
+		<button class="btn btn-yellow" @onclick="() => ShowingDialog = false">Secondary</button>
+		<button class="btn btn-red" @onclick="() => ShowingDialog = false">Danger</button>
 	</div>
 </Dialog>
 
@@ -31,9 +31,9 @@
         </div>
     </div>
 	<div class="dialogButtons">
-		<button class="btn btn-primary" @onclick="() => ShowingDraggableDialog = false">Primary</button>
-		<button class="btn btn-secondary" @onclick="() => ShowingDraggableDialog = false">Secondary</button>
-		<button class="btn btn-danger" @onclick="() => ShowingDraggableDialog = false">Danger</button>
+		<button class="btn btn-blue" @onclick="() => ShowingDraggableDialog = false">Primary</button>
+		<button class="btn btn-yellow" @onclick="() => ShowingDraggableDialog = false">Secondary</button>
+		<button class="btn btn-red" @onclick="() => ShowingDraggableDialog = false">Danger</button>
 	</div>
 </Dialog>
 

@@ -1,128 +1,217 @@
 ﻿.data-table-wrapper {
-    background-color: transparent;
-    border-top: 1px solid var(--greyLight);
-    border-bottom: 1px solid var(--greyLight);
+	background-color: transparent;
+	border-top: 1px solid var(--greyLight);
+	border-bottom: 1px solid var(--greyLight);
 
-    table {
-        &.data-table {
-            width: 100%;
-            max-width: 100%;
-            background-color: transparent;
-            border-collapse: collapse;
-            border-spacing: 0;
-            display: inline-table;
+	&.sticky-header {
+		min-height: 280px;
 
-            thead {
-                display: table-header-group;
-                vertical-align: middle;
-                border: inherit;
-            }
+		th {
+			background: var(--white);
+			position: sticky;
+			z-index: 500;
+			top: 0em;
+		}
+	}
 
-            tr {
-                height: 40px;
+	table {
+		&.table-scroll {
+			overflow-x: auto;
+			overflow-y: hidden;
+		}
 
-                &.slim-row {
-                    height: 32px;
-                }
+		&.data-table {
+			width: 100%;
+			max-width: 100%;
+			background-color: transparent;
+			border-collapse: collapse;
+			border-spacing: 0;
+			display: inline-block;
 
-                &:hover {
-                    background: var(--greyLight);
-                }
-            }
 
-            th {
-                padding: 0 16px;
-                height: 56px;
-            }
+			thead {
+				display: table-header-group;
+				vertical-align: middle;
+				border: inherit;
+			}
 
-            td {
-                padding: 0 16px;
-            }
+			tr {
+				height: 40px;
 
-            .align-right {
-                justify-content: right;
-            }
+				&.slim-row {
+					height: 32px;
+				}
 
-            &.striped {
-                tr:nth-child(odd) {
-                    background: var(--greyLightest);
+				&:hover {
+					background: var(--greyLight);
+				}
+			}
 
-                    &:hover {
-                        background: var(--greyLight);
-                    }
-                }
-            }
-        }
-    }
+			th {
+				padding: 0 16px;
+				height: 56px;
+				width: 1%;
+			}
+
+			td {
+				padding: 0 16px;
+			}
+
+			.align-right {
+				justify-content: right;
+			}
+
+			&.striped {
+				tr:nth-child(odd) {
+					background: var(--greyLightest);
+
+					&:hover {
+						background: var(--greyLight);
+					}
+				}
+			}
+		}
+	}
+
+	&.mobile {
+		@media (max-width: 768px) {
+			&.reduced {
+				font-size: 80%;
+				font-weight: 400;
+			}
+
+			table, tbody, th, td, tr {
+				display: block;
+			}
+
+			thead {
+				display: none !important;
+			}
+
+			tr {
+				border: 1px solid var(--greyLight);
+				height: auto !important;
+			}
+
+			td {
+				border: none;
+				position: relative;
+				padding-left: 52% !important;
+			}
+
+			td::before {
+				position: absolute;
+				left: 0px;
+				width: 48%;
+				text-align: right;
+				font-family: 'Lato-Bold';
+				padding-right: 10px;
+				white-space: nowrap;
+				content: attr(data-mobile-label);
+			}
+		}
+	}
+}
+
+.fixed-table {
+
+	> table {
+		table-layout: fixed;
+	}
 }
 
 .data-table-paging {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-content: center;
-    height: 52px;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-content: center;
+	height: 52px;
 
-    .paging-element {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 0px 16px;
+	.paging-element {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		padding: 0px 16px;
 
-        span {
-            padding-top: 5px;
-            cursor: pointer;
-        }
-    }
+		span {
+			padding-top: 5px;
+			cursor: pointer;
+		}
+	}
 
-    .page-sizing {
-        height: 32px;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
+	.page-sizing {
+		height: 32px;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
 
-        p {
-            padding-top: 2px;
-            padding-right: 8px;
-        }
-    }
-}
-
-select {
-    &.dropdown-select {
-        height: 32px;
-        border: none;
-
-        option {
-            height: 32px;
-        }
-    }
+		p {
+			padding-top: 2px;
+			padding-right: 8px;
+		}
+	}
 }
 
 .data-table-filter {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    padding: 1em 1em 0 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	padding: 1em 1em 0 0;
+	align-items: center;
 
-    .input-wrapper {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 0px 6px;
-    }
+	.input-wrapper {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		padding: 0px 6px;
+	}
 }
 
 .data-table {
-    .bs-popover-bottom {
-        margin-top: 1.7rem;
-    }
+	.bs-popover-bottom {
+		margin-top: 1.7rem;
+	}
 }
 
-.popover {
-    width: 228px;
+table {
+	border-collapse: collapse;
 }
 
-.column-header {
-    position: relative;
+th {
+	text-align: inherit;
+	text-align: -webkit-match-parent;
+}
+
+.table-row-yellow {
+	border-top: 1px solid var(--darkYellow) !important;
+	border-bottom: 1px solid var(--darkYellow) !important;
+	background-color: var(--yellow) !important;
+	border-left: 5px solid var(--darkYellow) !important;
+}
+
+.table-row-yellow:hover {
+	background-color: #{'rgba(var(--lightYellowRgb), 0.9)'} !important;
+}
+
+.table-row-blue {
+	border-top: 1px solid var(--blue) !important;
+	border-bottom: 1px solid var(--blue) !important;
+	background-color: var(--lightBlue) !important;
+	border-left: 5px solid var(--blue) !important;
+}
+
+.table-row-blue:hover {
+	background-color: #{'rgba(var(--blueRgb), 0.6)'} !important;
+}
+
+.table-row-green {
+	border-top: 1px solid var(--green) !important;
+	border-bottom: 1px solid var(--green) !important;
+	background-color: var(--lightGreen) !important;
+	border-left: 5px solid var(--green) !important;
+}
+
+.table-row-green:hover {
+	background-color: #{'rgba(var(--greenRgb), 0.75)'} !important;
 }

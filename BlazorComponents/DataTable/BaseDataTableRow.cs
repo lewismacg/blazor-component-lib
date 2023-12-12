@@ -18,21 +18,23 @@ namespace BlazorComponents
 
 		#region Properties and Fields
 
-		public string Class { get; set; }
+		public string RowClassFunctionOutput { get; set; }
 
 		#endregion
 
 		#region Methods
 
+		protected override void OnParametersSet()
+		{
+			if (RowClassFunction == null) return;
+
+			var classToAdd = RowClassFunction.Invoke(Item);
+			RowClassFunctionOutput = !string.IsNullOrEmpty(classToAdd) ? classToAdd : string.Empty;
+		}
+
 		protected void OnClickHandler(MouseEventArgs e)
 		{
 			OnClickAction?.Invoke(e);
-		}
-
-		protected override void OnParametersSet()
-		{
-			if (RowClassFunction != null) Class = RowClassFunction.Invoke(Item);
-
 		}
 
 		#endregion

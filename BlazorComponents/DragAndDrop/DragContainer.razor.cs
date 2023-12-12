@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlazorComponents
 {
-	public partial class DragContainer<TModel> where TModel : class
+	public partial class DragContainer<TModel> : IAsyncDisposable where TModel : class
 	{
 		#region Parameters
 
@@ -25,7 +26,7 @@ namespace BlazorComponents
 		/// <summary>
 		/// A setter function for setting a property value on a model upon category update.
 		/// </summary>
-		[Parameter] public Func<TModel, object, object> OnDrop { get; set; }
+		[Parameter] public Func<TModel, object, bool> OnDrop { get; set; }
 
 		/// <summary>
 		/// A get function for getting the text to be displayed for a model.
@@ -36,6 +37,17 @@ namespace BlazorComponents
 		/// A get function for getting the models current category to discern it's appropriate column.
 		/// </summary>
 		[Parameter] public Func<TModel, object> CategoryFunction { get; set; }
+
+		/// <summary>
+		/// Any additional classes for the drop container.
+		/// </summary>
+		[Parameter] public string AdditionalClass { get; set; }
+
+		#endregion
+
+		#region Dependencies
+
+		[Inject] public IJSRuntime JsRuntime { get; set; }
 
 		#endregion
 
@@ -50,6 +62,14 @@ namespace BlazorComponents
 
 		#region Methods
 
+		protected override async Task OnAfterRenderAsync(bool firstRender)
+		{
+			if (firstRender)
+			{
+				await JsRuntime.InvokeVoidAsync("DraggableElement.increaseDragScrollBoundary");
+			}
+		}
+
 		public async Task UpdateModelAsync(object newCategoryValue)
 		{
 			var model = Models.SingleOrDefault(x => x == ActiveModel);
@@ -63,5 +83,9 @@ namespace BlazorComponents
 
 		#endregion
 
+		public async ValueTask DisposeAsync()
+		{
+			await JsRuntime.InvokeVoidAsync("DraggableElement.destroyDragScrollBoundary");
+		}
 	}
 }

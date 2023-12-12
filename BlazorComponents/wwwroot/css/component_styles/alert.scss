@@ -49,59 +49,59 @@
     color: inherit;
 }
 
-.alert-success {
+.alert-green {
     background-color: var(--lightGreen) !important;
     border-left: 5px solid var(--green) !important;
 }
 
-.alert-success hr {
+.alert-green hr {
     border-top-color: var(--green);
 }
 
-.alert-info {
+.alert-lightblue {
     background-color: var(--lightBlue) !important;
     border-left: 5px solid var(--blue) !important;
 }
 
-.alert-info hr {
+.alert-lightblue hr {
     border-top-color: var(--blue);
 }
 
-.alert-warning {
-    background-color: var(--lightYellow) !important;
-    border-left: 5px solid var(--yellow) !important;
+.alert-yellow {
+    background-color: var(--yellow) !important;
+    border-left: 5px solid var(--darkYellow) !important;
 }
 
-.alert-warning hr {
-    border-top-color: var(--yellow);
+.alert-yellow hr {
+    border-top-color: var(--darkYellow);
 }
 
-.alert-danger {
+.alert-red {
     background-color: var(--lightRed) !important;
     border-left: 5px solid var(--red) !important;
 }
 
-.alert-danger hr {
+.alert-red hr {
     border-top-color: var(--red);
 }
 
-.info-highlight {
+.blue-highlight {
     background-color: var(--lightBlue) !important;
-    border: 1px solid var(--darkBlue) !important;
+    border: 1px solid var(--blue) !important;
     color: var(--black) !important;
     border-radius: 1rem !important;
 }
 
-.danger-highlight {
+.red-highlight {
     background-color: var(--white) !important;
-    border: 1px solid var(--darkRed) !important;
+    border: 1px solid var(--red) !important;
     color: var(--red) !important;
     border-radius: 1rem !important;
 }
 
-.success-highlight {
-    background-color: var(--darkGreen) !important;
-    border: 1px solid var(--lightGreen) !important;
+.green-highlight {
+    background-color: var(--green) !important;
+    border: 1px solid var(--white) !important;
     color: var(--white) !important;
     border-radius: 1rem !important;
 }

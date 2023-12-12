@@ -1,10 +1,8 @@
 ﻿@namespace BlazorComponents
-@inherits ToasterBase
 
 <div class="toaster">
-    @for (var i = 0; i < Toasts.Length; i++)
-    {
-        var toast = Toasts[i];
-        <Toast Title="@toast.Title" Body="@toast.Body" Level="@toast.Level" Time="@toast.Time" HideInSeconds="@toast.AutoHideSeconds" HideAction="@(()=>HideToast(toast))" />
-    }
+	@foreach (var toast in Toasts)
+	{
+		<Toast Model="toast" HideCallback="@(() => RemoveToast(toast))" />
+	}
 </div>

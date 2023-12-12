@@ -32,12 +32,6 @@ namespace BlazorComponents
         }
 
         /// <summary>
-        /// Width auto|value|initial|inherit
-        /// </summary>
-        [Parameter]
-        public string Width { get; set; }
-
-        /// <summary>
         /// Column can be sorted
         /// </summary>
         [Parameter]

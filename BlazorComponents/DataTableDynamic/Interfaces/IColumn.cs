@@ -22,11 +22,6 @@ namespace BlazorComponents
         string Title { get; set; }
 
         /// <summary>
-        /// Width auto|value|initial|inherit
-        /// </summary>
-        string Width { get; set; }
-
-        /// <summary>
         /// Column can be sorted
         /// </summary>
         bool Sortable { get; set; }

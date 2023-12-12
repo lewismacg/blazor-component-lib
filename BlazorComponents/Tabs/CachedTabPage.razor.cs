@@ -1,4 +1,4 @@
-﻿namespace BlazorComponents.Tabs
+﻿namespace BlazorComponents
 {
 	/// <summary>
 	/// Instead of removing and re-adding the child content of the page, this loads it on first open, and then hides it using the html attribute 'hidden'.

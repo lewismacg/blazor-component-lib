@@ -2,29 +2,35 @@
 
 @if (AlwaysShow || (Table.TotalPages > 1))
 {
-    <div class="data-table-paging mt-lg-1 mt-xl-1 mt-md-1 mt-sm-1 mt-4">
-            <div class="paging-element">
-                @if (ShowPageSizes)
-                {
-                    <div class="page-sizing">
-                        <p>Items per page:</p>
-                        <select class="dropdown-select" @onchange="(async ev => await SetPageSizeAsync(ev))">
-                            @foreach (var item in PageSizes)
-                            {
-                                <option value="@item.Size" class="dropdown-select-option" selected="@(item.Size == Table.PageSize)">@item.DisplayText</option>
-                            }
-                        </select>
-                    </div>
-                }
-            </div>
-            <div class="paging-element">@Table.TotalCount</div>
-            <div class="paging-element">
-                <div class="paging-navigation">
-                    <span class="material-icons" @onclick="@(() => Table.FirstPageAsync())">skip_previous</span>
-                    <span class="material-icons" @onclick="@(() => Table.PreviousPageAsync())">keyboard_arrow_left</span>
-                    <span class="material-icons" @onclick="@(() => Table.NextPageAsync())">keyboard_arrow_right</span>
-                    <span class="material-icons" @onclick="@(() => Table.LastPageAsync())">skip_next</span>
-                </div>
-            </div>
-        </div>
+	<div class="data-table-paging mt-lg-1 mt-xl-1 mt-md-1 mt-sm-1 mt-4">
+		<div class="paging-element">
+			@if (ShowPageSizes)
+			{
+				<div class="page-sizing">
+					<p class="mb-0">Items per page:</p>
+					<select class="dropdown-select" @onchange="(async ev => await SetPageSizeAsync(ev))">
+						@foreach (var item in PageSizes.OrderBy(x => x.Size))
+						{
+							<option value="@item.Size" class="dropdown-select-option" selected="@(item.Size == Table.GetPageSize())">@item.DisplayText</option>
+						}
+					</select>
+				</div>
+			}
+		</div>
+		<div class="paging-element">@Table.TotalCount</div>
+		<div class="paging-element">
+			<div class="paging-navigation">
+				<span class="material-icons" @onclick="@(() => Table.FirstPageAsync())">skip_previous</span>
+				<span class="material-icons" @onclick="@(() => Table.PreviousPageAsync())">keyboard_arrow_left</span>
+				<span class="material-icons" @onclick="@(() => Table.NextPageAsync())">keyboard_arrow_right</span>
+				<span class="material-icons" @onclick="@(() => Table.LastPageAsync())">skip_next</span>
+			</div>
+		</div>
+		@if (ShowPageNumber)
+		{
+			<div class="mt-3">
+				<p>@($"Page {Table.PageNumber + 1} of {Table.TotalPages}")</p>
+			</div>
+		}
+	</div>
 }

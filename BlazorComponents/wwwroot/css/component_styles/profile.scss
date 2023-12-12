@@ -1,0 +1,37 @@
+﻿.dropdown-wrapper {
+	cursor: pointer;
+	position: relative;
+	display: inline-block;
+
+	&:hover {
+		.dropdown-content {
+			display: block !important;
+		}
+	}
+
+	.dropdown-content {
+		display: none;
+		position: absolute;
+		right: 0;
+		top: 35px;
+		background-color: var(--white);
+		min-width: 160px;
+		box-shadow: 0px 8px 16px 0px var(--greyLight);
+		z-index: 1;
+
+		a:hover {
+			background-color: var(--greyLightest);
+		}
+
+		.ddc-item {
+			padding: 12px 16px;
+			text-decoration: none;
+			display: block;
+			color: var(--black);
+
+			&:not(:first-of-type) {
+				border-top: 2px solid var(--greyLightest);
+			}
+		}
+	}
+}

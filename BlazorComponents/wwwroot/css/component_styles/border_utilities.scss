@@ -1,0 +1,138 @@
+﻿.gold-underline {
+	border-bottom: 2px solid var(--yellow);
+}
+
+.border {
+	border: 1px solid var(--greyLight) !important;
+}
+
+.border-top {
+	border-top: 1px solid var(--greyLight) !important;
+}
+
+.border-right {
+	border-right: 1px solid var(--greyLight) !important;
+}
+
+.border-bottom {
+	border-bottom: 1px solid var(--greyLight) !important;
+}
+
+.border-left {
+	border-left: 1px solid var(--greyLight) !important;
+}
+
+.border-0 {
+	border: 0 !important;
+}
+
+.border-top-0 {
+	border-top: 0 !important;
+}
+
+.border-right-0 {
+	border-right: 0 !important;
+}
+
+.border-bottom-0 {
+	border-bottom: 0 !important;
+}
+
+.border-left-0 {
+	border-left: 0 !important;
+}
+
+.border-blue {
+	border-color: var(--blue) !important;
+}
+
+.border-yellow {
+	border-color: var(--yellow) !important;
+}
+
+.border-green {
+	border-color: var(--green) !important;
+}
+
+.border-black {
+	border-color: var(--black) !important;
+}
+
+.border-white {
+	border-color: var(--white) !important;
+}
+
+.rainbow-border {
+	border: 2px solid transparent;
+	border-image: linear-gradient(to bottom right, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%);
+	border-image-slice: 1;
+}
+
+.dark-yellow-border {
+	border-top: 1px solid var(--darkYellow) !important;
+	border-bottom: 1px solid var(--darkYellow) !important;
+}
+
+.bold-border {
+	border: 2px solid var(--greyLight);
+}
+
+.bold-border-left {
+	border-left: 2px solid var(--greyLight);
+}
+
+.bold-border-right {
+	border-right: 2px solid var(--greyLight);
+}
+
+.bold-border-bottom {
+	border-bottom: 2px solid var(--greyLight);
+}
+
+.bold-border-top {
+	border-top: 2px solid var(--greyLight);
+}
+
+.rounded-sm {
+	border-radius: 0.2rem !important;
+}
+
+.rounded {
+	border-radius: 0.25rem !important;
+}
+
+.rounded-top {
+	border-top-left-radius: 0.25rem !important;
+	border-top-right-radius: 0.25rem !important;
+}
+
+.rounded-right {
+	border-top-right-radius: 0.25rem !important;
+	border-bottom-right-radius: 0.25rem !important;
+}
+
+.rounded-bottom {
+	border-bottom-right-radius: 0.25rem !important;
+	border-bottom-left-radius: 0.25rem !important;
+}
+
+.rounded-left {
+	border-top-left-radius: 0.25rem !important;
+	border-bottom-left-radius: 0.25rem !important;
+}
+
+.rounded-lg {
+	border-radius: 0.3rem !important;
+}
+
+.rounded-circle {
+	border-radius: 50% !important;
+}
+
+.rounded-pill {
+	border-radius: 50rem !important;
+}
+
+.rounded-0 {
+	border-radius: 0 !important;
+}

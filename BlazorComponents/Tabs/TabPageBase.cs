@@ -3,12 +3,12 @@ using System;
 
 namespace BlazorComponents
 {
-	public class TabPageBase : ComponentBase
+	public class TabPageBase : ComponentBase, IDisposable
 	{
 		[CascadingParameter] public TabControl Parent { get; set; }
 		[Parameter] public RenderFragment ChildContent { get; set; }
 		[Parameter] public string TabTitle { get; set; }
-		[Parameter] public int TabBadge { get; set; }
+		[Parameter] public int Ordinal { get; set; }
 
 		protected override void OnInitialized()
 		{
@@ -19,6 +19,11 @@ namespace BlazorComponents
 		public virtual void ActivatePage()
 		{
 			Parent.ActivePage = this;
+		}
+
+		public void Dispose()
+		{
+			Parent.RemovePage(this);
 		}
 	}
 }

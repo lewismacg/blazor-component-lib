@@ -4,7 +4,7 @@ namespace BlazorComponents
 {
 	public enum Colour
 	{
-		Red,
+		Blue,
 		Gold,
 		Green,
 		White,
@@ -16,9 +16,9 @@ namespace BlazorComponents
 	{
 		private static Dictionary<Colour, string> _colourMap = new()
 		{
-			{Colour.Red, "text-primary"},
-			{Colour.Gold, "text-secondary"},
-			{Colour.Green, "text-success"},
+			{Colour.Blue, "text-blue"},
+			{Colour.Gold, "text-yellow"},
+			{Colour.Green, "text-green"},
 			{Colour.White, "text-white"},
 			{Colour.Black, "text-black"},
 			{Colour.Grey, "text-muted"}

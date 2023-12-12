@@ -2,6 +2,7 @@
 	padding: 0;
 	border: none;
 	position: relative !important;
+	max-width: 100%;
 
 	div:empty:after {
 		content: attr(data-placeholder);
@@ -28,6 +29,7 @@
 
 			.multidrop-item {
 				padding: .1rem 0.75rem !important;
+				min-height: unset !important;
 
 				&::after {
 					font-size: 14px !important;
@@ -50,7 +52,7 @@
 
 	&.active {
 		.multidrop-text {
-			border: 2px solid #{'rgba(var(--greyDarkestRgb), 0.5)'};
+			border: 2px solid #{'rgba(var(--greyDarkRgb), 0.5)'};
 		}
 
 		.multidrop-content {
@@ -97,7 +99,7 @@
 		width: 100%;
 		display: none;
 		background-clip: padding-box;
-		border: 2px solid rgba(212,212,212,.5);
+		border: 2px solid #{'rgba(var(--greyLightRgb),.5)'};
 		border-radius: .1rem;
 		transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 		max-height: 15rem;
@@ -107,6 +109,19 @@
 		.multidrop-item {
 			min-height: 2em;
 			padding: .2rem 1rem;
+
+			&.disabled {
+				background-color: var(--greyLight);
+
+				&::after {
+					font-family: 'Material Icons';
+					content: "unpublished";
+					-webkit-font-feature-settings: 'liga';
+					float: right;
+					font-size: 18px;
+					color: var(--greyDark);
+				}
+			}
 
 			&.selected {
 				background-color: var(--lightGreen);
@@ -121,7 +136,7 @@
 				}
 			}
 
-			&:not(.selected) {
+			&:not(.selected):not(.disabled) {
 				&::after {
 					font-family: 'Material Icons';
 					content: "radio_button_unchecked";
@@ -147,7 +162,7 @@
 				width: -moz-available;
 				width: fill-available;
 				background-color: var(--greyLightest);
-				border-bottom: 1px solid var(--grey);
+				border-bottom: 1px solid var(--baseGrey);
 				cursor: text;
 			}
 

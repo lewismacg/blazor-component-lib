@@ -1,0 +1,30 @@
+﻿.logo {
+	padding-top: 0.7em;
+	padding-bottom: 0.5em;
+	margin: 0 auto 0 -2.5em;
+}
+
+.logo-svg {
+	height: 3em;
+	width: auto;
+	padding: 0.3em 4em 0.3em 2em;
+	margin-left: 0.3rem;
+}
+
+.fill-logo {
+	fill: var(--black);
+}
+
+@media only screen and (min-width: 768px) {
+	.logo-svg {
+		height: 3.5em;
+		width: auto;
+		padding: 0.3em 4em 0.3em 4em;
+	}
+}
+
+@media only screen and (min-width:992px) {
+	.logo {
+		text-align: left;
+	}
+}

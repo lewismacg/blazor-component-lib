@@ -1,0 +1,89 @@
+﻿.drop-container {
+	display: flex;
+	gap: 1rem;
+
+	.column-category {
+		flex-direction: column;
+		flex-basis: 0;
+		flex: 1 1 0px;
+		display: flex;
+
+		.column-body {
+			height: 100%;
+			justify-content: flex-end;
+			display: flex;
+			flex-direction: column;
+
+			.body-content {
+				padding: 1rem 1rem 0rem;
+				overflow-y: auto;
+				display: inline-table;
+			}
+
+			.drop-column {
+				padding: 1rem;
+				height: 100%;
+
+				.dropzone {
+					border: 2px solid var(--greyLight);
+					min-height: 80px;
+					background-color: var(--greyLightest);
+					list-style: none;
+					margin-bottom: 0;
+					padding: 1rem;
+					height: 100%;
+					flex: 1 100%;
+				}
+
+				.drag-and-droppable {
+					margin-bottom: 0.5rem;
+					padding: 0.5rem 0.5rem;
+					border: 1px solid var(--blue);
+					cursor: grab;
+					background: var(--white);
+					border-radius: 0.2rem;
+				}
+
+				.drag-and-droppable:active {
+					cursor: grabbing;
+				}
+
+				.drag-and-droppable.dragged {
+					opacity: 0.6;
+					background-color: var(--lightBlue);
+				}
+			}
+		}
+	}
+
+	.no-drop {
+		border: 2px solid var(--darkRed) !important;
+	}
+
+	.can-drop {
+		border: 2px solid var(--darkGreen) !important;
+	}
+}
+
+.drag-scroll-boundary {
+	position: fixed;
+	left: 0;
+	right: 0;
+	height: 75px;
+	z-index: 999999;
+	text-align: center;
+	line-height: 75px;
+
+	i {
+		@extend .material-icons;
+		pointer-events: none;
+		padding: 0.5em;
+		border-radius: 60px;
+		border: 2px solid var(--baseGrey);
+		background-color: var(--white);
+		vertical-align: middle !important;
+		opacity: 1;
+		animation-delay: 0.5s;
+		animation: fadeOpacityIn 1s;
+	}
+}

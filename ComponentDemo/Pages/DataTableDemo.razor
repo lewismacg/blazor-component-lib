@@ -4,7 +4,7 @@
 
 <h3>DataTable Demo</h3>
 
-<DataTable Items="@Items" Striped="true" ShowPaging="false" PageSize="15" SlimRows="true" ShowPageSizeSelect="false" ShowFilter="true" FieldToFilter="CustomerName" RowClassFunction="@GetRowStyle" TTableItem="SaleModel">
+<DataTable ClassWrapperOverride="mobile" Items="@Items" Striped="true" ShowPaging="true" PageSize="10" SlimRows="true" ShowPageSizeSelect="false" ShowFilter="true" FieldToFilter="CustomerName" RowClassFunction="@GetRowStyle" TTableItem="SaleModel">
     <DataTableHeader>
         <th>Sales Person</th>
         <th>Customer Name</th>
@@ -14,12 +14,12 @@
         <th>Sale Value</th>
     </DataTableHeader>
     <DataTableRow>
-        <td>@context.SalesPerson</td>
-        <td>@context.CustomerName</td>
-        <td>@context.ProductCount</td>
-        <td>@context.SaleName</td>
-        <td>@($"{context.SaleProfit:c}")</td>
-        <td>@($"{context.SaleValue:c}")</td>
+	    <td data-mobile-label="Sales Person">@context.SalesPerson</td>
+	    <td data-mobile-label="Customer Name">@context.CustomerName</td>
+	    <td data-mobile-label="Product Count">@context.ProductCount</td>
+	    <td data-mobile-label="Sale Name">@context.SaleName</td>
+	    <td data-mobile-label="Sale Profit">@($"{context.SaleProfit:c}")</td>
+	    <td data-mobile-label="Sale Value">@($"{context.SaleValue:c}")</td>
     </DataTableRow>
 </DataTable>
 
@@ -36,7 +36,7 @@
                 CustomerName = "Joe Blogs",
                 ProductCount = 3,
                 SaleName = "First Sale",
-                SaleProfit = 123.45m,
+                SaleProfit = 523.45m,
                 SaleValue = 200m
             },
             new ()
@@ -45,7 +45,7 @@
                 CustomerName = "Jane Doe",
                 ProductCount = 1,
                 SaleName = "Lost Sale",
-                SaleProfit = 13.45m,
+                SaleProfit = 445m,
                 SaleValue = 10m
             },
             new ()
@@ -54,7 +54,7 @@
                 CustomerName = "Jeff",
                 ProductCount = 5,
                 SaleName = "First Sale",
-                SaleProfit = 123.45m,
+                SaleProfit = 332.45m,
                 SaleValue = 32.123m
             },
             new ()
@@ -63,7 +63,7 @@
                 CustomerName = "Tom",
                 ProductCount = 355,
                 SaleName = "Black Friday",
-                SaleProfit = -93.45m,
+                SaleProfit = -443.45m,
                 SaleValue = -130m
             },
             new ()
@@ -72,22 +72,22 @@
                 CustomerName = "Smith",
                 ProductCount = 35,
                 SaleName = "Tuesday",
-                SaleProfit = 3.85m,
+                SaleProfit = 285m,
                 SaleValue = 19m
             },
             new ()
             {
                 SalesPerson = "Steve",
                 CustomerName = "Smith",
-                ProductCount = 8,
+                ProductCount = 101,
                 SaleName = "50% off",
-                SaleProfit = 9.85m,
+                SaleProfit = 101m,
                 SaleValue = 9m
             }
         };
 
         var rand = new Random();
-        var names = new string[] {"Jeff", "Bob", "Matt", "Alan", "Rash"};
+        var names = new string[] {"Jeff", "Bob", "Matt", "Harry", "William"};
         var lastNames = new string[] {"Jones", "Doe", "Smith"};
 
         var saleNames = new string[] {"Office", "Super", "Sale", "Discount", "Phone"};
@@ -108,9 +108,9 @@
 
     protected string GetRowStyle(SaleModel model)
     {
-        if (model.SaleProfit > 600) return "alert-success";
-        if (model.SaleProfit > 400) return "alert-warning";
+	    if (model.SaleProfit > 300) return "table-row-green";
+	    if (model.SaleProfit > 100) return "table-row-yellow";
 
-        return "alert-danger";
+	    return "table-row-blue";
     }
 }

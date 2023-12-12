@@ -1,36 +1,76 @@
 ﻿@page "/Wizard"
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-12">
-            <LoadingWrapper Condition="() => IsLoading == false">
-                <Wizard ShowNavAtTop="true">
-                    <WizardStep ShowIcons="true">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <p>This is the first step. You can enter something useful in here.</p>
-                            </div>
-                        </div>
-                    </WizardStep>
-                    <WizardStep ShowIcons="true" BackwardsButtonText="Go back pls">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <p>Wow, you've reached the second step!</p>
-                            </div>
-                        </div>
-                    </WizardStep>
-                    <WizardStep ForwardButtonText="Submit Form" ShowIcons="true" OnFinalActionCallback="TriggerToast">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <p>This is the final step. The button here should be different for submitting.</p>
-                            </div>
-                        </div>
-                    </WizardStep>
-                </Wizard>
-            </LoadingWrapper>
-        </div>
-    </div>
-</div>
+<Wizard HideFinalStep="true">
+	<Card>
+		<CardHeader>
+			<div class="row">
+				<div class="col-4">
+					<b>Here is the wizard header.</b>
+				</div>
+				<div class="col-4">
+					<WizardNav />
+				</div>
+				<div class="col-4">
+					<div class="custom-control custom-switch text-right">
+						<input type="checkbox" class="custom-control-input" id="3433" />
+						<label class="custom-control-label" for="3433"> Edit</label>
+					</div>
+				</div>
+
+			</div>
+		</CardHeader>
+		<CardBody>
+			<LoadingWrapper Condition="() => IsLoading == false">
+				<WizardStep NavIconColour="Colour.Green" class="btn btn-sm btn-yellow">
+					<BackwardsButtonContent>
+						Go backwards
+					</BackwardsButtonContent>
+					<StepContent>
+						<div class="row">
+							<div class="col-sm-12">
+								<p>This is the first step. You can enter something useful in here.</p>
+							</div>
+						</div>
+					</StepContent>
+					<ForwardsButtonContent>
+						Go forward
+					</ForwardsButtonContent>
+				</WizardStep>
+				<WizardStep NavIconColour="Colour.Blue" class="btn btn-yellow">
+					<BackwardsButtonContent>
+						Go backwards
+					</BackwardsButtonContent>
+					<StepContent>
+						<div class="row">
+							<div class="col-sm-12">
+								<p>Wow, you've reached the second step!</p>
+							</div>
+						</div>
+					</StepContent>
+					<ForwardsButtonContent>
+						Go forward
+					</ForwardsButtonContent>
+				</WizardStep>
+				<WizardStep>
+					<BackwardsButtonContent>
+						Go backwards
+					</BackwardsButtonContent>
+					<StepContent>
+						<div class="row">
+							<div class="col-sm-12">
+								<p>This is the final step. The button here should be different for submitting.</p>
+							</div>
+						</div>
+					</StepContent>
+					<ForwardsButtonContent>
+						Go forward
+					</ForwardsButtonContent>
+				</WizardStep>
+			</LoadingWrapper>
+			<WizardNav />
+		</CardBody>
+	</Card>
+</Wizard>
 
 @code
 {
@@ -41,7 +81,7 @@
     {
         IsLoading = true;
         await Task.Delay(1000);
-        ToasterManager.AddToast("Nice!", "You triggered the final callback", NotificationType.Success, DateTime.Now);
+        ToasterManager.AddToast("Nice!", "You triggered the final callback", NotificationType.Green, DateTime.Now);
         IsLoading = false;
     }
 }

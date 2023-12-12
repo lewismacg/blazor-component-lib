@@ -1,32 +1,11 @@
 ﻿@namespace BlazorComponents
-<div class="loading-spinner">
-    <svg class="spinner" stroke="@Colour" width="@Width" height="@Height" viewBox="0 0 @(Width + 1) @(Height + 1)" xmlns="http://www.w3.org/2000/svg">
-        <circle class="spinner-circle" stroke="@Colour" fill="none" stroke-width="@StrokeWeight" stroke-linecap="round" cx="@CircleX" cy="@CircleY" r="@Radius"></circle>
-    </svg>
+<div class="loading-spinner" style="width: @(Width)rem; height: @(Height)rem;">
+	<spinner style="width: @(Width)rem; height: @(Height)rem; border-top-color: @Colour" />
 </div>
 
 @code
 {
-    [Parameter] public int Width { get; set; } = 65;
-	[Parameter] public int Height { get; set; } = 65;
-	[Parameter] public string Colour { get; set; } = "var(--grey)";
-
-    private int CircleX { get; set; }
-    private int CircleY { get; set; }
-    private int Radius { get; set; }
-    private int StrokeWeight { get; set; }
-
-    protected override void OnParametersSet()
-    {
-        CircleX = Width / 2;
-        CircleY = Height / 2;
-
-        if (CircleX % 2 == 0) CircleX++;
-        if (CircleY % 2 == 0) CircleY++;
-
-        StrokeWeight = (Width + Height) / 20;
-        
-        Radius = ((Width + Height) / 2 - (StrokeWeight / 2)) / 2 - 2;
-        Radius += Radius % 2;
-    }
+	[Parameter] public double Width { get; set; } = 4;
+	[Parameter] public double Height { get; set; } = 4;
+	[Parameter] public string Colour { get; set; } = "var(--red)";
 }

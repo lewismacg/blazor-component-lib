@@ -1,0 +1,122 @@
+﻿.content-grid {
+	display: grid;
+	pointer-events: none;
+	padding: 1em;
+	width: 100%;
+
+	> * {
+		pointer-events: auto;
+	}
+
+	&.auto-row {
+		grid-template-rows: auto;
+
+		@media screen and (max-width: 768px) {
+			grid-template-rows: repeat(3, auto);
+		}
+	}
+
+	&.gap-1 {
+		grid-gap: 1rem;
+	}
+
+	&.gap-half {
+		grid-gap: 0.5rem;
+	}
+
+	&.repeat-columns {
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	}
+
+	&.auto-columns {
+		grid-auto-columns: minmax(0, 1fr);
+	}
+
+	&:hover {
+		> .clickable {
+			&:hover {
+				z-index: 10;
+				opacity: 1;
+				border: 1px solid var(--yellow);
+				transform: scale(1.05, 1.05);
+			}
+		}
+	}
+
+	.content-grid-item-label {
+		font-weight: bold;
+		margin-bottom: 4px;
+	}
+
+	.content-item {
+		position: relative;
+		display: block;
+		border: 1px solid var(--greyLight);
+		border-radius: 8px;
+		padding: 1rem;
+		transition: all 0.1s ease-in-out;
+		background: var(--white);
+		overflow: hidden;
+		text-decoration: none;
+		z-index: 1;
+		overflow-wrap: break-word;
+
+		&:hover {
+			.content-item-corner {
+				margin-right: -11px;
+				opacity: 1;
+			}
+		}
+
+		&.clickable {
+			cursor: pointer;
+		}
+
+		input {
+			border: 2px solid var(--white);
+			padding: .3rem;
+			background-color: var(--white);
+			cursor: default;
+
+			&::-webkit-outer-spin-button,
+			&::-webkit-inner-spin-button,
+			[type=number] {
+				-webkit-appearance: none;
+				margin: 0;
+				-moz-appearance: textfield; // Firefox
+			}
+
+			&:not(:read-only) {
+				border-bottom: 2px solid var(--yellow);
+				cursor: text;
+			}
+		}
+	}
+
+	.content-item-corner {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: absolute;
+		top: 0;
+		right: 0;
+		overflow: hidden;
+		background-color: var(--yellow);
+		height: 100%;
+		width: 34px;
+		padding-right: 9px;
+		transform: skew(9deg);
+		margin-right: -36px;
+		align-items: start;
+		background-image: linear-gradient(-45deg, var(--yellow) 0%, var(--darkYellow) 70%);
+		transition: all 0.1s ease-in-out;
+		z-index: 1;
+		opacity: 0;
+	}
+
+	.linkCardPencil {
+		color: var(--white);
+		margin-right: -4px;
+		transform: skew(-9deg);
+	}
+}

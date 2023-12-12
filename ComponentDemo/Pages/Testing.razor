@@ -6,11 +6,11 @@
 <label>To set a custom timed toaster set a value here in milliseconds.</label>
 <input type="number" @bind="@TimedToastValue" />
 
-<button class="btn btn-primary" @onclick="AddToast">Add Toast</button>
-<button class="btn btn-secondary" @onclick="AddTimedToast">Add Timed Toast</button>
+<button class="btn btn-blue" @onclick="AddToast">Add Toast</button>
+<button class="btn btn-yellow" @onclick="AddTimedToast">Add Timed Toast</button>
 
 <BannerWrapper>
-	<Banner NotificationType="NotificationType.Error" IsSmall="true" IsDraggable="true" DepthForDisplay="100">
+	<Banner NotificationType="NotificationType.Red" IsSmall="true" IsDraggable="true" DepthForDisplay="100">
 		<span>This is a notification. You should close it.</span>
 	</Banner>
 
@@ -28,7 +28,7 @@
 
 	protected override void OnInitialized()
 	{
-		ToasterManager.AddToast("Success", "This is a demo toast", NotificationType.Success, DateTime.Now);
+		ToasterManager.AddToast("Success", "This is a demo toast", NotificationType.Green, DateTime.Now);
 	}
 
 	private void AddToast()

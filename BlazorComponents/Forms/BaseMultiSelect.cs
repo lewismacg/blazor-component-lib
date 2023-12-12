@@ -18,6 +18,7 @@ namespace BlazorComponents
 		[Parameter] public bool IsSmall { get; set; }
 		[Parameter] public bool AllowSearch { get; set; }
 		[Parameter] public string Placeholder { get; set; } = "Choose values from list...";
+		[Parameter] public string AdditionalClasses { get; set; }
 
 		#endregion
 

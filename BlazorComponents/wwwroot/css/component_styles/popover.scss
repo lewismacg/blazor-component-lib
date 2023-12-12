@@ -1,0 +1,109 @@
+﻿.popover {
+	position: absolute;
+	z-index: 1060;
+	display: block;
+	max-width: 276px;
+	width: 228px;
+	font-family: 'Lato-Regular', sans-serif;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 1.5;
+	text-align: left;
+	text-align: start;
+	text-decoration: none;
+	text-shadow: none;
+	text-transform: none;
+	letter-spacing: normal;
+	word-break: normal;
+	word-spacing: normal;
+	white-space: normal;
+	line-break: auto;
+	font-size: 0.875rem;
+	word-wrap: break-word;
+	background-color: var(--white);
+	background-clip: padding-box;
+	border: 1px solid #{'rgba(var(--blackRgb), 0.2)'};
+	border-radius: 0.3rem;
+	margin-top: 0.5rem;
+
+	.arrow, .arrow::before {
+		position: absolute;
+		width: 0.75rem;
+		height: 0.75rem;
+		background: var(--greyLightest);
+	}
+
+	.arrow {
+		visibility: hidden;
+	}
+
+	.arrow::before {
+		visibility: visible;
+		content: '';
+		transform: rotate(45deg);
+	}
+}
+
+[data-popper-placement^='top'] > .arrow {
+	bottom: -.35rem;
+
+	&::before {
+		border-right: 1px solid var(--greyLight);
+		border-bottom: 1px solid var(--greyLight);
+	}
+}
+
+[data-popper-placement^='bottom'] > .arrow {
+	top: -.35rem;
+
+	&::before {
+		border-left: 1px solid var(--greyLight);
+		border-top: 1px solid var(--greyLight);
+	}
+}
+
+[data-popper-placement^='left'] > .arrow {
+	right: -.35rem;
+
+	&::before {
+		border-top: 1px solid var(--greyLight);
+		border-right: 1px solid var(--greyLight);
+	}
+}
+
+[data-popper-placement^='right'] > .arrow {
+	left: -.35rem;
+
+	&::before {
+		border-bottom: 1px solid var(--greyLight);
+		border-left: 1px solid var(--greyLight);
+	}
+}
+
+.popover-header {
+	padding: 0.5rem 0.75rem;
+	margin-bottom: 0;
+	background-color: var(--greyLightest);
+	border-bottom: 1px solid var(--greyLight);
+	border-top-left-radius: calc(0.3rem - 1px);
+	border-top-right-radius: calc(0.3rem - 1px);
+	display: block;
+
+	&:empty {
+		display: none;
+	}
+}
+
+.popover-footer {
+	height: 0.5rem;
+	background-color: var(--greyLightest);
+	border-bottom: 1px solid var(--greyLight);
+	display: block;
+}
+
+.popover-body {
+	padding: 0.5rem 0.75rem;
+	color: var(--black);
+	max-height: 250px;
+	overflow-y: auto;
+}

@@ -2,53 +2,158 @@
 var DraggableElement = DraggableElement || {};
 
 DraggableElement.makeDraggable = function (rootElementId, handleElementId) {
-    var rootElement = document.getElementById(rootElementId);
-    var handleElement = document.getElementById(handleElementId);
+	var updatedX = 0, updatedY = 0, initialX = 0, initialY = 0;
+	document.getElementById(handleElementId).onmousedown = dragMouseDown;
+	var root = document.getElementById(rootElementId);
 
-    var deltaX = 0, deltaY = 0, startX = 0, startY = 0;
+	function dragMouseDown(e) {
+		e = e || window.event;
+		e.preventDefault();
+		initialX = e.clientX;
+		initialY = e.clientY;
+		document.onmouseup = closeDragElement;
+		document.onmousemove = elementDrag;
+	}
 
-    if (rootElement.offsetTop === 0){
-        rootElement.style.top = rootElement.offsetTop + "px";
-    }
+	function elementDrag(e) {
+		e = e || window.event;
+		e.preventDefault();
+		updatedX = initialX - e.clientX;
+		updatedY = initialY - e.clientY;
+		initialX = e.clientX;
+		initialY = e.clientY;
+		root.style.top = (root.offsetTop - updatedY) + "px";
+		root.style.left = (root.offsetLeft - updatedX) + "px";
+	}
 
-    if (rootElement.offsetLeft === 0) {
-        rootElement.style.left = (window.innerWidth / 2 - rootElement.clientWidth / 2) + "px";
-    }
+	function closeDragElement() {
+		document.onmouseup = null;
+		document.onmousemove = null;
+	}
+}
 
-    // magic js null check here. If handleElement != null, it is "truthy" so it will resolve to true when coerced into a bool. If it is null, it is falsy and will be false when coerced into a bool
-    if (handleElement) {
-        handleElement.onmousedown = dragMouseDown;
-    } else {
-        rootElement.onmousedown = dragMouseDown;
-    }
+DraggableElement.dragContainerCount = 0;
+DraggableElement.increaseDragScrollBoundary = function () {
+	DraggableElement.dragContainerCount++;
 
-    function dragMouseDown(e) {
-        e = e || window.event;
-        e.preventDefault();
+	if (document.getElementById("draggableScrollTop") || document.getElementById("draggableScrollBottom")) return;
+	
+	var appendElementWithId = function appendElementWithId(id, top) {
+		var element = document.createElement('div');
+		element.setAttribute('id', id);
+		element.classList.add("drag-scroll-boundary");
+		var icon = document.createElement('i');
+		element.appendChild(icon);
 
-        startX = e.clientX;
-        startY = e.clientY;
+		if (top) {
+			element.style.cssText += "top: 0;"
+			icon.innerHTML = "arrow_upward";
+		} else {
+			element.style.cssText += "bottom: 0;"
+			icon.innerHTML = "arrow_downward";
+		}
 
-        document.onmouseup = closeDragElement;
-        document.onmousemove = doDrag;
-    }
+		document.body.appendChild(element);
 
-    function doDrag(e) {
-        e = e || window.event;
-        e.preventDefault();
+		return element;
+	};
 
-        deltaX = startX - e.clientX;
-        deltaY = startY - e.clientY;
+	function hide() {
+		topElement.style.display = 'none';
+		bottomElement.style.display = 'none';
+	};
 
-        startX = e.clientX;
-        startY = e.clientY;
+	function show() {
+		topElement.style.display = 'block';
+		bottomElement.style.display = 'block';
+	};
 
-        rootElement.style.top = (rootElement.offsetTop - deltaY) + "px";
-        rootElement.style.left = (rootElement.offsetLeft - deltaX) + "px";
-    }
+	function triggerScroll(amount) {
+		return window.scrollBy(0, amount);
+	};
 
-    function closeDragElement() {
-        document.onmouseup = null;
-        document.onmousemove = null;
-    }
+	function clearScrollInterval() {
+		clearInterval(doScroll);
+		doScroll = null;
+	};
+
+	var topElement = appendElementWithId("draggableScrollTop", true);
+	var bottomElement = appendElementWithId("draggableScrollBottom", false);
+
+	hide();
+
+	var doScroll = null;
+
+	[topElement, bottomElement].forEach(function (el) {
+		return el.addEventListener('dragover', function (e) {
+			if (doScroll == null) {
+				doScroll = setInterval(function () {
+					return triggerScroll(e.target === topElement ? -25 : 25);
+				}, 25);
+			}
+		});
+	});
+
+	[topElement, bottomElement].forEach(function (el) {
+		return el.addEventListener('dragleave', function () {
+			return clearScrollInterval();
+		});
+	});
+
+	document.addEventListener('dragover', function (e) {
+		return show();
+	});
+
+	document.addEventListener('dragend', function () {
+		clearScrollInterval();
+		hide();
+	});
+}
+
+DraggableElement.destroyDragScrollBoundary = function () {
+	DraggableElement.dragContainerCount--;
+	if (DraggableElement.dragContainerCount == 0) {
+		var topElement = document.getElementById("draggableScrollTop");
+		var bottomElement = document.getElementById("draggableScrollBottom");
+
+		if (topElement) {
+			topElement.remove();
+		}
+		if (bottomElement) {
+			bottomElement.remove();
+		}
+	}
+}
+
+DraggableElement.createTopTableScrollbar = function (scrollableId, leftHandleId, rightHandleId) {
+	var scrollableElement = document.getElementById(scrollableId);
+	var leftHandleButton = document.getElementById(leftHandleId);
+	var rightHandleButton = document.getElementById(rightHandleId);
+
+	if (rightHandleButton && leftHandleButton) {
+		function scrollElementLeft() {
+			scrollableElement.scrollLeft -= 30;
+		}
+
+		function scrollElementRight() {
+			scrollableElement.scrollLeft += 30;
+		}
+
+		var leftButtonInterval = null
+		leftHandleButton.addEventListener("mousedown", () => {
+			scrollElementLeft();
+			leftButtonInterval = setInterval(scrollElementLeft, 25)
+		});
+
+		var rightButtonInterval = null
+		rightHandleButton.addEventListener("mousedown", () => {
+			scrollElementRight();
+			rightButtonInterval = setInterval(scrollElementRight, 25)
+		});
+
+		document.addEventListener("mouseup", () => {
+			if (leftButtonInterval) clearInterval(leftButtonInterval);
+			if (rightButtonInterval) clearInterval(rightButtonInterval);
+		});
+	}	
 }

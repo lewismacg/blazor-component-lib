@@ -32,11 +32,11 @@
 					@if (ShowPageSizeSelect)
 					{
 						<div class="page-sizing">
-							<p>Items per page:</p>
+							<div>Items per page:</div>
 							<select class="dropdown-select" @onchange=@OnPageSizeChange>
 								@foreach (var item in PageSizes)
 								{
-									<option value="@item.Size" class="dropdown-select-option" selected="@(item.Size == PageSize)">@item.DisplayText</option>
+									<option value="@item.Size" class="dropdown-select-option" selected="@(item.Size == _pageSize)">@item.DisplayText</option>
 								}
 							</select>
 						</div>

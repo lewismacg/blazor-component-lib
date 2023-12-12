@@ -1,7 +1,7 @@
 ﻿.blazored-typeahead {
     position: relative;
     width: 100%;
-    border: 2px solid rgba(212,212,212,.5);
+    border: 2px solid #{'rgba(var(--greyLightRgb),.5)'};
     border-radius: .1rem;
 
     .valid.modified {
@@ -27,6 +27,8 @@
         border: none;
         padding: .5rem;
         border-radius: 5px;
+        background-color: var(--white);
+        color: var(--black);
     }
 
     &:focus-within {
@@ -64,7 +66,7 @@
     }
 
     .blazored-typeahead__input-mask-wrapper--disabled {
-        background-color: var(--grey);
+        background-color: var(--baseGrey);
         cursor: not-allowed;
         border-radius: 5px 0 0 5px;
         color: var(--black);
@@ -129,7 +131,7 @@
 
     .blazored-typeahead__input-icon--disabled,
     .blazored-typeahead__input-icon--disabled:hover {
-        background-color: var(--grey);
+        background-color: var(--baseGrey);
         cursor: not-allowed;
     }
 
@@ -149,7 +151,7 @@
     }
 
     .blazored-typeahead__multi-value-label {
-        color: rgb(51, 51, 51);
+        color: #{'rgb(var(--blackRgb))'};
         font-size: 85%;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -177,13 +179,13 @@
     }
 
     .blazored-typeahead__multi-value-clear:hover {
-        background-color: rgb(212, 212, 212);
+        background-color: #{'rgb(var(--greyLightRgb))'};
         color: var(--yellow);
     }
 
     .blazored-typeahead__results {
         position: absolute;
-        box-shadow: 0 5px 10px rgba(0,0,0,.2);
+        box-shadow: 0 5px 10px #{'rgba(var(--blackRgb),.2)'};
         border: 1px solid var(--greyLight);
         min-height: 2rem;
         max-height: 30rem;

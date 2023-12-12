@@ -5,25 +5,37 @@
         @ChildContent
     </div>
     <div class="dialogButtons">
-        <button class="btn btn-primary" @onclick="async () => await ButtonClicked(true)">Yes</button>
-        <button class="btn btn-danger" @onclick="async () => await ButtonClicked(false)">No</button>
+		<LoadingWrapper Condition="() => IsLoading == false" Height="1.25" Width="1.25" Colour="var(--baseGrey)">
+		    <button class="btn btn-green" type="button" @onclick="async () => await ButtonClicked(true)">Yes</button>
+		    <button class="btn btn-red" type="button" @onclick="async () => await ButtonClicked(false)">No</button>
+	    </LoadingWrapper>
     </div>
 </Dialog>
 
 @code {
-    [Parameter] public EventCallback OnYes { get; set; }
+	[Parameter] public EventCallback OnYes { get; set; }
+	[Parameter] public EventCallback OnNo { get; set; }
+	[Parameter] public bool ShowDialog { get; set; }
+	[Parameter] public RenderFragment ChildContent { get; set; }
+	[Parameter] public bool DisableButtonsOnClick { get; set; }
 
-    [Parameter] public EventCallback OnNo { get; set; }
+	protected bool IsLoading { get; set; }
 
-    [Parameter] public bool ShowDialog { get; set; } = false;
+	private async Task ButtonClicked(bool yes)
+	{
+		ShowDialog = false;
 
-    [Parameter] public RenderFragment ChildContent { get; set; }
-
-    private async Task ButtonClicked(bool yes)
-    {
-        ShowDialog = false;
-
-        if (yes) await OnYes.InvokeAsync();
-        else await OnNo.InvokeAsync();
-    }
+		if (DisableButtonsOnClick)
+		{
+			IsLoading = true;
+			if (yes) await OnYes.InvokeAsync();
+			else await OnNo.InvokeAsync();
+			IsLoading = false;
+		}
+		else
+		{
+			if (yes) await OnYes.InvokeAsync();
+			else await OnNo.InvokeAsync();
+		}
+	}
 }

@@ -6,7 +6,7 @@
 	{
 		<div class="alert alert-@_alertClass mb-0 text-center rounded-0 bold-border">
 			<b>
-				@(ColumnTitle ?? CategoryValue.ToString())
+				@(ColumnTitle ?? CategoryValue?.ToString())
 				@HeaderContent
 				@if (ShowCount)
 				{

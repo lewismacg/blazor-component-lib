@@ -1,7 +1,7 @@
 ﻿@inherits LayoutComponentBase
 @inject ToasterManager ToasterManager
 
-<theme data-theme="@Theme">
+<theme data-theme="@Theme" class="v-zoom @Class">
 	<DefaultLayout FixNav="true">
 		<SearchBar>
 			<div class="input-group">
@@ -9,7 +9,7 @@
 				<div class="input-group-append my-auto">
 					<!-- Obvs make this perform whatever search logic you need. -->
 					<span class="g-search-icon">
-						<i class="material-icons text-primary large-icon" @onclick="@(() => Console.WriteLine(""))">search</i>
+						<i class="material-icons text-blue large-icon" @onclick="@(() => Console.WriteLine(""))">search</i>
 					</span>
 				</div>
 			</div>
@@ -26,6 +26,9 @@
 					</a>
 					<a class="ddc-item" @onclick="@((e) => SetTheme("dark"))">
 						<Icon>nights_stay</Icon> Dark Mode
+					</a>
+					<a class="ddc-item" @onclick="@((e) => Class = "out")">
+						<Icon>zoom_out</Icon> Zoom out
 					</a>
 					<a class="ddc-item">
 						<Icon OnClickAction="(e) => Console.WriteLine('H')">logout</Icon> Logout
@@ -48,6 +51,7 @@
 @code
 {
 	public string Theme { get; set; }
+	public string Class { get; set; }
 
 	public void SetTheme(string theme)
 	{

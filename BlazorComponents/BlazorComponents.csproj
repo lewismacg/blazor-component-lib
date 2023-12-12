@@ -34,6 +34,8 @@
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.6" />
 		<PackageReference Include="LINQKit.Core" Version="1.1.22" />
 		<PackageReference Include="Microsoft.Extensions.Localization" Version="6.0.6" />
+		<PackageReference Include="CronExpressionDescriptor" Version="2.21.0" />
+		<PackageReference Include="Cronos" Version="0.7.1" />
 	</ItemGroup>
 
 </Project>

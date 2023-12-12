@@ -1,0 +1,31 @@
+﻿@using Cronos
+@namespace BlazorComponents
+
+<div class="row" @attributes="@AdditionalAttributes">
+	<div class="col-sm-4">
+		<div class="form-group">
+			<label class="small strong d-block">Weekday(s)</label>
+			<MultiSelect IsSmall="SmallFields" AdditionalClasses="w-100" TValue="DayOfWeek" Options="Enum.GetValues<DayOfWeek>().ToList()" Placeholder="--All weekdays--" ValueChanged="async (e) => await GenerateWeekdays(e)" SelectedValues="SelectedWeekdays" />
+		</div>
+	</div>
+	<div class="col-sm-4">
+		<div class="form-group">
+			<label class="small strong d-block">Day(s) of month</label>
+			<MultiSelect IsSmall="SmallFields" AdditionalClasses="w-100" TValue="int" Options="Enumerable.Range(1, 31).ToList()" Placeholder="--Every day--" ValueChanged="async (e) => await GenerateDaysOfMonth(e)" SelectedValues="SelectedDaysOfMonth" />
+		</div>
+	</div>
+	<div class="col-sm-4">
+		<div class="form-group">
+			<label class="small strong d-block">Month(s)</label>
+			<MultiSelect IsSmall="SmallFields" AdditionalClasses="w-100" TValue="Month" Options="Enum.GetValues<Month>().ToList()" Placeholder="--Every month--" ValueChanged="async (e) => await GenerateMonths(e)" SelectedValues="SelectedMonths" />
+		</div>
+	</div>
+</div>
+@if (ParsingError)
+{
+	<div class="row">
+		<div class="col-12">
+			<div class="p-2 rounded alert-red strong small text-center">Generated schedule is not a valid value. Form has been reset.</div>
+		</div>
+	</div>
+}

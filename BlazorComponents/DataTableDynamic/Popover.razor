@@ -1,9 +1,7 @@
 ﻿@namespace BlazorComponents
 
-@if (IsOpen ?? false)
-{
-	<div @attributes="@UnknownParameters" class="@Classname" role="tooltip" @onclick="OnClick" @ref="MyRef" @onclick:stopPropagation>
-		<div @ref="Arrow" class="arrow"></div>
-		@ChildContent
-	</div>
-}
+<div @attributes="@UnknownParameters" id="@Id" class="popover show" role="tooltip" @onclick:stopPropagation>
+	<div class="arrow" data-popper-arrow></div>
+	@ChildContent
+	<div class="popover-footer"></div>
+</div>

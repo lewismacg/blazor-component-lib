@@ -1,0 +1,173 @@
+﻿.drawer-wrapper {
+	position: sticky;
+	top: 0px;
+	color: var(--white);
+	background-color: var(--black);
+	transition: width 0.5s;
+	transition-timing-function: ease-out;
+	padding-top: 1em;
+	flex: 0 0 6em;
+
+	.drawer-nav {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		justify-content: space-between;
+	}
+
+	&.drawer-open {
+		flex: 0 0 15em;
+
+		.nav-item {
+			span {
+				display: block;
+				opacity: 1;
+				animation-delay: 0.5s;
+				animation: fadeOpacityIn 1s;
+			}
+
+			i {
+				display: block;
+				padding-right: 0.8rem;
+			}
+		}
+	}
+
+	@media only screen and (max-width: 992px) {
+		&.drawer-open {
+			flex: 0 0 6em;
+
+			.nav-item {
+				span {
+					display: none;
+					opacity: 0;
+				}
+
+				i {
+					display: block;
+					padding-right: 0;
+				}
+			}
+
+			.hide-closed {
+				display: none !important;
+			}
+		}
+
+		.drawer-branding {
+			display: none !important;
+		}
+	}
+
+	&.drawer-closed {
+		.nav-item {
+			span {
+				display: none;
+				opacity: 0;
+			}
+
+			i {
+				display: block;
+			}
+		}
+
+		.hide-closed {
+			display: none !important;
+		}
+	}
+
+	.drawer-branding {
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-content: center;
+		align-items: center;
+		padding-bottom: 1em !important;
+		padding-top: 3em;
+
+		.drawer-brand {
+			width: 100%;
+			padding-left: 1em;
+			animation-delay: 0.4s;
+			animation: fadeOpacityIn 1s;
+		}
+
+		i {
+			width: 36px;
+			font-size: 36px;
+			padding-left: 0.7em;
+		}
+	}
+
+	.drawer-nav {
+		display: flex;
+		flex-direction: column;
+
+		.nav-header {
+			display: flex;
+			flex-direction: column;
+		}
+
+		.nav-item {
+			display: flex;
+			flex-direction: row;
+			padding: 1em 2em 1em 1.8em;
+		}
+
+		label {
+			padding-left: 1rem;
+			margin-bottom: 0px;
+		}
+
+		label:hover {
+			background: var(--greyDark);
+		}
+
+		li {
+			list-style: none;
+		}
+
+		ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+
+		ul li ul label {
+			padding-left: 2rem !important;
+			background: var(--greyDarkest);
+		}
+
+		.nav-item ~ ul {
+			height: 0;
+			transform: scaleY(0);
+		}
+
+		.show ~ ul {
+			height: 100%;
+			transform-origin: top;
+			transition: transform .2s ease-out;
+			transform: scaleY(1);
+		}
+
+		label.show {
+			background: var(--greyDark);
+		}
+
+		.nav-footer {
+			display: flex;
+			flex-direction: column;
+		}
+	}
+}
+
+@keyframes fadeOpacityIn {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}

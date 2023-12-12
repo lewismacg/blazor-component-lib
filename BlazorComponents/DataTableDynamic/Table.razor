@@ -16,50 +16,57 @@
 
 		@if (ShowSearchBar)
 		{
-			<div class="flex flex-row mb-3">
+			<div class="d-flex flex-row mb-3">
 				<div class="flex-grow-0">
-					<div class="float-left px-3 pt-3">
+					<div class="d-flex float-left pr-3 pt-3">
 						@if (Columns.Exists(column => !column.Visible))
 						{
-							<a class="btn btn-danger" href="javascript:;" @ref="VisibilityMenuIconRef" @onclick="@(_ => VisibilityMenuOpen = !VisibilityMenuOpen)">
+							<a class="btn btn-yellow" href="javascript:;" @ref="ColumnMenuVisibilityRef" @onclick="@(_ => VisibilityMenuOpen = !VisibilityMenuOpen)">
 								Column Visibility
 							</a>
-							<Popover IsOpen="@VisibilityMenuOpen" Placement="Placement.Bottom" DismissOnNextClick="false" Reference="VisibilityMenuIconRef">
-								<h3 class="popover-header">Column Visibility</h3>
-								<div class="popover-body">
-									<table class="table table-borderless">
-										@foreach (IColumn<TableItem> column in Columns.Where(column => !column.Visible))
-										{
-											<tr>
-												<td>
-													@(column.Title)
-												</td>
-												<td>
-													<div class="float-right" @onclick="@(_ => { column.Visible = true; if (!Columns.Exists(column => !column.Visible)) VisibilityMenuOpen = false;})">
-														<a href="javascript:;">
-															<span aria-hidden="true">
-																<Icon IconColour="Colour.Black" IconName="add" />
-															</span>
-														</a>
-													</div>
-												</td>
-											</tr>
+							@if (VisibilityMenuOpen)
+							{
+								<Popover Origin="ColumnMenuVisibilityRef">
+									<b class="popover-header">Column Visibility</b>
+									<div class="popover-body">
+										<table class="table table-borderless">
+											@foreach (IColumn<TableItem> column in Columns.Where(column => !column.Visible))
+											{
+												<tr>
+													<td>
+														@(column.Title)
+													</td>
+													<td>
+														<div class="float-right" @onclick="@(_ => MakeColumnVisible(column))">
+															<a href="javascript:;">
+																<span aria-hidden="true">
+																	<Icon IconColour="Colour.Black" IconName="add" />
+																</span>
+															</a>
+														</div>
+													</td>
+												</tr>
 
-										}
-									</table>
-									<button class="btn btn-sm btn-secondary" @onclick="@(_ => VisibilityMenuOpen = false)">
-										Close
-									</button>
-								</div>
-							</Popover>
+											}
+										</table>
+										<button class="btn btn-sm btn-yellow" @onclick="@(() => VisibilityMenuOpen = false)">
+											Close
+										</button>
+									</div>
+								</Popover>
+							}
 						}
 						@if (AllowExport && ExportAtTop)
 						{
 							<span class="px-1">
-								<button class="btn btn-primary" @onclick="DownloadCsv">Export</button>
+								<button class="btn btn-blue" @onclick="DownloadCsv">Export</button>
 							</span>
 						}
 					</div>
+					@if (HeaderChildContent != null)
+					{
+						@HeaderChildContent
+					}
 				</div>
 
 				<div class="flex-grow-1">
@@ -75,8 +82,16 @@
 
 			</div>
 		}
-
-		<table aria-readonly="@(IsEditMode ? "false" : "true")" role="grid" class="@TableClass" @attributes="UnknownParameters">
+		@if (AllowTopHorizontalScroll)
+		{
+			<div class="horizontal-scroller @(ShowSearchBar ? "mt-n4" : string.Empty) mb-3">
+				<button id="@($"leftScrollButton-{TableId}")" class="no-default-styles c-pointer"><Icon IconColour="Colour.Green">chevron_left</Icon></button>
+				<span class="text-muted strong mx-1">Scroll</span>
+				<button id="@($"rightScrollButton-{TableId}")" class="no-default-styles c-pointer"><Icon IconColour="Colour.Green">chevron_right</Icon></button>
+				<div class="flex-line"></div>
+			</div>
+		}
+		<table id="@TableId" aria-readonly="@(IsEditMode ? "false" : "true")" role="grid" class="@TableClass @(AllowXScroll ? "table-scroll" : "")" @attributes="UnknownParameters">
 			<thead class="@TableHeadClass" style="cursor: pointer;">
 				@if (_detailTemplate != null && DetailViewAvailable)
 				{
@@ -86,7 +101,7 @@
 				{
 					@if (column.Visible)
 					{
-					<th scope="col" style="@(!string.IsNullOrEmpty(column.Width) ? $"width:{column.Width};" : "") user-select: none"
+					<th scope="col" style="user-select: none"
 			@ondrop="@(_ => HandleDrop(column))"
 			@ondragstart="@(_ => HandleDragStart(column))"
 			ondragover="event.preventDefault();"
@@ -119,24 +134,27 @@
 										</span>
 									</a>
 								</div>
-								<CascadingValue Value="column" Name="Column">
-									<Popover Reference="@column.FilterRef" IsOpen="@column.FilterOpen" Placement="Placement.Bottom" DismissOnNextClick="false">
-										<h3 class="popover-header">Filter</h3>
-										<div class="popover-body">
-											<FilterManager TableItem="TableItem">
-												<StringFilter TableItem="TableItem" />
-												<BooleanFilter TableItem="TableItem" />
-												<NumberFilter TableItem="TableItem" />
-												<DateFilter TableItem="TableItem" />
-												<EnumFilter TableItem="TableItem" />
-													@if (column.CustomIFilters != null)
-													{
-														@column.CustomIFilters(column)
-													}
-											</FilterManager>
-										</div>
-									</Popover>
-								</CascadingValue>
+									<CascadingValue Value="column" Name="Column">
+										@if (column.FilterOpen)
+										{
+											<Popover Origin="column.FilterRef">
+												<b class="popover-header">Filter</b>
+												<div class="popover-body">
+													<FilterManager TableItem="TableItem">
+														<StringFilter TableItem="TableItem"/>
+														<BooleanFilter TableItem="TableItem"/>
+														<NumberFilter TableItem="TableItem"/>
+														<DateFilter TableItem="TableItem"/>
+														<EnumFilter TableItem="TableItem"/>
+														@if (column.CustomIFilters != null)
+														{
+															@column.CustomIFilters(column)
+														}
+													</FilterManager>
+												</div>
+											</Popover>
+										}
+									</CascadingValue>
 								}
 
 								@if (column.Hideable)
@@ -292,7 +310,7 @@
 @if (AllowExport && !ExportAtTop)
 {
 	<div class="mt-2 mb-2 float-left">
-		<button class="btn btn-primary" type="button" @onclick="@DownloadCsv">
+		<button class="btn btn-blue" type="button" @onclick="@DownloadCsv">
 			Export
 		</button>
 	</div>
@@ -304,4 +322,3 @@
 		@ChildContent
 	</CascadingValue>
 }
-

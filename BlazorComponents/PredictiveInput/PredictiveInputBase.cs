@@ -35,7 +35,7 @@ namespace BlazorComponents
 
 		protected async Task<IEnumerable<string>> Search(string searchText)
 		{
-			return await Task.FromResult(DataList.Where(x => x.ToLower().Contains(searchText.ToLower())).ToList());
+			return await Task.FromResult(DataList.Where(x => x.ToLower().Contains(searchText.ToLower())).OrderBy(x => x.IndexOf(searchText, StringComparison.OrdinalIgnoreCase)).ToList());
 		}
 
 		public Task OnValueChanged(string res)

@@ -1,0 +1,16 @@
+﻿@namespace BlazorComponents
+
+<ul class="d-flex justify-content-center list-inline-none mb-0" style="list-style-type: none">
+	@foreach (var step in Wizard.Steps)
+	{
+		<li id="step-@(Wizard.StepsIndex(step) + 1)">
+			<a @onclick="() => Wizard.SetActive(step)">
+				<Icon IconColour="step.NavIconColour">@(Wizard.ActiveStep == step ? "radio_button_checked" : "radio_button_unchecked")</Icon>
+			</a>
+		</li>
+	}
+</ul>
+
+@code {
+	[CascadingParameter] public Wizard Wizard { get; set; }
+}

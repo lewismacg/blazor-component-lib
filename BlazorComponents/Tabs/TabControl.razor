@@ -2,7 +2,7 @@
 
 <CascadingValue Value="this">
 	<ul class="nav nav-tabs">
-		@foreach (TabPageBase tabPage in _pages)
+		@foreach (TabPageBase tabPage in _pages.OrderBy(x => x.Ordinal))
 		{
 			<li class="nav-item">
 				<a class="nav-link @GetButtonClass(tabPage)" @onclick=@(() => ActivatePage(tabPage))>
@@ -10,14 +10,7 @@
 						<div class="pr-1 pt-1">
 							@tabPage.TabTitle
 						</div>
-						@if (@tabPage.TabBadge > 0)
-						{
-							<div class="numberCircle pt-0">@tabPage.TabBadge</div>
-						}
-						else
-						{
-							<div class="pt-0" style="height:30px"> </div>
-						}
+						<div class="pt-0" style="height:30px"> </div>
 					</div>
 				</a>
 			</li>
@@ -53,16 +46,26 @@
 		StateHasChanged();
 	}
 
+	internal void RemovePage(TabPageBase tabPage)
+	{
+		if (ActivePage == tabPage) RemoveActiveTab();
+		else
+		{
+			_pages.Remove(tabPage);
+			StateHasChanged();
+		}
+	}
+
 	public void RemoveActiveTab()
 	{
-		var activePageIndex = _pages.IndexOf(ActivePage);
+		var pageIndex = _pages.IndexOf(ActivePage);
 
 		_pages.Remove(ActivePage);
 
 		if (_pages.Any())
 		{
-			if (activePageIndex < _pages.Count) _pages[activePageIndex].ActivatePage();
-			else if (activePageIndex - 1 < _pages.Count) _pages[activePageIndex - 1].ActivatePage();
+			if (pageIndex < _pages.Count) _pages[pageIndex].ActivatePage();
+			else if (pageIndex - 1 < _pages.Count) _pages[pageIndex - 1].ActivatePage();
 			else _pages.First().ActivatePage();
 		}
 

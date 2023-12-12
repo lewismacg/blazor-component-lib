@@ -1,8 +1,8 @@
 ﻿@page "/DragAndDrop"
 @using ComponentDemo.Models
 
-<DragContainer TModel="JobModel" Models="Jobs" OnCategoryUpdated="HandleStatusUpdated" OnDrop="(x, y) => x.Category = y.ToString()" TextFunction="@(x => x.Name)" CategoryFunction="@(x => x.Category)">
-	<DragColumn TModel="JobModel" CategoryValue="@("Todo")" ColumnType="NotificationType.Error" BodyContentHeight="40" AdditionalDragItemClass="d-inline-block mr-3">
+<DragContainer TModel="JobModel" Models="Jobs" OnCategoryUpdated="async (e) => await HandleStatusUpdated(e)" OnDrop="(x, y) => SetCategory(x,y)" TextFunction="@(x => x.Name)" CategoryFunction="@(x => x.Category)">
+	<DragColumn IsLoading="IsLoading" TModel="JobModel" CategoryValue="@null" ColumnType="NotificationType.Red" BodyContentHeight="40" AdditionalDragItemClass="d-inline-block mr-3">
 		<HeaderContent>
 			<Icon OnClickAction="(e) => CollapseColumn()">expand_less</Icon>
 			<Icon>delete</Icon>
@@ -11,12 +11,12 @@
 			<span class="align-self-end">Todo Jobs</span>
 		</BodyContent>
 	</DragColumn>
-	<DragColumn TModel="JobModel" CategoryValue="@("Started")" ColumnTitle="Start" ShowCount="true" ColumnType="NotificationType.Success">
+	<DragColumn TModel="JobModel" CategoryValue="@("Started")" ColumnTitle="Start" ShowCount="true" ColumnType="NotificationType.Green">
 		<BodyContent>
 			Could put anything here, even another component.
 		</BodyContent>
 	</DragColumn>
-	<DragColumn TModel="JobModel" CategoryValue="@("Completed")" ColumnType="NotificationType.Success">
+	<DragColumn TModel="JobModel" CategoryValue="@("Completed")" ColumnType="NotificationType.Green">
 		<BodyContent>
 			<p>Proactively envisioned multimedia based expertise and cross-media growth strategies. Seamlessly visualize quality intellectual capital without superior collaboration and idea-sharing. Holistically pontificate installed base portals after maintainable products.</p>
 		</BodyContent>
@@ -37,9 +37,9 @@
 
 @code {
 	private static Random random = new Random();
-
+	public bool IsLoading { get; set; }
 	List<JobModel> Jobs = new();
-	List<string> AllStatuses = new() { "Todo", "Started", "Completed" };
+	List<string> AllStatuses = new() { "Started", "Completed", null };
 	List<string> Logs = new();
 	protected bool ShowColumn { get; set; } = true;
 
@@ -52,9 +52,21 @@
 		Jobs.Add(GenerateJobModel("Walk the dog", AllStatuses[random.Next(AllStatuses.Count)]));
 	}
 
-	void HandleStatusUpdated(JobModel updatedJob)
+	bool SetCategory(JobModel jobModel, object newValue)
 	{
-		Logs.Add($"{updatedJob.Name} = {updatedJob.Category}");
+		jobModel.Category = newValue?.ToString();
+
+		return true;
+	}
+
+	async Task HandleStatusUpdated(JobModel updatedJob)
+	{
+		Logs.Add(updatedJob.Name + updatedJob.Category);
+		IsLoading = true;
+
+		await Task.Delay(3000);
+
+		IsLoading = false;
 	}
 
 	JobModel GenerateJobModel(string title, string category)

@@ -1,27 +1,32 @@
 ﻿theme[data-theme="dark"] {
 	--red: #ae2012;
 	--redRgb: 174, 32, 18;
-	--darkRed: #f28482;
 	--lightRed: #9b2226;
+	--darkRed: #f28482;
+	--darkBlue: #c1d3fe;
+	--lightBlue: #001d3d;
+	--blue: #003566;
+	--blueRgb: 0, 53, 102;
 	--green: #52b788;
 	--greenRgb: 82, 183, 136;
-	--darkGreen: #b7e4c7;
 	--lightGreen: #2d6a4f;
-	--darkBlue: #94d2bd;
-	--blue: #003566;
-	--lightBlue: #001d3d;
-	--darkYellow: #fcf6bd;
+	--darkGreen: #b7e4c7;
 	--yellow: #ffd60a;
+	--darkYellow: #fcf6bd;
 	--lightYellow: #ffc300;
+	--lightYellowRgb: 255, 195, 0;
 	--black: #FFFFFF;
+	--blackRgb: 255, 255, 255;
 	--white: #000814;
+	--whiteRgb: 0, 8, 20;
 	--greyDarkest: #F6F6F6;
 	--greyDark: #D4D4D4;
 	--greyDarkRgb: 212, 212, 212;
-	--grey: #B3B3B3;
+	--baseGrey: #B3B3B3;
 	--greyLight: #717171;
 	--greyLightRgb: 113, 113, 113;
 	--greyLightest: #383838;
+	--zoom: 1;
 
 	select {
 		&.dropdown-select {
@@ -64,12 +69,12 @@
 				background: var(--greyLight);
 
 				&:hover {
-					background: var(--grey);
+					background: var(--baseGrey);
 				}
 			}
 
 			input[type="checkbox"]:checked + label {
-				background: var(--grey);
+				background: var(--baseGrey);
 			}
 
 			.nav-item {
@@ -94,8 +99,8 @@
 		opacity: 0.3;
 	}
 
-	.btn-primary.disabled, .btn-primary:disabled, .btn-secondary.disabled, .btn-secondary:disabled, .btn-success.disabled, .btn-success:disabled,
-	.btn-info.disabled, .btn-info:disabled, .btn-danger.disabled, .btn-danger:disabled, .btn-linksecondary:disabled, .btn-link.disabled {
+	.btn-blue.disabled, .btn-blue:disabled, .btn-yellow.disabled, .btn-yellow:disabled, .btn-green.disabled, .btn-green:disabled,
+	.btn-lightblue.disabled, .btn-lightblue:disabled, .btn-red.disabled, .btn-red:disabled, .btn-linksecondary:disabled, .btn-link.disabled {
 		color: var(--greyDarkest);
 		background-color: var(--greyLight);
 		border-color: var(--greyLight);
@@ -114,7 +119,7 @@
 		background-color: var(--greyLightest);
 
 		&:disabled, .disabled {
-			color: var(--grey);
+			color: var(--baseGrey);
 		}
 	}
 
@@ -128,18 +133,30 @@
 
 	.toast {
 		background-color: #{'rgba(var(--greyLightRgb), 0.85)'};
-		border: 1px solid #{'rgba(var(--greyDarkestRgb), 0.1)'};
-		box-shadow: 0 0.25rem 0.75rem #{'rgba(var(--greyDarkestRgb), 0.1)'};
+		border: 1px solid #{'rgba(var(--greyDarkRgb), 0.1)'};
+		box-shadow: 0 0.25rem 0.75rem #{'rgba(var(--greyDarkRgb), 0.1)'};
 	}
 
 	.toast-header {
 		color: var(--greyDark);
 		background-color: #{'rgba(var(--greyLightRgb), 0.85)'};
-		border-bottom: 1px solid #{'rgba(var(--greyDarkestRgb), 0.05)'};
+		border-bottom: 1px solid #{'rgba(var(--greyDarkRgb), 0.05)'};
 	}
 
 	.drop-container .column-category .column-body .drop-column .drag-and-droppable {
 		border: 1px solid var(--greyLight);
 		background: var(--white);
+	}
+
+	.table-row-green:hover {
+		background-color: #{'rgba(var(--greenRgb), 0.95)'} !important;
+	}
+
+	.table-row-blue:hover {
+		background-color: #{'rgba(var(--redRgb), 0.9)'} !important;
+	}
+
+	.table-row-yellow:hover {
+		background-color: #{'rgba(var(--lightYellowRgb), 0.9)'} !important;
 	}
 }

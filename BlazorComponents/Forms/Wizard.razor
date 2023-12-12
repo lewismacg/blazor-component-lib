@@ -1,29 +1,6 @@
 ﻿@namespace BlazorComponents
 
 <CascadingValue Value="this">
-    <div>
-        @if (ShowNavAtTop)
-        {
-            <ul class="d-flex justify-content-center list-inline-none" style="list-style-type: none">
-                @foreach (var step in Steps)
-                {
-                    <li id="step-@(StepsIndex(step) + 1)">
-                        <a @onclick="() => SetActive(step)"><Icon>@(ActiveStep == step ? "radio_button_checked" : "radio_button_unchecked")</Icon></a>
-                    </li>
-                }
-            </ul>
-        }
-        @ChildContent
-        @if (ShowNavAtBottom)
-        {
-            <ul class="d-flex justify-content-center list-inline-none" style="list-style-type: none">
-                @foreach (var step in Steps)
-                {
-                    <li id="step-@(StepsIndex(step) + 1)">
-                        <a @onclick="() => SetActive(step)"><Icon>@(ActiveStep == step ? "radio_button_checked" : "radio_button_unchecked")</Icon></a>
-                    </li>
-                }
-            </ul>
-        }
-    </div>
+	@Nav
+	@ChildContent
 </CascadingValue>

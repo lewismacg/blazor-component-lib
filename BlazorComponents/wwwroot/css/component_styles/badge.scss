@@ -36,51 +36,52 @@ a.badge:hover, a.badge:focus {
     border-radius: 10rem;
 }
 
-.badge-primary {
+.badge-blue {
     color: var(--white);
     background-color: var(--blue);
 }
 
-a.badge-primary:hover, a.badge-primary:focus {
+a.badge-blue:hover, a.badge-blue:focus {
     color: var(--white);
     background-color: var(--darkBlue);
 }
 
-.badge-secondary {
+.badge-yellow {
     color: var(--black);
     background-color: var(--yellow);
 }
 
-a.badge-secondary:hover, a.badge-secondary:focus {
+a.badge-yellow:hover, a.badge-yellow:focus {
     color: var(--black);
     background-color: var(--darkYellow);
 }
 
-.badge-success {
+.badge-green {
     color: var(--white);
     background-color: var(--green);
 }
 
-a.badge-success:hover, a.badge-success:focus {
-    color: var(--white);
-    background-color: var(--darkGreen);
+a.badge-green:hover, a.badge-green:focus {
+    color: var(--black);
+    background-color: var(--lightGreen);
 }
 
-.badge-info {
+.badge-lightblue {
     color: var(--black);
+    background-color: var(--lightBlue);
+    border: 1px solid var(--blue);
+}
+
+a.badge-lightblue:hover, a.badge-lightblue:focus {
     background-color: var(--lightBlue);
 }
 
-a.badge-info:hover, a.badge-info:focus {
-    background-color: var(--blue);
-}
-
-.badge-danger {
+.badge-red {
     color: var(--red);
     background-color: var(--white);
     border: 1px solid var(--red);
 }
 
-a.badge-danger:hover, a.badge-danger:focus {
+a.badge-red:hover, a.badge-red:focus {
     background-color: var(--greyLightest);
 }

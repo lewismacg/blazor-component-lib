@@ -1,0 +1,10 @@
+﻿@namespace BlazorComponents
+
+<span class="highlighter-container @Type.ToString()">
+	<span class="highlighter">@ChildContent</span>
+</span>
+
+@code {
+	[Parameter] public RenderFragment ChildContent { get; set; }
+	[Parameter] public NotificationType Type { get; set; } = NotificationType.Yellow;
+}

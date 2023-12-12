@@ -1,0 +1,29 @@
+﻿@page "/CronExpression"
+
+<CronExpressionForm @bind-CronExpressionValue="CronBeingSet" DateToBuildFrom="BaseDate" />
+
+<div class="row">
+	<div class="col-4">
+		<div class="form-group">
+			<label>Binded Cron Expression</label>
+			<input class="form-control bg-white" readonly value="@CronBeingSet"/>
+		</div>
+	</div>
+	<div class="col-4">
+		<div class="form-group">
+			<label>User Friendly Expression</label>
+			<input class="form-control bg-white" readonly value="@CronExtensions.UserFriendlyCronExpression(CronBeingSet, true)"/>
+		</div>
+	</div>
+	<div class="col-4">
+		<div class="form-group">
+			<label>Next Execution Date</label>
+			<input class="form-control bg-white" readonly value="@CronExtensions.GetNextDateForScheduleByCronExpression(CronBeingSet, BaseDate)"/>
+		</div>
+	</div>
+</div>
+
+@code {
+	public DateTime? BaseDate { get; set; } = DateTime.Today;
+	public string CronBeingSet { get; set; } = "0 0 * * *";
+}

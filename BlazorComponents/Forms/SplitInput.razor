@@ -1,0 +1,12 @@
+﻿@using Microsoft.AspNetCore.Components;
+@using Microsoft.AspNetCore.Components.Forms;
+@namespace BlazorComponents
+
+<div class="d-flex">
+	<div class="split-input left" style="width: @_calcLeftWidthPercentage">
+		@LeftInput
+	</div>
+	<div class="split-input right" style="width: @_calcRightWidthPercentage">
+		@RightInput
+	</div>
+</div>

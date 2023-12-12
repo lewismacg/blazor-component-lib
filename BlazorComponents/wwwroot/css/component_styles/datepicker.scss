@@ -91,7 +91,7 @@
     align-items: center;
     justify-content: center;
     margin: 0;
-    border: 1px solid var(--grey);
+    border: 1px solid var(--baseGrey);
     border-radius: 4px;
     box-shadow: none;
     background-color: var(--white);
@@ -116,7 +116,7 @@
 }
 
 .datepicker-controls .button:focus {
-    border-color: var(--grey);
+    border-color: var(--baseGrey);
     color: var(--black)
 }
 
@@ -184,7 +184,7 @@
 
 .datepicker-view .week {
     width: 2.25rem;
-    color: var(--grey);
+    color: var(--baseGrey);
     font-size: .75rem
 }
 
@@ -205,18 +205,18 @@
 }
 
 .datepicker-cell:not(.disabled):hover {
-    background-color: var(--darkYellow);
+    background-color: var(--lightBlue);
     cursor: pointer
 }
 
 .datepicker-cell.selected, .datepicker-cell.selected:hover {
-    background-color: var(--lightYellow);
-    color: var(--black);
+    background-color: var(--blue);
+    color: var(--white);
     font-weight: 600
 }
 
 .datepicker-cell.disabled {
-    color: var(--grey)
+    color: var(--baseGrey)
 }
 
 .datepicker-cell.next:not(.disabled), .datepicker-cell.prev:not(.disabled) {
@@ -233,7 +233,7 @@
 }
 
 .datepicker-cell.highlighted:not(.selected):not(.range):not(.today):not(.disabled):hover {
-    background-color: var(--grey)
+    background-color: var(--baseGrey)
 }
 
 .datepicker-cell.highlighted:not(.selected):not(.range):not(.today).focused {
@@ -241,7 +241,7 @@
 }
 
 .datepicker-cell.today:not(.selected) {
-    background-color: var(--blue)
+    background-color: var(--yellow);
 }
 
 .datepicker-cell.today:not(.selected):not(.disabled) {
@@ -249,16 +249,16 @@
 }
 
 .datepicker-cell.today.focused:not(.selected) {
-    background-color: var(--lightBlue)
+    background-color: var(--yellow);
 }
 
 .datepicker-cell.range-end:not(.selected), .datepicker-cell.range-start:not(.selected) {
-    background-color: var(--grey);
+    background-color: var(--baseGrey);
     color: var(--white)
 }
 
 .datepicker-cell.range-end.focused:not(.selected), .datepicker-cell.range-start.focused:not(.selected) {
-    background-color: var(--grey)
+    background-color: var(--baseGrey)
 }
 
 .datepicker-cell.range-start {
@@ -279,11 +279,11 @@
 }
 
 .datepicker-cell.range.disabled {
-    color: var(--grey)
+    color: var(--baseGrey)
 }
 
 .datepicker-cell.range.focused {
-    background-color: var(--grey)
+    background-color: var(--baseGrey)
 }
 
 .datepicker-view.datepicker-grid .datepicker-cell {
@@ -294,4 +294,3 @@
 .datepicker-input.in-edit {
     border-color: var(--greyDark)
 }
-

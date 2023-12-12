@@ -61,6 +61,11 @@ namespace BlazorComponents
 		/// </summary>
 		[Parameter] public string AdditionalDragItemClass { get; set; }
 
+		/// <summary>
+		/// Set this to true to hide the content in favour of a loading spinner
+		/// </summary>
+		[Parameter] public bool IsLoading { get; set; }
+
 		#endregion
 
 		#region Properties and Fields
@@ -92,14 +97,14 @@ namespace BlazorComponents
 		protected override void OnParametersSet()
 		{
 			_models.Clear();
-			_models.AddRange(Container.Models.Where(x => Container.CategoryFunction.Invoke(x).Equals(CategoryValue)));
+			_models.AddRange(Container.Models.Where(x => Container.CategoryFunction.Invoke(x) == CategoryValue));
 
 			_alertClass = ColumnType switch
 			{
-				NotificationType.Info => "info",
-				NotificationType.Warning => "warning",
-				NotificationType.Error => "danger",
-				NotificationType.Success => "success",
+				NotificationType.Blue => "blue",
+				NotificationType.Yellow => "yellow",
+				NotificationType.Red => "red",
+				NotificationType.Green => "green",
 				_ => ""
 			};
 		}
@@ -107,7 +112,7 @@ namespace BlazorComponents
 		private void HandleDragEnter()
 		{
 			if (Container.ActiveModel == null) return;
-			if (CategoryValue.Equals(Container.CategoryFunction.Invoke(Container.ActiveModel))) return;
+			if (Container.CategoryFunction.Invoke(Container.ActiveModel) == CategoryValue) return;
 
 			_counter++;
 			_dropClass = "can-drop";
@@ -126,7 +131,7 @@ namespace BlazorComponents
 			_counter = 0;
 			_dropClass = string.Empty;
 
-			if (CategoryValue.Equals(Container.CategoryFunction.Invoke(Container.ActiveModel))) return;
+			if (Container.CategoryFunction.Invoke(Container.ActiveModel) == CategoryValue) return;
 			await Container.UpdateModelAsync(CategoryValue);
 		}
 

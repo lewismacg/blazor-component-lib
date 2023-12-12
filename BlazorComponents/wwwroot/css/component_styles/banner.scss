@@ -1,0 +1,81 @@
+﻿.banner-wrapper .banner:not(:first-child) {
+	bottom: 10vh;
+}
+
+.banner {
+	padding: 1em;
+	text-align: center;
+	vertical-align: middle;
+	min-width: 40vw;
+	max-width: 60vw;
+	position: fixed;
+	bottom: 2vh;
+	z-index: 999;
+	height: fit-content;
+	opacity: 1;
+	transition: opacity 500ms;
+
+	&.translucent {
+		opacity: 0;
+		z-index: -100 !important;
+	}
+
+	&.Blue {
+		background-color: var(--lightBlue);
+		color: var(--black);
+		border: 2px solid var(--darkBlue);
+	}
+
+	&.Green {
+		background-color: var(--green);
+		color: var(--white);
+		border: 2px solid var(--darkGreen);
+	}
+
+	&.Yellow {
+		background-color: var(--yellow);
+		color: var(--black);
+		border: 2px solid var(--darkYellow);
+	}
+
+	&.Red {
+		background-color: var(--lightRed);
+		color: var(--black);
+		border: 2px solid var(--red);
+	}
+
+	&.None {
+		background-color: var(--white);
+		color: var(--black);
+		border: 2px solid var(--black);
+	}
+
+	.banner-content {
+		flex: 0 0 75%;
+	}
+
+	@media screen and (max-width: 768px) {
+		.banner-content {
+			flex: 0 0 60%;
+		}
+	}
+}
+
+@keyframes hide-banner {
+	0% {
+		opacity: 1;
+	}
+
+	100% {
+		display: none;
+		visibility: hidden;
+		opacity: 0;
+		transform: translateY(50px)
+	}
+}
+
+.banner-hide {
+	animation-name: hide-banner;
+	animation-duration: 1000ms;
+	animation-fill-mode: forwards;
+}

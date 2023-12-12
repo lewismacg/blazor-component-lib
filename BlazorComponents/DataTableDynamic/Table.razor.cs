@@ -17,169 +17,99 @@ using System.Threading.Tasks;
 
 namespace BlazorComponents
 {
-	/// <summary>
-	/// NOTE: I am not the creator of this component, nor any of the content within this folder.
-	/// See github.com/IvanJosipovic/BlazorTable for original repo.
-	/// </summary>
-	/// <typeparam name="TableItem"></typeparam>
 	public partial class Table<TableItem> : ComponentBase, ITable<TableItem>
 	{
+		#region Parameters
+
+		[Parameter] public bool ShowSearchBar { get; set; }
+		[Parameter] public bool ShowFooter { get; set; }
+		[Parameter] public string SearchPlaceholder { get; set; }
+		[Parameter] public bool ShowChildContentAtTop { get; set; }
+		[Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> UnknownParameters { get; set; }
+		[Parameter] public string TableClass { get; set; } = "table data-table striped table-hover table-sm";
+		[Parameter] public string TableHeadClass { get; set; } = "";
+		[Parameter] public string TableBodyClass { get; set; } = "";
+		[Parameter] public string TableFooterClass { get; set; } = "text-black bg-grey";
+		[Parameter] public Func<TableItem, string> TableRowClass { get; set; }
+		[Parameter] public int PageSize { private get; set; } = DEFAULT_PAGE_SIZE;
+		[Parameter] public bool ColumnReorder { get; set; }
+		[Parameter] public RenderFragment ChildContent { get; set; }
+		[Parameter] public RenderFragment HeaderChildContent { get; set; }
+		[Parameter] public IQueryable<TableItem> ItemsQueryable { get; set; }
+		[Parameter] public IEnumerable<TableItem> Items { get; set; }
+		[Parameter] public IDataLoader<TableItem> DataLoader { get; set; }
+		[Parameter] public string GlobalSearch { get; set; }
+		[Parameter] public string ClassWrapperOverride { get; set; } = string.Empty;
+		[Parameter] public bool AllowExport { get; set; }
+		[Parameter] public bool AllowTopHorizontalScroll { get; set; }
+		[Parameter] public bool ExportAtTop { get; set; }
+		[Parameter] public string CsvTitleText { get; set; } = "SearchResults.csv";
+		[Parameter] public bool AllowXScroll { get; set; }
+		[Parameter] public EventCallback<List<string>> CustomDownloadMethodCallback { get; set; }
+		[Parameter] public List<TableItem> SelectedItems { get; set; } = new();
+		[Parameter] public Action<TableItem> RowClickAction { get; set; }
+		/// <summary>
+		/// Select Type: None, Single or Multiple
+		/// </summary>
+		[Parameter]
+		public SelectionType SelectionType
+		{
+			get => _selectionType;
+			set
+			{
+				_selectionType = value;
+				if (_selectionType == SelectionType.None) SelectedItems.Clear();
+				else if (_selectionType == SelectionType.Single && SelectedItems.Count > 1) SelectedItems.RemoveRange(1, SelectedItems.Count - 1);
+
+				StateHasChanged();
+			}
+		}
+
+		#endregion
+
+		#region Dependencies
+
+		[Inject] protected IJSRuntime JsRuntime { get; set; }
+		[Inject] protected IBlazorDownloadFileService BlazorDownloadFileService { get; set; }
+		[Inject] private ILogger<ITable<TableItem>> Logger { get; set; }
+
+		#endregion
+
+		#region Properties and Fields
+
+		private int _pageSize;
 		private const int DEFAULT_PAGE_SIZE = 10;
-
-		[Inject]
-		protected IJSRuntime JsRuntime { get; set; }
-
-		[Inject]
-		protected IBlazorDownloadFileService BlazorDownloadFileService { get; set; }
-
-		[Parameter]
-		public bool ShowSearchBar { get; set; }
-
-		[Parameter]
-		public bool ShowFooter { get; set; }
-
-		[Parameter]
-		public string SearchPlaceholder { get; set; }
-
-		[Parameter]
-		public bool ShowChildContentAtTop { get; set; }
-
-		[Parameter(CaptureUnmatchedValues = true)]
-		public IReadOnlyDictionary<string, object> UnknownParameters { get; set; }
-
-		/// <summary>
-		/// Table CSS Class (Defaults to Bootstrap 4)
-		/// </summary>
-		[Parameter]
-		public string TableClass { get; set; } = "table data-table striped table-hover table-sm";
-
-		/// <summary>
-		/// Table Head Class (Defaults to Bootstrap 4)
-		/// </summary>
-		[Parameter]
-		public string TableHeadClass { get; set; } = "";
-
-		/// <summary>
-		/// Table Body Class
-		/// </summary>
-		[Parameter]
-		public string TableBodyClass { get; set; } = "";
-
-		/// <summary>
-		/// Table Footer Class
-		/// </summary>
-		[Parameter]
-		public string TableFooterClass { get; set; } = "text-black bg-grey";
-
-		/// <summary>
-		/// Expression to set Row Class
-		/// </summary>
-		[Parameter]
-		public Func<TableItem, string> TableRowClass { get; set; }
-
-		/// <summary>
-		/// Page Size, defaults to 15
-		/// </summary>
-		[Parameter]
-		public int PageSize { get; set; } = DEFAULT_PAGE_SIZE;
-
-		/// <summary>
-		/// Allow Columns to be reordered
-		/// </summary>
-		[Parameter]
-		public bool ColumnReorder { get; set; }
-
-		[Parameter]
-		public RenderFragment ChildContent { get; set; }
-
-		/// <summary>
-		/// IQueryable data source to display in the table
-		/// </summary>
-		[Parameter]
-		public IQueryable<TableItem> ItemsQueryable { get; set; }
-
-		/// <summary>
-		/// Collection to display in the table
-		/// </summary>
-		[Parameter]
-		public IEnumerable<TableItem> Items { get; set; }
-
-		/// <summary>
-		/// Service to use to query data server side
-		/// </summary>
-		[Parameter]
-		public IDataLoader<TableItem> DataLoader { get; set; }
-
-		/// <summary>
-		/// Search all columns for the specified string, supports spaces as a delimiter
-		/// </summary>
-		[Parameter]
-		public string GlobalSearch { get; set; }
-
-		[Parameter]
-		public string ClassWrapperOverride { get; set; } = string.Empty;
-
-		[Parameter]
-		public bool AllowExport { get; set; }
-
-		[Parameter]
-		public bool ExportAtTop { get; set; }
-
-		[Parameter]
-		public string CsvTitleText { get; set; } = "SearchResults.csv";
-
-		[Parameter]
-		public EventCallback<List<string>> CustomDownloadMethodCallback { get; set; }
-
-		[Inject]
-		private ILogger<ITable<TableItem>> Logger { get; set; }
-
-		/// <summary>
-		/// Ref to visibility menu icon for popover display
-		/// </summary>
-		private ElementReference VisibilityMenuIconRef { get; set; }
-
-		/// <summary>
-		/// True if visibility menu is open otherwise false
-		/// </summary>
 		private bool VisibilityMenuOpen { get; set; }
-
-		/// <summary>
-		/// Collection of filtered items
-		/// </summary>
 		public IEnumerable<TableItem> FilteredItems { get; private set; }
-
-		/// <summary>
-		/// List of All Available Columns
-		/// </summary>
-		public List<IColumn<TableItem>> Columns { get; } = new List<IColumn<TableItem>>();
-
-		/// <summary>
-		/// Current Page Number
-		/// </summary>
+		public List<IColumn<TableItem>> Columns { get; } = new();
 		public int PageNumber { get; private set; }
-
-		/// <summary>
-		/// Total Count of Items
-		/// </summary>
 		public int TotalCount { get; private set; }
-
-		/// <summary>
-		/// Is Table in Edit mode
-		/// </summary>
 		public bool IsEditMode { get; private set; }
-
 		private bool DetailViewAvailable { get; set; }
+		public int TotalPages => _pageSize <= 0 ? 1 : (TotalCount + _pageSize - 1) / _pageSize;
+		private List<CustomRow<TableItem>> CustomRows { get; set; } = new();
+		private string TableId { get; set; } = Guid.NewGuid().ToString();
+		private ElementReference ColumnMenuVisibilityRef { get; set; }
+		private Dictionary<int, bool> detailsViewOpen = new();
+		private IColumn<TableItem> DragSource;
+		private DetailTemplate<TableItem> _detailTemplate;
+		private SelectionType _selectionType;
+		private RenderFragment _emptyDataTemplate;
+		private RenderFragment _loadingDataTemplate;
 
-		/// <summary>
-		/// Total Pages
-		/// </summary>
-		public int TotalPages => PageSize <= 0 ? 1 : (TotalCount + PageSize - 1) / PageSize;
+		#endregion
 
-		/// <summary>
-		/// Custom Rows
-		/// </summary>
-		private List<CustomRow<TableItem>> CustomRows { get; set; } = new List<CustomRow<TableItem>>();
+		#region Methods
+
+		protected override void OnInitialized()
+		{
+			_pageSize = PageSize; // Needed for persistence over StateHasChanged events from parent components, prevents reset of pagination
+		}
+
+		protected override async Task OnAfterRenderAsync(bool firstRender)
+		{
+			if (firstRender && AllowTopHorizontalScroll) await JsRuntime.InvokeVoidAsync("DraggableElement.createTopTableScrollbar", TableId, $"leftScrollButton-{TableId}", $"rightScrollButton-{TableId}");
+		}
 
 		protected override async Task OnParametersSetAsync()
 		{
@@ -221,40 +151,26 @@ namespace BlazorComponents
 
 			if (sortColumn != null)
 			{
-				ItemsQueryable = sortColumn.SortDescending ?
-					ItemsQueryable.OrderByDescending(sortColumn.Field) :
-					ItemsQueryable.OrderBy(sortColumn.Field);
+				ItemsQueryable = sortColumn.SortDescending ? ItemsQueryable.OrderByDescending(sortColumn.Field) : ItemsQueryable.OrderBy(sortColumn.Field);
 			}
 
 			// if the current page is filtered out, we should go back to a page that exists
-			if (PageNumber > TotalPages)
+			if (PageNumber >= TotalPages)
 			{
 				PageNumber = TotalPages - 1;
 			}
 
 			// if PageSize is zero, we return all rows and no paging
-			return PageSize <= 0 ? ItemsQueryable.ToList() : ItemsQueryable.Skip(PageNumber * PageSize).Take(PageSize).ToList();
+			return _pageSize <= 0 ? ItemsQueryable.ToList() : ItemsQueryable.Skip(PageNumber * _pageSize).Take(_pageSize).ToList();
 		}
 
-		private Dictionary<int, bool> detailsViewOpen = new Dictionary<int, bool>();
-
-		/// <summary>
-		/// Open/Close detail view in specified row.
-		/// </summary>
-		/// <param name="row">number of row to toggle detail view</param>
-		/// <param name="open">true for openening detail view, false for closing detail view</param>
 		public void ToggleDetailView(int row, bool open)
 		{
-			if (!detailsViewOpen.ContainsKey(row))
-				throw new KeyNotFoundException("Specified row could not be found in the currently rendered part of the table.");
+			if (!detailsViewOpen.ContainsKey(row)) throw new KeyNotFoundException("Specified row could not be found in the currently rendered part of the table.");
 
 			detailsViewOpen[row] = open;
 		}
 
-		/// <summary>
-		/// Open/Close all detail views.
-		/// </summary>
-		/// <param name="open">true for openening detail view, false for closing detail view</param>
 		public void ToggleAllDetailsView(bool open)
 		{
 			int[] rows = new int[detailsViewOpen.Keys.Count];
@@ -265,9 +181,6 @@ namespace BlazorComponents
 			}
 		}
 
-		/// <summary>
-		/// Gets Data and redraws the Table
-		/// </summary>
 		public async Task UpdateAsync()
 		{
 			await LoadServerSideDataAsync().ConfigureAwait(false);
@@ -291,8 +204,8 @@ namespace BlazorComponents
 
 				var result = await DataLoader.LoadDataAsync(new FilterData
 				{
-					Top = PageSize,
-					Skip = PageNumber * PageSize,
+					Top = _pageSize,
+					Skip = PageNumber * _pageSize,
 					Query = GlobalSearch,
 					OrderBy = sortExpression.ToString()
 				}).ConfigureAwait(false);
@@ -301,10 +214,6 @@ namespace BlazorComponents
 			}
 		}
 
-		/// <summary>
-		/// Adds a Column to the Table
-		/// </summary>
-		/// <param name="column"></param>
 		public void AddColumn(IColumn<TableItem> column)
 		{
 			column.Table = this;
@@ -318,19 +227,12 @@ namespace BlazorComponents
 			Refresh();
 		}
 
-		/// <summary>
-		/// Removes a Column from the Table
-		/// </summary>
-		/// <param name="column"></param>
 		public void RemoveColumn(IColumn<TableItem> column)
 		{
 			Columns.Remove(column);
 			Refresh();
 		}
 
-		/// <summary>
-		/// Go to First Page
-		/// </summary>
 		public async Task FirstPageAsync()
 		{
 			if (PageNumber != 0)
@@ -341,9 +243,6 @@ namespace BlazorComponents
 			}
 		}
 
-		/// <summary>
-		/// Go to Next Page
-		/// </summary>
 		public async Task NextPageAsync()
 		{
 			if (PageNumber + 1 < TotalPages)
@@ -354,9 +253,6 @@ namespace BlazorComponents
 			}
 		}
 
-		/// <summary>
-		/// Go to Previous Page
-		/// </summary>
 		public async Task PreviousPageAsync()
 		{
 			if (PageNumber > 0)
@@ -367,9 +263,6 @@ namespace BlazorComponents
 			}
 		}
 
-		/// <summary>
-		/// Go to Last Page
-		/// </summary>
 		public async Task LastPageAsync()
 		{
 			PageNumber = TotalPages - 1;
@@ -377,41 +270,22 @@ namespace BlazorComponents
 			await UpdateAsync().ConfigureAwait(false);
 		}
 
-		/// <summary>
-		/// Redraws the Table using EditTemplate instead of Template
-		/// </summary>
 		public void ToggleEditMode()
 		{
 			IsEditMode = !IsEditMode;
 			StateHasChanged();
 		}
 
-		/// <summary>
-		/// Redraws Table without Getting Data
-		/// </summary>
 		public void Refresh()
 		{
 			InvokeAsync(StateHasChanged);
 		}
 
-		/// <summary>
-		/// Save currently dragged column
-		/// </summary>
-		private IColumn<TableItem> DragSource;
-
-		/// <summary>
-		/// Handles the Column Reorder Drag Start and set DragSource
-		/// </summary>
-		/// <param name="column"></param>
 		private void HandleDragStart(IColumn<TableItem> column)
 		{
 			DragSource = column;
 		}
 
-		/// <summary>
-		/// Handles Drag Drop and inserts DragSource column before itself
-		/// </summary>
-		/// <param name="column"></param>
 		private void HandleDrop(IColumn<TableItem> column)
 		{
 			if (DragSource != null)
@@ -426,90 +300,33 @@ namespace BlazorComponents
 			}
 		}
 
-		/// <summary>
-		/// Return row class for item if expression is specified
-		/// </summary>
-		/// <param name="item">TableItem to return for</param>
-		/// <returns></returns>
 		private string RowClass(TableItem item)
 		{
 			return TableRowClass?.Invoke(item);
 		}
 
-		/// <summary>
-		/// Set the template to use for empty data
-		/// </summary>
-		/// <param name="emptyDataTemplate"></param>
+		protected void MakeColumnVisible(IColumn<TableItem> column)
+		{
+			column.Visible = true;
+			if (Columns.All(x => x.Visible)) VisibilityMenuOpen = false;
+		}
+
 		public void SetEmptyDataTemplate(EmptyDataTemplate emptyDataTemplate)
 		{
 			_emptyDataTemplate = emptyDataTemplate?.ChildContent;
 		}
 
-		private RenderFragment _emptyDataTemplate;
-
-		/// <summary>
-		/// Set the template to use for loading data
-		/// </summary>
-		/// <param name="loadingDataTemplate"></param>
 		public void SetLoadingDataTemplate(LoadingDataTemplate loadingDataTemplate)
 		{
 			_loadingDataTemplate = loadingDataTemplate?.ChildContent;
 		}
 
-		private RenderFragment _loadingDataTemplate;
-
-		/// <summary>
-		/// Set the template to use for detail
-		/// </summary>
-		/// <param name="detailTemplate"></param>
 		public void SetDetailTemplate(DetailTemplate<TableItem> detailTemplate)
 		{
 			_detailTemplate = detailTemplate;
 			DetailViewAvailable = Items.Any(x => detailTemplate.ShowDetailView.Compile().Invoke(x));
 		}
 
-		private DetailTemplate<TableItem> _detailTemplate;
-
-		private SelectionType _selectionType;
-
-		/// <summary>
-		/// Select Type: None, Single or Multiple
-		/// </summary>
-		[Parameter]
-		public SelectionType SelectionType
-		{
-			get { return _selectionType; }
-			set
-			{
-				_selectionType = value;
-				if (_selectionType == SelectionType.None)
-				{
-					SelectedItems.Clear();
-				}
-				else if (_selectionType == SelectionType.Single && SelectedItems.Count > 1)
-				{
-					SelectedItems.RemoveRange(1, SelectedItems.Count - 1);
-				}
-				StateHasChanged();
-			}
-		}
-
-		/// <summary>
-		/// Contains Selected Items
-		/// </summary>
-		[Parameter]
-		public List<TableItem> SelectedItems { get; set; } = new List<TableItem>();
-
-		/// <summary>
-		/// Action performed when the row is clicked.
-		/// </summary>
-		[Parameter]
-		public Action<TableItem> RowClickAction { get; set; }
-
-		/// <summary>
-		/// Handles the onclick action for table rows.
-		/// This allows the RowClickAction to be optional.
-		/// </summary>
 		private void OnRowClickHandler(TableItem tableItem)
 		{
 			try
@@ -538,10 +355,6 @@ namespace BlazorComponents
 			}
 		}
 
-		/// <summary>
-		/// Add custom row to current table
-		/// </summary>
-		/// <param name="customRow">custom row to add</param>
 		public void AddCustomRow(CustomRow<TableItem> customRow)
 		{
 			CustomRows.Add(customRow);
@@ -583,11 +396,14 @@ namespace BlazorComponents
 			return expression;
 		}
 
-		public async Task SetPageSizeAsync(int pageSize)
+		public async Task SetPageSizeAsync(int newPageSize)
 		{
-			PageSize = pageSize;
+			PageNumber = (PageNumber * _pageSize) / newPageSize;
+			_pageSize = newPageSize;
 			await UpdateAsync().ConfigureAwait(false);
 		}
+
+		public int GetPageSize() => _pageSize;
 
 		protected void DownloadCsv()
 		{
@@ -645,5 +461,7 @@ namespace BlazorComponents
 				_ => throw new NotSupportedException(expression.NodeType.ToString())
 			};
 		}
+
+		#endregion
 	}
 }

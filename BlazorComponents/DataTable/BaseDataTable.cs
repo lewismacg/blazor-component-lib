@@ -35,15 +35,21 @@ namespace BlazorComponents
 		private string _lastItemFilter { get; set; }
 		public int CurrentPage { get; set; } = 1;
 		public List<PageSizeStruct> PageSizes { get; set; } = PageSizeStruct.DefaultPageSizes;
+		protected int _pageSize { get; set; }
 
 		#endregion
 
 		#region Methods
 
+		protected override void OnInitialized()
+		{
+			_pageSize = PageSize; // Needed for persistence over StateHasChanged events from parent components, prevents reset of pagination
+		}
+
 		public void NextPage()
 		{
-			if (PageSize <= -1) PageSize = FilteredList.Count;
-			if (CurrentPage * PageSize >= FilteredList.Count) return;
+			if (_pageSize <= -1) _pageSize = FilteredList.Count;
+			if (CurrentPage * _pageSize >= FilteredList.Count) return;
 
 			CurrentPage++;
 		}
@@ -62,21 +68,21 @@ namespace BlazorComponents
 
 		public void GotoLastPage()
 		{
-			CurrentPage = FilteredList.Count / PageSize;
+			CurrentPage = FilteredList.Count / _pageSize;
 
-			if (FilteredList.Count > CurrentPage * PageSize) CurrentPage++;
+			if (FilteredList.Count > CurrentPage * _pageSize) CurrentPage++;
 		}
 
 		public string GetPageItemCountString()
 		{
-			var start = ((CurrentPage - 1) * PageSize);
-			if (PageSize < 0)
+			var start = ((CurrentPage - 1) * _pageSize);
+			if (_pageSize < 0)
 			{
 				start = 0;
-				PageSize = FilteredList.Count;
+				_pageSize = FilteredList.Count;
 			}
 
-			var end = start + PageSize;
+			var end = start + _pageSize;
 			if (end > FilteredList.Count) end = FilteredList.Count;
 
 			return $"{start + 1}-{end} of {FilteredList.Count}";
@@ -89,7 +95,7 @@ namespace BlazorComponents
 
 			if (ShowPaging)
 			{
-				result.AddRange(filtered.Skip((CurrentPage - 1) * PageSize).Take(PageSize));
+				result.AddRange(filtered.Skip((CurrentPage - 1) * _pageSize).Take(_pageSize));
 			}
 			else
 			{
@@ -131,7 +137,7 @@ namespace BlazorComponents
 				CurrentPage = 1;
 			}
 
-			PageSize = newPageSize;
+			_pageSize = newPageSize;
 			StateHasChanged();
 		}
 

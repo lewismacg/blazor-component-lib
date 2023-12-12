@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BlazorComponents
@@ -41,6 +42,14 @@ namespace BlazorComponents
         /// </summary>
         [Parameter]
         public bool ShowPageSizes { get; set; }
+
+        protected override void OnInitialized()
+        {
+            if (Table != null && PageSizes.All(x => x.Size != Table.GetPageSize()))
+            {
+                PageSizes.Add(new PageSizeStruct(Table.GetPageSize(), Table.GetPageSize().ToString()));
+            }
+        }
 
         private async Task SetPageSizeAsync(ChangeEventArgs args)
         {

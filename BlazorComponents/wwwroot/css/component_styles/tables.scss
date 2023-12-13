@@ -14,19 +14,19 @@
 		}
 	}
 
-	table {
-		&.table-scroll {
-			overflow-x: auto;
-			overflow-y: hidden;
-		}
+	.table-scroll {
+		overflow-x: auto;
+		overflow-y: hidden;
+	}
 
+	table {
 		&.data-table {
 			width: 100%;
 			max-width: 100%;
 			background-color: transparent;
 			border-collapse: collapse;
 			border-spacing: 0;
-			display: inline-block;
+			display: inline-table;
 
 
 			thead {

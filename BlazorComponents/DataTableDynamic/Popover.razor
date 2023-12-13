@@ -1,7 +1,12 @@
 ﻿@namespace BlazorComponents
 
-<div @attributes="@UnknownParameters" id="@Id" class="popover show" role="tooltip" @onclick:stopPropagation>
+<div @attributes="@UnknownParameters" id="@Id" class="popover-wrapper show" role="tooltip" @onclick:stopPropagation>
 	<div class="arrow" data-popper-arrow></div>
-	@ChildContent
-	<div class="popover-footer"></div>
+	@if (HasRendered)
+	{
+		<div class="popover">
+			@ChildContent
+			<div class="popover-footer"></div>
+		</div>
+	}
 </div>

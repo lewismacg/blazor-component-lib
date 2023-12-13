@@ -1,4 +1,4 @@
-﻿.popover {
+﻿.popover-wrapper {
 	position: absolute;
 	z-index: 1060;
 	display: block;
@@ -22,14 +22,17 @@
 	word-wrap: break-word;
 	background-color: var(--white);
 	background-clip: padding-box;
-	border: 1px solid #{'rgba(var(--blackRgb), 0.2)'};
-	border-radius: 0.3rem;
-	margin-top: 0.5rem;
+
+	.popover {
+		border: 1px solid #{'rgba(var(--blackRgb), 0.2)'};
+		border-radius: 0.3rem;
+	}
 
 	.arrow, .arrow::before {
 		position: absolute;
 		width: 0.75rem;
 		height: 0.75rem;
+		margin-right: 0.25rem;
 		background: var(--greyLightest);
 	}
 

@@ -26,6 +26,10 @@ namespace BlazorComponents
 		#region Properties and Fields
 
 		private string Id { get; set; } = Guid.NewGuid().ToString();
+		/// <summary>
+		/// Boolean required to prevent jitter where the popover appears and is later repositioned by popper.js.
+		/// </summary>
+		public bool HasRendered { get; set; }
 
 		#endregion
 
@@ -33,7 +37,12 @@ namespace BlazorComponents
 
 		protected override async Task OnAfterRenderAsync(bool firstRender)
 		{
-			if (firstRender) await JsRuntime.InvokeVoidAsync("Popover.createPopover", Origin, Id, Placement);
+			if (firstRender)
+			{
+				await JsRuntime.InvokeVoidAsync("Popover.createPopover", Origin, Id, Placement);
+				HasRendered = true;
+				StateHasChanged();
+			}
 		}
 
 		#endregion

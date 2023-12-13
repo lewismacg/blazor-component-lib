@@ -8404,7 +8404,7 @@ footer .footer-curve svg {
   padding: 0.75rem;
 }
 
-.popover {
+.popover-wrapper {
   position: absolute;
   z-index: 1060;
   display: block;
@@ -8428,20 +8428,22 @@ footer .footer-curve svg {
   word-wrap: break-word;
   background-color: var(--white);
   background-clip: padding-box;
+}
+.popover-wrapper .popover {
   border: 1px solid rgba(var(--blackRgb), 0.2);
   border-radius: 0.3rem;
-  margin-top: 0.5rem;
 }
-.popover .arrow, .popover .arrow::before {
+.popover-wrapper .arrow, .popover-wrapper .arrow::before {
   position: absolute;
   width: 0.75rem;
   height: 0.75rem;
+  margin-right: 0.25rem;
   background: var(--greyLightest);
 }
-.popover .arrow {
+.popover-wrapper .arrow {
   visibility: hidden;
 }
-.popover .arrow::before {
+.popover-wrapper .arrow::before {
   visibility: visible;
   content: "";
   transform: rotate(45deg);
@@ -8646,7 +8648,7 @@ footer .footer-curve svg {
   z-index: 500;
   top: 0em;
 }
-.data-table-wrapper table.table-scroll {
+.data-table-wrapper .table-scroll {
   overflow-x: auto;
   overflow-y: hidden;
 }
@@ -8656,7 +8658,7 @@ footer .footer-curve svg {
   background-color: transparent;
   border-collapse: collapse;
   border-spacing: 0;
-  display: inline-block;
+  display: inline-table;
 }
 .data-table-wrapper table.data-table thead {
   display: table-header-group;

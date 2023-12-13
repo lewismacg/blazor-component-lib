@@ -88,7 +88,7 @@ namespace BlazorComponents
 		private bool DetailViewAvailable { get; set; }
 		public int TotalPages => _pageSize <= 0 ? 1 : (TotalCount + _pageSize - 1) / _pageSize;
 		private List<CustomRow<TableItem>> CustomRows { get; set; } = new();
-		private string TableId { get; set; } = Guid.NewGuid().ToString();
+		private string ScrollableId { get; set; } = Guid.NewGuid().ToString();
 		private ElementReference ColumnMenuVisibilityRef { get; set; }
 		private Dictionary<int, bool> detailsViewOpen = new();
 		private IColumn<TableItem> DragSource;
@@ -108,7 +108,7 @@ namespace BlazorComponents
 
 		protected override async Task OnAfterRenderAsync(bool firstRender)
 		{
-			if (firstRender && AllowTopHorizontalScroll) await JsRuntime.InvokeVoidAsync("DraggableElement.createTopTableScrollbar", TableId, $"leftScrollButton-{TableId}", $"rightScrollButton-{TableId}");
+			if (firstRender && AllowTopHorizontalScroll) await JsRuntime.InvokeVoidAsync("DraggableElement.createTopTableScrollbar", ScrollableId, $"leftScrollButton-{ScrollableId}", $"rightScrollButton-{ScrollableId}");
 		}
 
 		protected override async Task OnParametersSetAsync()

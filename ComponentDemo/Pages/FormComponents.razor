@@ -226,105 +226,18 @@
 				</select>
 			</div>
 			<div class="form-group form-row">
+				<label for="exampleFormControlSelect1">Categorised Select</label>
+				<CategorisedSelect @bind-Value="BoundCategorisedSelectModelValue" CategoryFunction="@(x => x.NotificationType)" DisplayTextFunction="@(x => x.Value)"
+								   Options="CategorisedSelectDemoModel" BoundValueEqualityComparisonFunction="@(x => x.Value == BoundCategorisedSelectModelValue.Value &&
+				                                                                                                     x.NotificationType == BoundCategorisedSelectModelValue.NotificationType)" />
+
+				<small><b>Debug -- @BoundCategorisedSelectModelValue.NotificationType: @BoundCategorisedSelectModelValue.Value</b></small>
+			</div>
+			<div class="form-group form-row">
 				<div class="custom-control custom-switch">
 					<input type="checkbox" class="custom-control-input" id="3433" />
 					<label class="custom-control-label" for="3433"> Edit</label>
 				</div>
-			</div>
-		</div>
-	</div>
-	<hr />
-	<div class="row">
-		<div class="col-sm-12">
-			<h5>Typography</h5>
-		</div>
-		<div class="col-sm-12">
-			<p>This is regular text in a P tag</p>
-			<b>This is bolded text in a B tag</b><br />
-			<i>This is italicised text in an I tag</i><br />
-			<strong>This is strong text in a strong tag</strong><br />
-			<b><i>This is italicised bold text in a B and I tag</i></b><br />
-			<h1>This is an H1</h1><br />
-			<h2>This is an H2</h2><br />
-			<h3>This is an H3</h3><br />
-			<h4>This is an H4</h4><br />
-			<h5>This is an H5</h5><br />
-		</div>
-	</div>
-	<hr />
-	<div class="row">
-		<div class="col-sm-12">
-			<h5>Alerts and Badges</h5>
-		</div>
-		<div class="col-sm-12">
-			<div class="alert alert-green">
-				<h4>Success!</h4>
-				<p>This is a success alert <a href='#'>with a link</a></p>
-			</div>
-			<div class="alert alert-lightblue">
-				<h4>Info!</h4>
-				<p>This is an info alert <a href='#'>with a link</a></p>
-			</div>
-			<div class="alert alert-yellow">
-				<h4>Warning!</h4>
-				<p>This is a warning alert <a href='#'>with a link</a></p>
-			</div>
-			<div class="alert alert-red">
-				<h4>Danger!</h4>
-				<p>This is a danger alert <a href='#'>with a link</a></p>
-			</div>
-			<div class="badge badge-pill badge-blue">
-				Primary badge
-			</div>
-			<div class="badge badge-pill badge-yellow">
-				Secondary badge
-			</div>
-			<div class="badge badge-pill badge-green">
-				Success badge
-			</div>
-			<div class="badge badge-pill badge-lightblue">
-				Info badge
-			</div>
-			<div class="badge badge-pill badge-red">
-				Danger badge
-			</div>
-		</div>
-	</div>
-	<hr />
-	<div class="row pt-5">
-		<div class="col-sm-12">
-			<h5>Cards</h5>
-		</div>
-		<div class="col-sm-12">
-			<div class="card-group">
-				<div class="card">
-					<div class="card-header">
-						<b>Header</b>
-					</div>
-					<div class="card-body">
-						<b>Title</b>
-						<p class="card-text">Some supporting text</p>
-						<a href='#' class="btn btn-blue">Go Somewhere</a>
-					</div>
-					<div class="card-footer">Footer of the card</div>
-				</div>
-				<Card>
-					<CardHeader>Card title</CardHeader>
-					<CardBody>
-						<h5 class="card-title">Card title</h5>
-						<p class="card-text">This is a <Highlighter Type="NotificationType.Blue">wider card</Highlighter> with supporting text below as a natural lead-in to <Highlighter Type="NotificationType.Red">additional content</Highlighter>. This content is a little bit longer.</p>
-						<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-					</CardBody>
-				</Card>
-
-				<Card ClassOverride="p-5">
-					<CardHeader ClassOverride="text-uppercase">Card title</CardHeader>
-					<CardBody ClassOverride="bg-yellow">
-						<h5 class="card-title">Card title</h5>
-						<p class="card-text">This is a card with ClassOverrides p-5 on Card, text-uppercase on CardHeader and bg-yellow on CardBody.</p>
-						<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-					</CardBody>
-				</Card>
 			</div>
 		</div>
 	</div>
@@ -336,6 +249,19 @@
 	public TestModel Model { get; set; } = new();
 	public List<DateTime> Options { get; set; } = new() {DateTime.Now, DateTime.Today.AddDays(-3), DateTime.Today.AddDays(-3).AddMonths(-5)};
 	public List<DateTime> SelectedValues = new();
+	public CategorisedSelectModel BoundCategorisedSelectModelValue { get; set; } = new CategorisedSelectModel(NotificationType.Blue, "Blue");
+
+	public List<CategorisedSelectModel> CategorisedSelectDemoModel { get; set; } = new()
+	{
+		new(NotificationType.Red, "Red"),
+		new(NotificationType.Red,  "Scarlet"),
+		new(NotificationType.Red, "Ruby"),
+		new(NotificationType.Yellow, "Yellow"),
+		new(NotificationType.Green, "Green"),
+		new(NotificationType.None, "White" ),
+		new(NotificationType.None, "Blanc" ),
+		new(NotificationType.None, "Shiro" )
+	};
 
 	public void Validate()
 	{

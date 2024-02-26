@@ -1,0 +1,14 @@
+﻿@namespace BlazorComponents
+
+<div class="border p-2 @(Acknowledged ? string.Empty :"unread")">
+	<div class="d-flex justify-content-between mb-1" @onmouseover="@(() => Acknowledged = true)">
+		<strong>@Title</strong>
+		<svg class="bd-placeholder-img rounded @FillClass" width="20" height="20" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%"></rect></svg>
+	</div>
+	<div class="text-muted mb-2" style="font-size: 0.875rem">
+		@Text
+	</div>
+	<div style="font-size: 0.75rem">
+		@Footer
+	</div>
+</div>

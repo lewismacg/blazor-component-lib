@@ -843,3 +843,18 @@ fieldset {
 		}
 	}
 }
+
+select {
+	.bold {
+		font-family: 'Lato-Bold';
+	}
+
+	optgroup {
+		background-color: var(--lightBlue);
+
+		> option {
+			font-family: 'Lato-Regular';
+			background-color: var(--white);
+		}
+	}
+}

@@ -6,7 +6,7 @@
 }
 else
 {
-	<div class="loading-wrapper" style="min-height: @(MinWrapperHeight)px">
+	<div class="loading-wrapper" @attributes="@AdditionalAttributes">
 		<div class="flex-row d-flex">
 			<LoadingSpinner Width="Width" Height="Height" Colour="@Colour" />
 		</div>
@@ -15,21 +15,16 @@ else
 
 @code {
 	[Parameter] public Func<bool> Condition { get; set; }
-	[Parameter] public double Width { get; set; } = 4;
-	[Parameter] public double Height { get; set; } = 4;
-	[Parameter] public string Colour { get; set; } = "var(--blue)";
-
+	[Parameter] public double Width { get; set; } = 3;
+	[Parameter] public double Height { get; set; } = 3;
+	[Parameter] public string Colour { get; set; } = "var(--primaryRed)";
 	[Parameter] public RenderFragment ChildContent { get; set; }
-
-	private decimal MinWrapperHeight { get; set; }
+	[Parameter(CaptureUnmatchedValues = true)] public IReadOnlyDictionary<string, object> AdditionalAttributes { get; set; }
 
 	protected override void OnInitialized()
 	{
 		base.OnInitialized();
 
 		if (Condition == null) throw new InvalidOperationException("Condition must be set when using a conditional wrapper");
-
-		// Calculated by working out the size of square containing around the circle (the spinner) using pythagoras theorem
-		MinWrapperHeight = Math.Round((decimal)(Math.Sqrt(Math.Pow(Width / 2, 2) * 2) * 2), 3, MidpointRounding.AwayFromZero);
 	}
 }

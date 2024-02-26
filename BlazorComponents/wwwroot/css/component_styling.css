@@ -6621,6 +6621,17 @@ fieldset {
   background-color: var(--greyLightest);
 }
 
+select .bold {
+  font-family: "Lato-Bold";
+}
+select optgroup {
+  background-color: var(--lightBlue);
+}
+select optgroup > option {
+  font-family: "Lato-Regular";
+  background-color: var(--white);
+}
+
 *,
 *::before,
 *::after {
@@ -8342,6 +8353,35 @@ footer .footer-curve svg {
   min-height: 4.5em;
 }
 
+#nav-logo {
+  margin-bottom: auto;
+  margin-top: auto;
+  width: 45%;
+  padding-left: 0.5rem;
+}
+
+#nav-search {
+  margin-bottom: auto;
+  margin-top: auto;
+  flex-grow: 1;
+}
+
+#nav-dropdowns {
+  margin-bottom: auto;
+  margin-top: auto;
+  padding-left: 2rem;
+  padding-right: 3rem;
+}
+
+@media (max-width: 768px) {
+  #nav-logo {
+    width: 15%;
+  }
+  #nav-dropdowns {
+    padding-left: 1rem;
+    padding-right: 0.5rem;
+  }
+}
 .main-content {
   flex-grow: 1;
   overflow-x: hidden;
@@ -8402,6 +8442,23 @@ footer .footer-curve svg {
 
 .toast-body {
   padding: 0.75rem;
+}
+
+.notification-widget {
+  width: 250px;
+  cursor: default;
+  max-height: 500px;
+  overflow-y: auto;
+}
+.notification-widget button {
+  background-color: var(--greyLightest);
+  color: var(--black);
+}
+.notification-widget button:hover {
+  text-decoration: underline;
+}
+.notification-widget > .unread {
+  border-left: 5px solid var(--lightBlue) !important;
 }
 
 .popover-wrapper {
@@ -8677,7 +8734,6 @@ footer .footer-curve svg {
 .data-table-wrapper table.data-table th {
   padding: 0 16px;
   height: 56px;
-  width: 1%;
 }
 .data-table-wrapper table.data-table td {
   padding: 0 16px;

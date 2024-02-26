@@ -14,6 +14,22 @@
 				</div>
 			</div>
 		</SearchBar>
+		<NotificationMenu>
+			<div class="dropdown-wrapper" @onmouseover="() => NotificationsActive = true" @onmouseleave="OnNotificationsMouseLeave">
+				<Icon IsLarge="true">notifications</Icon>
+				@if (NotificationsActive)
+				{
+					<div class="dropdown-content">
+						<NotificationsWidget OnViewAllCallback="@(() => Console.WriteLine("View all!"))">
+							@foreach (var notification in Notifications)
+							{
+								<NotificationSegment Title="@notification.Title" Text="@notification.Body" Footer="@GetFormattedTimespanSince(notification.Time)" FillClass="@GetFillColourForNotificationType(notification.Level)" IsUnread="true" />
+							}
+						</NotificationsWidget>
+					</div>
+				}
+			</div>
+		</NotificationMenu>
 		<DropdownMenu>
 			<div class="dropdown-wrapper">
 				<Icon IsLarge="true">menu</Icon>
@@ -52,10 +68,46 @@
 {
 	public string Theme { get; set; }
 	public string Class { get; set; }
+	public bool NotificationsActive { get; set; }
+
+	protected List<ToastModel> Notifications { get; set; } = new() { new() { Title = "Notification 1", Body = "Here is my first notification", Level = (NotificationType)new Random().Next(0, 4), Time = DateTime.Now.AddDays(-4) }, new() { Title = "Notification 2", Body = "Here is my OTHER notification. Oh my it is a bit long!", Level = (NotificationType)new Random().Next(0, 4), Time = DateTime.Now.AddHours(-7) } };
+
+	protected void OnNotificationsMouseLeave()
+	{
+		NotificationsActive = false;
+
+		Notifications = new()
+		{
+			new() { Title = "Notification 1", Body = "Here is my first notification", Level = (NotificationType)new Random().Next(0, 4), Time = DateTime.Now.AddDays(-4) },
+			new() { Title = "Notification 2", Body = "Here is my OTHER notification. Oh my it is a bit long!", Level = (NotificationType)new Random().Next(0, 4), Time = DateTime.Now.AddHours(-7) }
+		};
+	}
 
 	public void SetTheme(string theme)
 	{
 		Theme = theme;
 		StateHasChanged();
+	}
+
+	private string GetFormattedTimespanSince(DateTime dateTime)
+	{
+		var timeSpanSince = DateTime.Now.Subtract(dateTime);
+
+		if (timeSpanSince.Days > 0) return $"{timeSpanSince.Days} days ago.";
+		if (timeSpanSince.Hours > 0) return $"{timeSpanSince.Hours} hours ago.";
+
+		return $"{timeSpanSince.Minutes} minutes ago.";
+	}
+
+	private string GetFillColourForNotificationType(NotificationType notificationType)
+	{
+		return notificationType switch
+		{
+			NotificationType.Blue => "blue-fill",
+			NotificationType.Green => "green-fill",
+			NotificationType.Yellow => "yellow-fill",
+			NotificationType.Red => "red-fill",
+			_ => ""
+		};
 	}
 }

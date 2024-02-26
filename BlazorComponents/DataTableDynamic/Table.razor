@@ -102,7 +102,7 @@
 					{
 						@if (column.Visible)
 						{
-						<th scope="col" style="user-select: none"
+						<th scope="col" style="@(!string.IsNullOrEmpty(column.Width) ? $"width:{column.Width};" : "") user-select: none"
 				@ondrop="@(_ => HandleDrop(column))"
 				@ondragstart="@(_ => HandleDragStart(column))"
 				ondragover="event.preventDefault();"

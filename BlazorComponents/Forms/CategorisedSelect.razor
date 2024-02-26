@@ -1,0 +1,20 @@
+﻿@typeparam TObject
+@typeparam TCategory
+@typeparam TText
+@namespace BlazorComponents
+
+<select class="form-control" @attributes="AdditionalAttributes" @onchange="OnChange" value="@GetCurrentlyBoundValueKey()">
+	@if (_boundValueNotInList)
+	{
+		<option hidden selected disabled>@DisplayTextFunction.Invoke(Value)</option>
+	}
+	@foreach (var category in _categories)
+	{
+		<optgroup class="bold" label="@category">
+			@foreach (var value in GetOptionsForCategory(category))
+			{
+				<option value="@value.Key">@DisplayTextFunction.Invoke(value.Value)</option>
+			}
+		</optgroup>
+	}
+</select>

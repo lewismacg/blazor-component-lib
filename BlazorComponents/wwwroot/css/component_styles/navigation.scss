@@ -10,6 +10,37 @@
 	min-height: 4.5em;
 }
 
+#nav-logo {
+	margin-bottom: auto;
+	margin-top: auto;
+	width: 45%;
+	padding-left: 0.5rem;
+}
+
+#nav-search {
+	margin-bottom: auto;
+	margin-top: auto;
+	flex-grow: 1;
+}
+
+#nav-dropdowns {
+	margin-bottom: auto;
+	margin-top: auto;
+	padding-left: 2rem;
+	padding-right: 3rem;
+}
+
+@media (max-width: 768px) {
+	#nav-logo {
+		width: 15%;
+	}
+
+	#nav-dropdowns {
+		padding-left: 1rem;
+		padding-right: 0.5rem;
+	}
+}
+
 .main-content {
 	flex-grow: 1;
 	overflow-x: hidden;

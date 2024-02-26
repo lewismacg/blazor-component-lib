@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace BlazorComponents
 {
@@ -15,6 +16,18 @@ namespace BlazorComponents
 		{
 			var hideTimeMilliseconds = GetAutoHideMillisecondsFromToastLevel(toastLevel);
 			ToastAdded?.Invoke(new ToastModel { Title = toastTitle, Body = toastBody, Level = toastLevel, Time = toastAddedTime ?? DateTime.Now, AutoHideMilliseconds = hideTimeMilliseconds });
+		}
+
+		public async Task AddToastWithAction(Func<string, string, NotificationType, Task> action, string toastTitle, string toastBody, NotificationType toastLevel, DateTime? toastAddedTime = null)
+		{
+			AddToast(toastTitle, toastBody, toastLevel, toastAddedTime);
+			await action.Invoke(toastTitle, toastBody, toastLevel);
+		}
+
+		public async Task AddToastWithCustomMessageAction(Func<Task> action, string toastTitle, string toastBody, NotificationType toastLevel, DateTime? toastAddedTime = null)
+		{
+			AddToast(toastTitle, toastBody, toastLevel, toastAddedTime);
+			await action.Invoke();
 		}
 
 		private int GetAutoHideMillisecondsFromToastLevel(NotificationType toastLevel)

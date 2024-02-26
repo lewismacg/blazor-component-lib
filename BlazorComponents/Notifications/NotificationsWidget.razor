@@ -1,0 +1,6 @@
+﻿@namespace BlazorComponents
+
+<div class="border notification-widget">
+	@ChildContent
+	<button class="small d-block w-100 border text-center p-1" @onclick="async () => await OnViewAllCallback.InvokeAsync()">View All</button>
+</div>

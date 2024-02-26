@@ -54,3 +54,22 @@
 	padding: 0.75rem;
 }
 
+.notification-widget {
+	width: 250px;
+	cursor: default;
+	max-height: 500px;
+	overflow-y: auto;
+
+	button {
+		background-color: var(--greyLightest);
+		color: var(--black);
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	> .unread {
+		border-left: 5px solid var(--lightBlue) !important;
+	}
+}

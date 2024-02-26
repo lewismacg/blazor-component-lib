@@ -4,10 +4,11 @@
 <hr />
 
 <label>To set a custom timed toaster set a value here in milliseconds.</label>
-<input type="number" @bind="@TimedToastValue" />
+<input type="number" class="form-control form-control-sm" @bind="@TimedToastValue" />
 
 <button class="btn btn-blue" @onclick="AddToast">Add Toast</button>
-<button class="btn btn-yellow" @onclick="AddTimedToast">Add Timed Toast</button>
+<button class="btn btn-yellow" @onclick="AddToast">Add Toast</button>
+<button class="btn btn-green" @onclick="async () => await AddToastAsync()">Add Async Toast</button>
 
 <BannerWrapper>
 	<Banner NotificationType="NotificationType.Red" IsSmall="true" IsDraggable="true" DepthForDisplay="100">
@@ -45,5 +46,19 @@
 		var toastLevel = (NotificationType)levels.GetValue(new Random().Next(levels.Length));
 
 		ToasterManager.AddTimedToast("Sample Timed Toast", $"Toast: {Guid.NewGuid().ToString()}", toastLevel, DateTime.Now, TimedToastValue);
+	}
+
+	private async Task AddToastAsync()
+	{
+		var levels = Enum.GetValues(typeof(NotificationType));
+		var toastLevel = (NotificationType)levels.GetValue(new Random().Next(levels.Length));
+
+		await ToasterManager.AddToastWithAction(ToastAction, "Sample Toast With Action", $"Toast: {Guid.NewGuid().ToString()}", toastLevel, DateTime.Now);
+	}
+
+	protected Task ToastAction(string title, string body, NotificationType notificationType)
+	{
+		Console.WriteLine($"{title}, {body}, {notificationType}");
+		return Task.CompletedTask;
 	}
 }

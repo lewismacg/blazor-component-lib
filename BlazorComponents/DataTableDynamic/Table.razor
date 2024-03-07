@@ -40,7 +40,7 @@
 														<div class="float-right" @onclick="@(_ => MakeColumnVisible(column))">
 															<a href="javascript:;">
 																<span aria-hidden="true">
-																	<Icon IconColour="Colour.Black" IconName="add" />
+																	<Icon IconColour="Colour.Black">add</Icon>
 																</span>
 															</a>
 														</div>
@@ -118,11 +118,11 @@
 									{
 										if (column.SortDescending)
 										{
-										<span aria-hidden="true"><Icon IconColour="Colour.Black" IconName="arrow_upward" /></span>
+										<span aria-hidden="true"><Icon IconColour="Colour.Black">arrow_upward</Icon></span>
 										}
 										else
 										{
-										<span aria-hidden="true"><Icon IconColour="Colour.Black" IconName="arrow_downward" /></span>
+										<span aria-hidden="true"><Icon IconColour="Colour.Black">arrow_downward</Icon></span>
 										}
 									}
 
@@ -131,7 +131,7 @@
 									<div class="float-right" @onclick="@(_ => column.ToggleFilter())" @onclick:stopPropagation>
 										<a href="javascript:;" @ref="column.FilterRef" aria-expanded="@(column.FilterOpen ? "true" : "false")" style="text-decoration: none" aria-label="@(column.Filter == null ? "unfiltered" : "filtered")">
 											<span aria-hidden="true" style="@(column.Filter == null ? "opacity: 0.2;" : string.Empty)">
-												<Icon IconColour="Colour.Black" IconName="filter_list" />
+												<Icon IconColour="Colour.Black">filter_list</Icon>
 											</span>
 										</a>
 									</div>
@@ -162,7 +162,7 @@
 									{
 									<div class="float-right mr-1" @onclick="@(_ => column.Visible = false)" @onclick:stopPropagation>
 										<span aria-hidden="true">
-											<Icon IconColour="Colour.Black" IconName="remove" />
+											<Icon IconColour="Colour.Black">remove</Icon>
 										</span>
 									</div>
 									}
@@ -212,11 +212,11 @@
 													<a href="javascript:;" style="text-decoration: none" @onclick="@(() => { detailsViewOpen[locali] = !detailsViewOpen[locali]; StateHasChanged(); })" title="@(detailsViewOpen[i] ? "Close" : "Open")" aria-expanded="@(detailsViewOpen[locali] ? "true" : "false")">
 														@if (detailsViewOpen[locali])
 														{
-															<span aria-hidden="true"><Icon IconColour="Colour.Black" IconName="expand_less" /></span>
+															<span aria-hidden="true"><Icon IconColour="Colour.Black">expand_less</Icon></span>
 														}
 														else
 														{
-															<span aria-hidden="true"><Icon IconColour="Colour.Black" IconName="expand_more" /></span>
+															<span aria-hidden="true"><Icon IconColour="Colour.Black">expand_more</Icon></span>
 														}
 													</a>
 												}

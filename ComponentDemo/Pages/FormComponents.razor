@@ -141,25 +141,25 @@
 				<FluentValidationValidator @ref="ModelValidator" DisableAssemblyScanning="@true" />
 
 				<div class="form-row">
-					<div class="form-group col-sm-6">
+					<div class="form-group col-sm-3">
 						<label>Label</label>
 						<DateInput @bind-Value="@Model.Date" DatepickerTitle="Title" class="form-control editable" />
 						<p>Bound value: @Model.Date</p>
 						<ValidationMessage For="() => Model.Date"></ValidationMessage>
 					</div>
-					<div class="form-group col-sm-6">
+					<div class="form-group col-sm-3">
 						<label>Label</label>
 						<DateInput @bind-Value="@Model.Date2" placeholder="Text" disabled="true" class="form-control" />
 						<p>Bound value: @Model.Date2</p>
 						<ValidationMessage For="() => Model.Date2"></ValidationMessage>
 					</div>
-					<div class="form-group col-sm-6">
+					<div class="form-group col-sm-3">
 						<label>Label</label>
 						<Datepicker @bind-Value="@Model.Date" DatepickerTitle="Title" class="form-control editable"/>
 						<p>Bound value: @Model.Date</p>
 						<ValidationMessage For="() => Model.Date"></ValidationMessage>
 					</div>
-					<div class="form-group col-sm-6">
+					<div class="form-group col-sm-3">
 						<label>Label</label>
 						<Datepicker @bind-Value="@Model.Date2" placeholder="Text" class="form-control" />
 						<p>Bound value: @Model.Date2</p>
@@ -167,29 +167,41 @@
 					</div>
 				</div>
 				<div class="form-row">
-		            <div class="form-group col-sm-3">
+		            <div class="form-group col-sm-2">
 			            <label>Int</label>
 			            <NumberInput @bind-Value="@Model.MyInt" class="form-control"/>
 			            <p>Bound value: @Model.MyInt</p>
 			            <ValidationMessage For="() => Model.MyInt"></ValidationMessage>
 		            </div>
-		            <div class="form-group col-sm-3">
+		            <div class="form-group col-sm-2">
 			            <label>Nullable Int</label>
 			            <NumberInput @bind-Value="@Model.MyNullableInt" class="form-control" />
 			            <p>Bound value: @Model.MyNullableInt</p>
 			            <ValidationMessage For="() => Model.MyNullableInt"></ValidationMessage>
 		            </div>
-		            <div class="form-group col-sm-3">
+		            <div class="form-group col-sm-2">
 			            <label>Decimal</label>
 			            <NumberInput @bind-Value="@Model.MyDecimal" class="form-control"/>
 			            <p>Bound value: @Model.MyDecimal</p>
 			            <ValidationMessage For="() => Model.MyDecimal"></ValidationMessage>
 		            </div>
-		            <div class="form-group col-sm-3">
+		            <div class="form-group col-sm-2">
 			            <label>Nullable Decimal</label>
-                        <NumberInput @bind-Value="@Model.MyNullableDecimal" class="form-control" placeholder="ayy lmao" />
+			            <NumberInput @bind-Value="@Model.MyNullableDecimal" class="form-control" />
 			            <p>Bound value: @Model.MyNullableDecimal</p>
 			            <ValidationMessage For="() => Model.MyNullableDecimal"></ValidationMessage>
+		            </div>
+		            <div class="form-group col-sm-2">
+			            <label>% Decimal</label>
+			            <PercentageInput @bind-Value="@Model.PercentageDecimal" class="form-control" />
+			            <p>Bound value: @Model.PercentageDecimal</p>
+						<ValidationMessage For="() => Model.PercentageDecimal"></ValidationMessage>
+		            </div>
+		            <div class="form-group col-sm-2">
+			            <label>Nullable % Decimal</label>
+			            <PercentageInput @bind-Value="@Model.NullablePercentageDecimal" class="form-control" />
+			            <p>Bound value: @Model.NullablePercentageDecimal</p>
+						<ValidationMessage For="() => Model.NullablePercentageDecimal"></ValidationMessage>
 		            </div>
 	            </div>
 				<button class="btn btn-blue" type="submit">Validate</button>

@@ -1,0 +1,6 @@
+﻿@namespace BlazorComponents
+@typeparam TValue
+@inherits BasePercentageInput<TValue>
+<input type="@InputType" @attributes="@AdditionalAttributes" @onchange="BindValue" step="any"
+       @onfocusin="@(() => InputType = "number")" @onblur="@(() => InputType = "text")" value="@GetValueToDisplay()"
+       onkeydown="javascript: return ['e','E','+'].includes(event.key) ? false : true" />

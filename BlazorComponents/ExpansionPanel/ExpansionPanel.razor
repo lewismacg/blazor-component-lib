@@ -4,7 +4,7 @@
 <div class="expansion-panel @(_expansionState ? "expansion-panel-expanded" : "expansion-panel-collapsed") @ClassOverride">
     <div class="expansion-panel-heading" @onclick="ExpansionHeadingClicked">
         <div>@Heading</div>
-        <Icon IconName="@GetExpansionIcon()"></Icon>
+        <Icon>@GetExpansionIcon()</Icon>
     </div>
     <div class="expansion-content @(_expansionState ? "expansion-content-expanded" : "expansion-content-collapsed")">
         @if (ShowLine)

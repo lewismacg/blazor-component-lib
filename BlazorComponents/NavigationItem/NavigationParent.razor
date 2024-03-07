@@ -4,8 +4,8 @@
 	<li>
 		@if (_navItems.Any())
 		{
-			<label class="nav-item @(Show ? "show" : "")" @onclick="@ToggleShowChildren">
-				<Icon IconTitle="@IconTitle" IconColour="@Colour.White">@Icon</Icon>
+			<label class="nav-item @(Show ? "show" : "")" @onclick="@ToggleShowChildren" title="@HoverTitle">
+				<Icon IconColour="@Colour.White">@Icon</Icon>
 				<span>@LinkText</span>
 			</label>
 		}
@@ -20,7 +20,7 @@
 {
 	[Parameter] public RenderFragment ChildContent { get; set; }
 	[Parameter] public string Icon { get; set; }
-	[Parameter] public string IconTitle { get; set; }
+	[Parameter] public string HoverTitle { get; set; }
 	[Parameter] public string LinkText { get; set; }
 
 	protected bool Show { get; set; }

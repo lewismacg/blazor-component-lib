@@ -2280,13 +2280,43 @@ button.bg-green:focus {
   z-index: 10000;
   flex-direction: column;
   opacity: 1;
+}
+.dialog .dialog-inner {
   overflow: auto;
+  outline: none !important;
+  -webkit-border-radius: 0.5em;
+  -moz-border-radius: 0.5em;
+  border-radius: 0.5em;
+  border: none;
+}
+.dialog .drag-handle {
+  z-index: 10001;
+  position: absolute;
+  top: -2rem;
+  right: 0.5rem;
+  height: 2rem;
+  width: 3rem;
+  background: var(--greyLightest);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1em 1em 0 0;
+}
+.dialog .drag-cursor :hover {
+  cursor: grab;
+}
+.dialog .drag-cursor :active {
+  cursor: grabbing;
 }
 .dialog.large {
   width: 90%;
   height: 90%;
   max-width: 90%;
   max-height: 90%;
+}
+.dialog.wide {
+  width: 90%;
+  max-width: 90%;
 }
 .dialog .dialogTitle {
   background-color: var(--black);
@@ -5297,10 +5327,12 @@ button.bg-green:focus {
   padding: 1rem 1rem 0rem;
   overflow-y: auto;
   display: inline-table;
+  background-color: var(--white);
 }
 .drop-container .column-category .column-body .drop-column {
   padding: 1rem;
   height: 100%;
+  background-color: var(--white);
 }
 .drop-container .column-category .column-body .drop-column .dropzone {
   border: 2px solid var(--greyLight);
@@ -6630,6 +6662,17 @@ select optgroup {
 select optgroup > option {
   font-family: "Lato-Regular";
   background-color: var(--white);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
 *,

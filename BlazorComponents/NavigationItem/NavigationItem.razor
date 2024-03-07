@@ -4,8 +4,8 @@
 @if (Show)
 {
 	<li>
-		<label class="nav-item" @onclick="@Navigate">
-			<Icon IconTitle="@IconTitle" IconColour="@Colour.White">@Icon</Icon>
+		<label class="nav-item" @onclick="@Navigate" title="@HoverTitle">
+			<Icon IconColour="@Colour.White">@Icon</Icon>
 			<span>@LinkText</span>
 		</label>
 

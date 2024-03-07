@@ -37,13 +37,50 @@
 	z-index: 10000;
 	flex-direction: column;
 	opacity: 1;
-	overflow: auto;
+
+	.dialog-inner {
+		overflow: auto;
+		outline: none !important;
+		-webkit-border-radius: .5em;
+		-moz-border-radius: .5em;
+		border-radius: .5em;
+		border: none;
+	}
+
+	.drag-handle {
+		z-index: 10001;
+		position: absolute;
+		top: -2rem;
+		right: 0.5rem;
+		height: 2rem;
+		width: 3rem;
+		background: var(--greyLightest);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 1em 1em 0 0;
+	}
+
+	.drag-cursor {
+		:hover {
+			cursor: grab;
+		}
+
+		:active {
+			cursor: grabbing;
+		}
+	}
 
 	&.large {
 		width: 90%;
 		height: 90%;
 		max-width: 90%;
 		max-height: 90%;
+	}
+
+	&.wide {
+		width: 90%;
+		max-width: 90%;
 	}
 
 	.dialogTitle {

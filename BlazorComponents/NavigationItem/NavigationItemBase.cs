@@ -10,7 +10,7 @@ namespace BlazorComponents
 		[CascadingParameter] public NavigationParent Parent { get; set; }
 		[Parameter] public RenderFragment ChildContent { get; set; }
 		[Parameter] public string Icon { get; set; }
-		[Parameter] public string IconTitle { get; set; }
+		[Parameter] public string HoverTitle { get; set; }
 		[Parameter] public string LinkText { get; set; }
 		[Parameter] public string Destination { get; set; }
 		[Parameter] public bool ForceReload { get; set; }

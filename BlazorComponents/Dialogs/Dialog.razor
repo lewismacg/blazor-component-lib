@@ -6,30 +6,30 @@
 	<div class="dialog-container">
 		<div class="dialog-background"></div>
 		<div class="dialog @AdditionalClass" id="@DialogId">
-			@if (!string.IsNullOrWhiteSpace(DialogTitle) && IsDraggable)
+			@if (IsDraggable && string.IsNullOrWhiteSpace(DialogTitle))
 			{
-				<div class="dialogTitle flex-row justify-content-between">
-					<span>@DialogTitle</span>
-					<div class="float-right">
-						<Icon IconName="open_with" IconColour="Colour.White" IconId="@DialogHandleId"/>
+				<div class="drag-handle drag-cursor">
+					<Icon IconColour="Colour.Black" IconId="@DialogHandleId">open_with</Icon>
+				</div>
+			}
+			<div class="dialog-inner">
+				@if (!string.IsNullOrWhiteSpace(DialogTitle) && IsDraggable)
+				{
+					<div class="dialogTitle flex-row justify-content-between">
+						<span>@DialogTitle</span>
+						<div class="float-right">
+							<Icon IconColour="Colour.White" IconId="@DialogHandleId">open_with</Icon>
+						</div>
 					</div>
-				</div>
-			}
-			else if (IsDraggable)
-			{
-				<div class="dialogTitle flex-row justify-content-between">
-					<div class="float-right">
-						<Icon IconName="open_with" IconColour="Colour.White" IconId="@DialogHandleId"/>
+				}
+				else if (!string.IsNullOrWhiteSpace(DialogTitle))
+				{
+					<div class="dialogTitle">
+						@DialogTitle
 					</div>
-				</div>
-			}
-			else if (!string.IsNullOrWhiteSpace(DialogTitle))
-			{
-				<div class="dialogTitle">
-					@DialogTitle
-				</div>
-			}
-			@ChildContent
+				}
+				@ChildContent
+			</div>
 		</div>
 	</div>
 }

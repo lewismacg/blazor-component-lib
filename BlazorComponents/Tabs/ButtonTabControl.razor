@@ -1,0 +1,15 @@
+﻿@namespace BlazorComponents
+<CascadingValue Value="this">
+	@if (_tabs.Count > 1)
+	{
+		<div class="d-flex pb-3" style="gap: var(--rem-6)" @attributes="AdditionalAttributes">
+			@foreach (ButtonTab tab in _tabs)
+			{
+				<button type="button" class="padded-button large w-100 @(ActiveTab == tab ? ActiveTabClass : "")" @onclick="() => tab.ActivateTab()">
+					<b>@tab.TabTitle</b>
+				</button>
+			}
+		</div>
+	}
+	@ChildContent
+</CascadingValue>

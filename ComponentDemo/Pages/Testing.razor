@@ -10,21 +10,22 @@
 <button class="btn btn-yellow" @onclick="AddToast">Add Toast</button>
 <button class="btn btn-green" @onclick="async () => await AddToastAsync()">Add Async Toast</button>
 
-<BannerWrapper>
-	<Banner NotificationType="NotificationType.Red" IsSmall="true" IsDraggable="true" DepthForDisplay="100">
-		<span>This is a notification. You should close it.</span>
-	</Banner>
+<SectionContent Name="banners">
+	<BannerWrapper>
+		<Banner NotificationType="NotificationType.Red" IsSmall="true" IsDraggable="true" DepthForDisplay="100">
+			<span>This is a notification. You should close it.</span>
+		</Banner>
 
-	<Banner NotificationType="NotificationType.None" IsSmall="true" IsDraggable="true">
-		<span>This is a notification. You should close it.</span>
-	</Banner>
-</BannerWrapper>
-
+		<Banner NotificationType="NotificationType.None" IsSmall="true" IsDraggable="true">
+			<span>This is a notification. You should close it.</span>
+		</Banner>
+	</BannerWrapper>
+</SectionContent>
 
 @code {
 	[CascadingParameter]
 	public ToasterManager ToasterManager { get; set; }
-
+	
 	public int TimedToastValue { get; set; } = 1000;
 
 	protected override void OnInitialized()

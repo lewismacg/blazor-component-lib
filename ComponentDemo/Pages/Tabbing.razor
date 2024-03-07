@@ -15,7 +15,7 @@
 		<p>Wow this is some text for the third tab</p>
 	</TabPage>
 </TabControl>
-
+<hr />
 <TabControl>
 	<TabPage TabTitle="First Tab" Ordinal="1">
 		<p>Wow this is some text for the first tab</p>
@@ -27,15 +27,31 @@
 		<p>Wow this is some text for the third tab</p>
 	</TabPage>
 </TabControl>
-
-<TabControl>
-	<CachedTabPage TabTitle="First Tab">
-		<p>Wow this is some text for the first tab</p>
-	</CachedTabPage>
-	<CachedTabPage TabTitle="These Tabs Names Can Be Really Long">
-		<p>Wow this is some text for the second tab</p>
-	</CachedTabPage>
-	<CachedTabPage TabTitle="1234567 855">
-		<p>Wow this is some text for the third tab</p>
-	</CachedTabPage>
-</TabControl>
+<hr/>
+<ButtonTabControl>
+	<ButtonTab TabTitle="Tab 1" AllowCaching="true">
+		<b>I am cached.</b>
+		<DataTable Items="@(new List<string> { "a", "b", "c" })">
+			<DataTableHeader>
+				<th>String</th>
+			</DataTableHeader>
+			<DataTableRow>
+				<td>@context</td>
+			</DataTableRow>
+		</DataTable>
+	</ButtonTab>
+	<ButtonTab TabTitle="Tab 2">
+		<b>I am not cached.</b>
+		<DataTable Items="@(new List<int> { 1,2,3 })">
+			<DataTableHeader>
+				<th>Number</th>
+			</DataTableHeader>
+			<DataTableRow>
+				<td>@context</td>
+			</DataTableRow>
+		</DataTable>
+	</ButtonTab>
+	<ButtonTab TabTitle="Tab 3" InitialiseActive="true">
+		<b>Hello world</b>
+	</ButtonTab>
+</ButtonTabControl>

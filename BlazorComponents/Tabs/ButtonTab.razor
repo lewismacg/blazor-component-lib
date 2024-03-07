@@ -1,0 +1,22 @@
+﻿@namespace BlazorComponents
+
+@if (AllowCaching)
+{
+	@if (ChildContentRendered)
+	{
+		<span hidden="@(Parent.ActiveTab != this)">
+			<div @attributes="@AdditionalAttributes">
+				@ChildContent
+			</div>
+		</span>
+	}
+}
+else
+{
+	@if (Parent.ActiveTab == this)
+	{
+		<div @attributes="@AdditionalAttributes">
+			@ChildContent
+		</div>
+	}
+}

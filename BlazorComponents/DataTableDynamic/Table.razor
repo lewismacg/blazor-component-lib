@@ -91,7 +91,7 @@
 				<div class="flex-line"></div>
 			</div>
 		}
-		<div class="@(AllowXScroll ? "table-scroll" : "")" id="@ScrollableId">
+		<div class="table-scroll" id="@ScrollableId">
 			<table aria-readonly="@(IsEditMode ? "false" : "true")" role="grid" class="@TableClass" @attributes="UnknownParameters">
 				<thead class="@TableHeadClass" style="cursor: pointer;">
 					@if (_detailTemplate != null && DetailViewAvailable)

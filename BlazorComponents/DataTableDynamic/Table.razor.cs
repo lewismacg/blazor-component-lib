@@ -44,7 +44,6 @@ namespace BlazorComponents
 		[Parameter] public bool AllowTopHorizontalScroll { get; set; }
 		[Parameter] public bool ExportAtTop { get; set; }
 		[Parameter] public string CsvTitleText { get; set; } = "SearchResults.csv";
-		[Parameter] public bool AllowXScroll { get; set; }
 		[Parameter] public EventCallback<List<string>> CustomDownloadMethodCallback { get; set; }
 		[Parameter] public List<TableItem> SelectedItems { get; set; } = new();
 		[Parameter] public Action<TableItem> RowClickAction { get; set; }

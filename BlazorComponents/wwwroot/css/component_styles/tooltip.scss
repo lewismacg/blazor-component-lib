@@ -2,11 +2,10 @@
 	position: relative;
 	display: inline-block;
 	font-size: 1rem;
-	z-index: 500;
 
 	.tooltip-text {
 		visibility: hidden;
-		position: fixed;
+		position: absolute;
 		background-color: var(--black);
 		color: var(--white);
 		text-align: center;
@@ -21,7 +20,9 @@
 		font-size: 80%;
 
 		&.tooltip-up {
-			transform: translate(0%, -120%);
+			left: 50%;
+			bottom: 150%;
+			transform: translate(-50%, 0%);
 			max-width: 120px;
 
 			&::after {
@@ -38,7 +39,9 @@
 
 		&.tooltip-down {
 			max-width: 120px;
-			transform: translate(0%,120%);
+			left: 50%;
+			top: 150%;
+			transform: translate(-50%, 0%);
 
 			&::after {
 				content: " ";
@@ -53,7 +56,9 @@
 		}
 
 		&.tooltip-left {
-			transform: translate(-120%, 0%);
+			right: 150%;
+			top: 50%;
+			transform: translate(0%,-50%);
 
 			&::after {
 				content: " ";
@@ -68,7 +73,9 @@
 		}
 
 		&.tooltip-right {
-			transform: translate(120%, 0%);
+			left: 150%;
+			top: 50%;
+			transform: translate(0%,-50%);
 
 			&::after {
 				content: " ";

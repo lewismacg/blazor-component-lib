@@ -43,6 +43,6 @@
 
 .main-content {
 	flex-grow: 1;
+	overflow-x: hidden;
 	background-color: var(--white);
-	transform: translateZ(0);
 }

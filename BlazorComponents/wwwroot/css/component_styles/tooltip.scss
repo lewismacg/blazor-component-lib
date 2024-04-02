@@ -2,6 +2,7 @@
 	position: relative;
 	display: inline-block;
 	font-size: 1rem;
+	z-index: 500;
 
 	.tooltip-text {
 		visibility: hidden;

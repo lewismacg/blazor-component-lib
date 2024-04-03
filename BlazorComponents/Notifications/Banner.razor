@@ -1,19 +1,21 @@
 ﻿@namespace BlazorComponents
 
-<div class="banner @NotificationBannerClass @(IsSmall ? "pt-0 pb-0" : "") @(DepthForDisplay.HasValue ? "translucent" : "")" id="@BannerId">
-	<div class="d-flex justify-content-center align-items-center">
-		@if (IsDraggable)
-		{
-			<div class="btn"><Icon IconColour="@IconColour" IconId="@BannerHandleId">open_with</Icon></div>
-		}
-		else
-		{
-			<div class="btn"><Icon IconColour="@IconColour">@IconName</Icon></div>
-		}
-		<div class="banner-content">@ChildContent</div>
-		@if (AllowDismiss)
-		{
-			<button @onclick="@HideBanner" class="btn"><Icon IconColour="@IconColour">clear</Icon></button>
-		}
+<div class="banner-row @(BannerHidden ? "banner-hide" : "") @(DepthForDisplay.HasValue ? "translucent" : "")" id="@($"row-{BannerId}")">
+	<div class="banner @NotificationBannerClass @(IsSmall ? "pt-0 pb-0" : "")" id="@BannerId">
+		<div class="d-flex justify-content-center align-items-center">
+			@if (IsDraggable)
+			{
+				<div class="btn"><Icon IconColour="@IconColour" IconId="@BannerHandleId">open_with</Icon></div>
+			}
+			else
+			{
+				<div class="btn"><Icon IconColour="@IconColour">@IconName</Icon></div>
+			}
+			<div class="banner-content">@ChildContent</div>
+			@if (AllowDismiss)
+			{
+				<button @onclick="@HideBanner" class="btn"><Icon IconColour="@IconColour">clear</Icon></button>
+			}
+		</div>
 	</div>
 </div>

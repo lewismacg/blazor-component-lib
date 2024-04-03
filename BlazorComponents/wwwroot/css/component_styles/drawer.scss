@@ -16,7 +16,7 @@
 	}
 
 	&.drawer-open {
-		flex: 0 0 15em;
+		flex-basis: 15%;
 
 		.nav-item {
 			span {
@@ -35,7 +35,7 @@
 
 	@media only screen and (max-width: 992px) {
 		&.drawer-open {
-			flex: 0 0 6em;
+			flex-basis: auto;
 
 			.nav-item {
 				span {

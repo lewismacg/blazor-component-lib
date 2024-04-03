@@ -1,4 +1,5 @@
-﻿@inherits LayoutComponentBase
+﻿﻿@using Microsoft.AspNetCore.Components.Sections
+@inherits LayoutComponentBase
 @inject ToasterManager ToasterManager
 
 <theme data-theme="@Theme" class="v-zoom @Class">
@@ -60,7 +61,7 @@
 				<Toaster />
 				@Body
 				<BannerWrapper>
-					<SectionOutlet Name="banners" />
+					<SectionOutlet SectionName="banners" />
 				</BannerWrapper>
 			</CascadingValue>
 		</Content>

@@ -1,62 +1,97 @@
-﻿.banner-wrapper .banner:not(:first-child) {
-	bottom: 10vh;
-}
-
-.banner {
-	padding: 1em;
-	text-align: center;
-	vertical-align: middle;
-	min-width: 40vw;
-	max-width: 60vw;
+﻿.banner-wrapper {
+	display: flex;
+	justify-content: center;
 	position: fixed;
-	bottom: 2vh;
+	bottom: 0;
+	align-content: flex-end;
+	flex-wrap: wrap;
 	z-index: 999;
-	height: fit-content;
-	opacity: 1;
-	transition: opacity 500ms;
+	width: 100%;
+	pointer-events: none;
 
-	&.translucent {
-		opacity: 0;
-		z-index: -100 !important;
-	}
+	.banner-row {
+		padding-bottom: 1.5rem;
+		text-align: center;
+		vertical-align: middle;
+		z-index: 999;
+		height: fit-content;
+		opacity: 1;
+		margin-bottom: 3vh;
+		transition: opacity 500ms;
+		flex: 0 1 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		pointer-events: none;
 
-	&.Blue {
-		background-color: var(--lightBlue);
-		color: var(--black);
-		border: 2px solid var(--darkBlue);
-	}
+		&.banner-hide {
+			animation-name: hide-banner;
+			animation-duration: 1000ms;
+			animation-fill-mode: forwards;
+		}
 
-	&.Green {
-		background-color: var(--green);
-		color: var(--white);
-		border: 2px solid var(--darkGreen);
-	}
+		&.translucent {
+			opacity: 0;
+			z-index: -100 !important;
+		}
 
-	&.Yellow {
-		background-color: var(--yellow);
-		color: var(--black);
-		border: 2px solid var(--darkYellow);
-	}
+		.banner {
+			position: absolute;
+			min-width: 40vw;
+			max-width: 60vw;
+			padding: 1rem;
+			pointer-events: all;
 
-	&.Red {
-		background-color: var(--lightRed);
-		color: var(--black);
-		border: 2px solid var(--red);
-	}
+			&.translucent {
+				opacity: 0;
+				z-index: -100 !important;
+			}
 
-	&.None {
-		background-color: var(--white);
-		color: var(--black);
-		border: 2px solid var(--black);
-	}
+			&.Blue {
+				background-color: var(--lightBlue);
+				color: var(--black);
+				border: 2px solid var(--darkBlue);
+			}
 
-	.banner-content {
-		flex: 0 0 75%;
-	}
+			&.Green {
+				background-color: var(--green);
+				color: var(--white);
+				border: 2px solid var(--darkGreen);
+			}
 
-	@media screen and (max-width: 768px) {
-		.banner-content {
-			flex: 0 0 60%;
+			&.Yellow {
+				background-color: var(--yellow);
+				color: var(--black);
+				border: 2px solid var(--darkYellow);
+			}
+
+			&.Red {
+				background-color: var(--lightRed);
+				color: var(--black);
+				border: 2px solid var(--red);
+			}
+
+			&.None {
+				background-color: var(--white);
+				color: var(--black);
+				border: 2px solid var(--black);
+			}
+
+			.banner-content {
+				flex: 0 0 75%;
+			}
+
+			@media screen and (max-width: 768px) {
+				.banner-content {
+					flex: 0 0 60%;
+				}
+			}
+		}
+
+		.banner-hide {
+			animation-name: hide-banner;
+			animation-duration: 1000ms;
+			animation-fill-mode: forwards;
 		}
 	}
 }
@@ -67,15 +102,10 @@
 	}
 
 	100% {
-		display: none;
 		visibility: hidden;
 		opacity: 0;
-		transform: translateY(50px)
+		height: 0;
+		margin-top: -3vh;
+		padding-bottom: 0;
 	}
-}
-
-.banner-hide {
-	animation-name: hide-banner;
-	animation-duration: 1000ms;
-	animation-fill-mode: forwards;
 }

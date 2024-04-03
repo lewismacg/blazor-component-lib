@@ -1,4 +1,5 @@
-﻿@page "/Testing"
+﻿@using Microsoft.AspNetCore.Components.Sections
+@page "/Testing"
 
 <h3>Toasts</h3>
 <hr />
@@ -10,7 +11,7 @@
 <button class="btn btn-yellow" @onclick="AddToast">Add Toast</button>
 <button class="btn btn-green" @onclick="async () => await AddToastAsync()">Add Async Toast</button>
 
-<SectionContent Name="banners">
+<SectionContent SectionName="banners">
 	<BannerWrapper>
 		<Banner NotificationType="NotificationType.Red" IsSmall="true" IsDraggable="true" DepthForDisplay="100">
 			<span>This is a notification. You should close it.</span>

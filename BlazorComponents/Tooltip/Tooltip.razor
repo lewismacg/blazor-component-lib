@@ -2,6 +2,23 @@
 @inherits BaseTooltip
 
 <div class="tooltip-wrapper">
-	<span class="tooltip-text @Class">@TooltipText</span>
+	@switch (Direction)
+	{
+		case TooltipDirection.Up or TooltipDirection.Down:
+			<div class="d-flex justify-content-center tooltip-anchor">
+				<span class="tooltip-text @Class">@TooltipText</span>
+			</div>
+			break;
+		case TooltipDirection.Right:
+			<div class="d-flex justify-content-end tooltip-anchor">
+				<span class="tooltip-text @Class">@TooltipText</span>
+			</div>
+			break;
+		default:
+			<div class="tooltip-anchor">
+				<span class="tooltip-text @Class">@TooltipText</span>
+			</div>
+			break;
+	}
 	@ChildContent
 </div>

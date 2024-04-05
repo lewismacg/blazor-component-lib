@@ -7435,7 +7435,8 @@ theme[data-theme="dark"] {
 .tooltip-wrapper {
   position: relative;
   display: inline-block;
-  font-size: 1rem; }
+  font-size: 1rem;
+  text-align: left; }
   .tooltip-wrapper .tooltip-anchor {
     width: 100%;
     transform: translateZ(0);

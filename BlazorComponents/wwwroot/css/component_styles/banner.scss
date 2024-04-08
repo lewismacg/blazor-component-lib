@@ -7,6 +7,8 @@
 	flex-wrap: wrap;
 	z-index: 999;
 	width: -webkit-fill-available;
+	width: -moz-available;
+	width: fill-available;
 	pointer-events: none;
 
 	.banner-row {

@@ -203,6 +203,8 @@ a.badge-red:hover, a.badge-red:focus {
   flex-wrap: wrap;
   z-index: 999;
   width: -webkit-fill-available;
+  width: -moz-available;
+  width: fill-available;
   pointer-events: none;
 }
 .banner-wrapper .banner-row {

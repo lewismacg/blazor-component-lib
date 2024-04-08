@@ -42,7 +42,6 @@
 }
 
 .main-content {
-	flex-grow: 1;
-	overflow-x: hidden;
-	background-color: var(--white);
+	min-width: 0%;
+	flex: 1 1 0;
 }

@@ -16,7 +16,7 @@
 	}
 
 	&.drawer-open {
-		flex-basis: 15%;
+		flex: 0 0 15rem;
 
 		.nav-item {
 			span {

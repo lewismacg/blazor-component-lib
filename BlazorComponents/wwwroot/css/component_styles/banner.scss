@@ -6,7 +6,7 @@
 	align-content: flex-end;
 	flex-wrap: wrap;
 	z-index: 999;
-	width: 100%;
+	width: -webkit-fill-available;
 	pointer-events: none;
 
 	.banner-row {
@@ -16,7 +16,7 @@
 		z-index: 999;
 		height: fit-content;
 		opacity: 1;
-		margin-bottom: 3vh;
+		margin-bottom: 2rem;
 		transition: opacity 500ms;
 		flex: 0 1 100%;
 		display: flex;
@@ -30,15 +30,19 @@
 			animation-fill-mode: forwards;
 		}
 
-		&.translucent {
-			opacity: 0;
-			z-index: -100 !important;
+		&:not(.banner-hide) {
+			&.translucent {
+				visibility: hidden;
+				opacity: 0;
+				height: 0;
+				margin-top: calc(var(--rem-8) * -1);
+				padding-bottom: 0;
+			}
 		}
 
 		.banner {
 			position: absolute;
-			min-width: 40vw;
-			max-width: 60vw;
+			width: 60vw;
 			padding: 1rem;
 			pointer-events: all;
 
@@ -105,7 +109,7 @@
 		visibility: hidden;
 		opacity: 0;
 		height: 0;
-		margin-top: -3vh;
+		margin-top: -2rem;
 		padding-bottom: 0;
 	}
 }

@@ -5,71 +5,74 @@ using System.Globalization;
 
 namespace BlazorComponents
 {
-	public class BasePercentageInput<TValue> : InputBase<TValue>
-	{
-		#region Properties and Fields
+    public class BasePercentageInput<TValue> : InputBase<TValue>
+    {
+        #region Parameters
 
-		protected string InputType { get; set; } = "text";
-		private bool ShowZero { get; set; }
+        [Parameter] public bool ShowZero { get; set; }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Properties and Fields
 
-		protected override void OnInitialized()
-		{
-			if (typeof(TValue) != typeof(decimal) && typeof(TValue) != typeof(decimal?)) throw new Exception("Percentage input usage is limited to decimal type.");
-		}
+        protected string InputType { get; set; } = "text";
 
-		protected void BindValue(ChangeEventArgs e)
-		{
-			var valueAsDecimal = decimal.TryParse(e.Value?.ToString(), out var decimalValue) ? decimalValue : (decimal?)null;
-			CurrentValueAsString = valueAsDecimal == default ? null : Math.Round(valueAsDecimal.Value, 2).ToString();
+        #endregion
 
-			ShowZero = valueAsDecimal == 0;
-		}
+        #region Methods
 
-		protected override string FormatValueAsString(TValue value)
-		{
-			return value switch
-			{
-				decimal decimalValue => decimalValue == default ? null : GetPercentageDisplayValue(decimalValue),
-				_ => null
-			};
-		}
+        protected override void OnInitialized()
+        {
+            if (typeof(TValue) != typeof(decimal) && typeof(TValue) != typeof(decimal?)) throw new Exception("Percentage input usage is limited to decimal type.");
+        }
 
-		protected string GetPercentageDisplayValue(decimal? value)
-		{
-			if (value == default) return ShowZero ? "0.00%" : null;
-			return value.Value.ToString("P2", CultureInfo.GetCultureInfo("en-gb"));
-		}
+        protected void BindValue(ChangeEventArgs e)
+        {
+            var valueAsDecimal = decimal.TryParse(e.Value?.ToString(), out var decimalValue) ? decimalValue : (decimal?)null;
+            CurrentValueAsString = valueAsDecimal == default ? null : Math.Round(valueAsDecimal.Value, 2).ToString();
+        }
 
-		protected override bool TryParseValueFromString(string value, out TValue result, out string validationErrorMessage)
-		{
-			result = GetDecimalValueFromString(value);
+        protected override string FormatValueAsString(TValue value)
+        {
+            return value switch
+            {
+                decimal decimalValue => decimalValue == default ? null : GetPercentageDisplayValue(decimalValue),
+                _ => null
+            };
+        }
 
-			validationErrorMessage = "";
-			return true;
-		}
+        protected string GetPercentageDisplayValue(decimal? value)
+        {
+            if (value == default) return ShowZero ? "0.00%" : null;
+            return value.Value.ToString("P2", CultureInfo.GetCultureInfo("en-gb"));
+        }
 
-		protected TValue GetDecimalValueFromString(string stringValue)
-		{
-			var valueAsDecimal = decimal.TryParse(stringValue, out var decimalValue) ? decimalValue : (decimal?)null;
-			return valueAsDecimal == default ? default : (TValue)(object)(valueAsDecimal / 100);
-		}
+        protected override bool TryParseValueFromString(string value, out TValue result, out string validationErrorMessage)
+        {
+            result = GetDecimalValueFromString(value);
 
-		protected string GetValueToDisplay()
-		{
-			var currentValueAsParsableString = CurrentValueAsString?.Replace(CultureInfo.CurrentCulture.NumberFormat.PercentSymbol, "") ?? "";
-			var currentValue = GetDecimalValueFromString(currentValueAsParsableString) as decimal?;
-			return InputType switch
-			{
-				"text" => GetPercentageDisplayValue(currentValue),
-				"number" => decimal.TryParse(currentValueAsParsableString, CultureInfo.GetCultureInfo("en-gb"), out var parsedDecimalValue) ? parsedDecimalValue.ToString() : default
-			};
-		}
+            validationErrorMessage = "";
+            return true;
+        }
 
-		#endregion
+        protected TValue GetDecimalValueFromString(string stringValue)
+        {
+            var valueAsDecimal = decimal.TryParse(stringValue, out var decimalValue) ? decimalValue : (decimal?)null;
+            return valueAsDecimal == default ? default : (TValue)(object)(valueAsDecimal / 100);
+        }
 
-	}
+        protected string GetValueToDisplay()
+        {
+            var currentValueAsParsableString = CurrentValueAsString?.Replace(CultureInfo.CurrentCulture.NumberFormat.PercentSymbol, "") ?? "";
+            var currentValue = GetDecimalValueFromString(currentValueAsParsableString) as decimal?;
+            return InputType switch
+            {
+                "text" => GetPercentageDisplayValue(currentValue),
+                "number" => decimal.TryParse(currentValueAsParsableString, CultureInfo.GetCultureInfo("en-gb"), out var parsedDecimalValue) ? parsedDecimalValue.ToString() : default
+            };
+        }
+
+        #endregion
+
+    }
 }

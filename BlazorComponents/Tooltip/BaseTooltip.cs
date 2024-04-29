@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
+using System;
+using System.Threading.Tasks;
 
 namespace BlazorComponents
 {
-	public class BaseTooltip : ComponentBase
+	public class BaseTooltip : ComponentBase, IAsyncDisposable
 	{
 		#region Parameters
 
@@ -12,24 +15,60 @@ namespace BlazorComponents
 
 		#endregion
 
+		#region Dependencies
+
+		[Inject] public IJSRuntime JsRuntime { get; set; }
+
+		#endregion
+
 		#region Properties and Fields
 
-		protected string Class { get; set; }
+		protected bool Show { get; set; }
+		protected ElementReference Origin { get; set; }
+		protected string Id { get; set; } = Guid.NewGuid().ToString();
+		protected IJSObjectReference Popper { get; set; }
 
 		#endregion
 
 		#region Methods
 
-		protected override void OnParametersSet()
+		protected override async Task OnAfterRenderAsync(bool firstRender)
 		{
-			Class = Direction switch
+			if (firstRender)
 			{
-				TooltipDirection.Up => "tooltip-up",
-				TooltipDirection.Down => "tooltip-down",
-				TooltipDirection.Left => "tooltip-left",
-				TooltipDirection.Right => "tooltip-right",
-				_ => string.Empty
-			};
+				var direction = Direction switch
+				{
+					TooltipDirection.Up => "top",
+					TooltipDirection.Down => "bottom",
+					TooltipDirection.Left => "left",
+					TooltipDirection.Right => "right",
+					_ => string.Empty
+				};
+
+				Popper = await JsRuntime.InvokeAsync<IJSObjectReference>("Popover.createPopover", Origin, Id, direction);
+			}
+		}
+
+		/// <summary>
+		/// The js interop is required for DOM updates that popper is unaware of. I.e. elements hidden behind a blazor if statement that then appears - without
+		/// the update call popper will not realign the tooltip. 
+		/// </summary>
+		/// <param name="show"></param>
+		/// <returns></returns>
+		protected async Task ToggleVisibility(bool show)
+		{
+			Show = show;
+
+			if (Show && Popper != null) await Popper.InvokeVoidAsync("update");
+		}
+
+		public async ValueTask DisposeAsync()
+		{
+			if (Popper != null)
+			{
+				await Popper.InvokeVoidAsync("destroy");
+				await Popper.DisposeAsync();
+			}
 		}
 
 		#endregion

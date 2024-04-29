@@ -9,7 +9,7 @@ var Popover = Popover || {};
 
 Popover.createPopover = function (start, popover, placement) {
     var popoverEl = document.getElementById(popover);
-    Popper.createPopper(start, popoverEl, {
+    return Popper.createPopper(start, popoverEl, {
         placement: placement,
         modifiers: [
             {

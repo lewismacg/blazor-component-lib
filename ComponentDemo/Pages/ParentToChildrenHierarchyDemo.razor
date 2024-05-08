@@ -1,0 +1,87 @@
+﻿@page "/hierarchy/parent-to-children"
+@using ComponentDemo.Models
+
+<HierarchyChart ChartDirection="HierarchyRelationshipEnum.ParentToChildren" AllowFiltering="true" Models="Managers" KeyFunc="@(x => x.Id)" ChildSelectFunc="@(x => x.Children)" DisplayTextFunc="@(x => x.GetDescription())" OnSelectHierarchy="(ManagerModel e) => OnChangeManager(e)" />
+
+<Dialog ShowDialog="ManagerModelWithManagerBeingChanged != null" DialogTitle="Changing Hierarchy">
+	<div class="m-3">
+		<p>
+			You are changing <b>@ManagerModelWithManagerBeingChanged.Name</b>'s manager.
+			What are you changing it to?
+		</p>
+		<hr />
+		<div class="form-group">
+			<label>New Parent ID</label>
+			<input type="number" @bind="NewManagerID" class="form-control form-control-sm" />
+		</div>
+	</div>
+	<div class="dialogButtons">
+		<button class="btn btn-blue" type="button" @onclick="SaveManager">Save</button>
+		<button class="btn btn-yellow" type="button" @onclick="() => ManagerModelWithManagerBeingChanged = null">Close</button>
+	</div>
+</Dialog>
+
+@code {
+	public List<ManagerModel> Managers { get; set; } = new();
+	public ManagerModel ManagerModelWithManagerBeingChanged { get; set; }
+	public int? NewManagerID { get; set; }
+
+	public string[] FirstNames { get; set; } = ["Ally", "Bobby", "Charley", "Danny", "Elly", "Freddy", "Ginny", "Holly", "Izzy", "Jenny", "Kenny"];
+	public string[] LastNames { get; set; } = ["Aardvark", "Badger", "Cat", "Dog", "Elk", "Frog", "Goat", "Hippo", "Ibex", "Jackal", "Kingfisher"];
+
+	protected override void OnInitialized()
+	{
+		GenerateManagerModels();
+	}
+
+	protected void GenerateManagerModels()
+	{
+		var rand = new Random();
+
+		var mostNestedChildModel = new ManagerModel { Id = 100, Name = "Duplicate Duplication" };
+		var child1OfChildManagerWithMultipleChildren = new ManagerModel { Id = 101, Name = $"{FirstNames[rand.Next(FirstNames.Length)]} {LastNames[rand.Next(LastNames.Length)]}", Children = [mostNestedChildModel] };
+		var child2OfChildManagerWithMultipleChildren = new ManagerModel { Id = 102, Name = "Duplicate Duplication" };
+
+		var childOfMultipleManagers = new ManagerModel { Id = 10, Name = $"{FirstNames[rand.Next(FirstNames.Length)]} {LastNames[rand.Next(LastNames.Length)]}" };
+		var childOfOneManager1 = new ManagerModel { Id = 11, Name = $"{FirstNames[rand.Next(FirstNames.Length)]} {LastNames[rand.Next(LastNames.Length)]}" };
+		var childOfOneManager2 = new ManagerModel { Id = 12, Name = $"{FirstNames[rand.Next(FirstNames.Length)]} {LastNames[rand.Next(LastNames.Length)]}", Children = [child1OfChildManagerWithMultipleChildren, child2OfChildManagerWithMultipleChildren] };
+
+		Managers.Add(new ManagerModel { Id = 1, Name = $"{FirstNames[rand.Next(FirstNames.Length)]} {LastNames[rand.Next(LastNames.Length)]}", Children = [childOfOneManager1, childOfMultipleManagers] });
+		Managers.Add(new ManagerModel { Id = 2, Name = $"{FirstNames[rand.Next(FirstNames.Length)]} {LastNames[rand.Next(LastNames.Length)]}", Children = [childOfMultipleManagers] });
+		Managers.Add(new ManagerModel { Id = 3, Name = $"{FirstNames[rand.Next(FirstNames.Length)]} {LastNames[rand.Next(LastNames.Length)]}", Children = [childOfMultipleManagers, childOfOneManager2, childOfOneManager1] });
+	}
+
+	public void OnChangeManager(ManagerModel model)
+	{
+		ManagerModelWithManagerBeingChanged = model;
+	}
+
+	public void SaveManager()
+	{
+		var flattenedList = FlattenList(Managers, x => x.Children).ToList();
+
+		var oldManager = flattenedList.FirstOrDefault(x => x.Children.Contains(ManagerModelWithManagerBeingChanged));
+		var matchingNewManager = flattenedList.FirstOrDefault(x => x.Id == NewManagerID);
+
+		if (oldManager != null) oldManager.Children.Remove(ManagerModelWithManagerBeingChanged);
+		else Managers.Remove(ManagerModelWithManagerBeingChanged);
+
+		if (matchingNewManager != null) matchingNewManager.Children.Add(ManagerModelWithManagerBeingChanged);
+		else Managers.Add(ManagerModelWithManagerBeingChanged);
+
+		ManagerModelWithManagerBeingChanged = null;
+	}
+
+	private IEnumerable<T> FlattenList<T>(IEnumerable<T> source, Func<T, IEnumerable<T>> childrenSelector)
+	{
+		var queue = new Queue<T>(source);
+		while (queue.Count > 0)
+		{
+			var current = queue.Dequeue();
+			yield return current;
+			var children = childrenSelector(current);
+			if (children == null) continue;
+			foreach (var child in children) queue.Enqueue(child);
+		}
+	}
+}

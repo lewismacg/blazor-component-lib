@@ -1,0 +1,18 @@
+﻿@namespace BlazorComponents
+@typeparam TObject where TObject : class
+@typeparam TKey
+
+<div class="child-list">
+	<div class="child-list-header @(OnClickCallback.HasDelegate ? "clickable": "")" @onclick="async () => await OnClickCallback.InvokeAsync(Model.Data)">
+		<b>@HierarchyChart.DisplayTextFunc(Model.Data)</b>
+	</div>
+	@if (Model.Children.Any())
+	{
+		<div class="child-list-body">
+			@foreach (var child in Model.Children)
+			{
+				<HierarchyList Model="child" OnClickCallback="OnClickCallback" TKey="TKey" TObject="TObject" />
+			}
+		</div>
+	}
+</div>

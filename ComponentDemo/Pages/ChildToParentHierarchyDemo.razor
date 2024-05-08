@@ -1,0 +1,75 @@
+﻿@page "/hierarchy/child-to-parent"
+@using ComponentDemo.Models
+
+<HierarchyChart ChartDirection="HierarchyRelationshipEnum.ChildToParent" AllowFiltering="true" Models="People" KeyFunc="@(x => x.Id)" ParentKeyFunc="@(x => x.ManagerId)" DisplayTextFunc="@(x => x.GetDescription())" OnSelectHierarchy="(PersonModel e) => OnChangePerson(e)" />
+
+<Dialog ShowDialog="PersonModelWithManagerBeingChanged != null" DialogTitle="Changing Hierarchy">
+	<div class="m-3">
+		<p>
+			You are changing <b>@PersonModelWithManagerBeingChanged.Name</b>'s manager.
+			What are you changing it to?
+		</p>
+		<hr />
+		<div class="form-group">
+			<label>New Parent ID</label>
+			<input type="number" @bind="NewManagerID" class="form-control form-control-sm" />
+		</div>
+	</div>
+	<div class="dialogButtons">
+		<button class="btn btn-blue" type="button" @onclick="SavePerson">Save</button>
+		<button class="btn btn-yellow" type="button" @onclick="() => PersonModelWithManagerBeingChanged = null">Close</button>
+	</div>
+</Dialog>
+
+@code {
+	public List<PersonModel> People { get; set; } = new();
+	public PersonModel PersonModelWithManagerBeingChanged { get; set; }
+
+	public int? NewManagerID { get; set; }
+
+	public string[] FirstNames { get; set; } = ["Ally", "Bobby", "Charley", "Danny", "Elly", "Freddy", "Ginny", "Holly", "Izzy", "Jenny", "Kenny"];
+	public string[] LastNames { get; set; } = ["Aardvark", "Badger", "Cat", "Dog", "Elk", "Frog", "Goat", "Hippo", "Ibex", "Jackal", "Kingfisher"];
+
+	protected override void OnInitialized()
+	{
+		GeneratePersonModels();
+	}
+
+	protected void GeneratePersonModels()
+	{
+		var rand = new Random();
+
+		People.Add(new PersonModel { Id = 1, ManagerId = 2, Name = $"{FirstNames[rand.Next(FirstNames.Length)]} {LastNames[rand.Next(LastNames.Length)]}" });
+		People.Add(new PersonModel { Id = 2, ManagerId = null, Name = $"{FirstNames[rand.Next(FirstNames.Length)]} {LastNames[rand.Next(LastNames.Length)]}" });
+		People.Add(new PersonModel { Id = 3, ManagerId = 2, Name = $"{FirstNames[rand.Next(FirstNames.Length)]} {LastNames[rand.Next(LastNames.Length)]}" });
+		People.Add(new PersonModel { Id = 4, ManagerId = 1, Name = $"{FirstNames[rand.Next(FirstNames.Length)]} {LastNames[rand.Next(LastNames.Length)]}" });
+		People.Add(new PersonModel { Id = 5, ManagerId = 20, Name = $"{FirstNames[rand.Next(FirstNames.Length)]} {LastNames[rand.Next(LastNames.Length)]}" });
+		People.Add(new PersonModel { Id = 6, ManagerId = 20, Name = $"{FirstNames[rand.Next(FirstNames.Length)]} {LastNames[rand.Next(LastNames.Length)]}" });
+		People.Add(new PersonModel { Id = 7, ManagerId = 20, Name = $"{FirstNames[rand.Next(FirstNames.Length)]} {LastNames[rand.Next(LastNames.Length)]}" });
+		People.Add(new PersonModel { Id = 8, ManagerId = 20, Name = $"{FirstNames[rand.Next(FirstNames.Length)]} {LastNames[rand.Next(LastNames.Length)]}" });
+		People.Add(new PersonModel { Id = 9, ManagerId = 20, Name = $"{FirstNames[rand.Next(FirstNames.Length)]} {LastNames[rand.Next(LastNames.Length)]}" });
+		People.Add(new PersonModel { Id = 10, ManagerId = 14, Name = $"{FirstNames[rand.Next(FirstNames.Length)]} {LastNames[rand.Next(LastNames.Length)]}" });
+		People.Add(new PersonModel { Id = 11, ManagerId = 17, Name = $"{FirstNames[rand.Next(FirstNames.Length)]} {LastNames[rand.Next(LastNames.Length)]}" });
+		People.Add(new PersonModel { Id = 12, ManagerId = 1, Name = $"{FirstNames[rand.Next(FirstNames.Length)]} {LastNames[rand.Next(LastNames.Length)]}" });
+		People.Add(new PersonModel { Id = 13, ManagerId = 1, Name = $"{FirstNames[rand.Next(FirstNames.Length)]} {LastNames[rand.Next(LastNames.Length)]}" });
+		People.Add(new PersonModel { Id = 14, ManagerId = 1, Name = $"{FirstNames[rand.Next(FirstNames.Length)]} {LastNames[rand.Next(LastNames.Length)]}" });
+		People.Add(new PersonModel { Id = 15, ManagerId = 1, Name = $"{FirstNames[rand.Next(FirstNames.Length)]} {LastNames[rand.Next(LastNames.Length)]}" });
+		People.Add(new PersonModel { Id = 16, ManagerId = null, Name = $"{FirstNames[rand.Next(FirstNames.Length)]} {LastNames[rand.Next(LastNames.Length)]}" });
+		People.Add(new PersonModel { Id = 17, ManagerId = 2, Name = $"{FirstNames[rand.Next(FirstNames.Length)]} {LastNames[rand.Next(LastNames.Length)]}" });
+		People.Add(new PersonModel { Id = 18, ManagerId = 2, Name = $"{FirstNames[rand.Next(FirstNames.Length)]} {LastNames[rand.Next(LastNames.Length)]}" });
+		People.Add(new PersonModel { Id = 19, ManagerId = 2, Name = $"{FirstNames[rand.Next(FirstNames.Length)]} {LastNames[rand.Next(LastNames.Length)]}" });
+		People.Add(new PersonModel { Id = 20, ManagerId = 2, Name = $"{FirstNames[rand.Next(FirstNames.Length)]} {LastNames[rand.Next(LastNames.Length)]}" });
+	}
+
+	public void OnChangePerson(PersonModel model)
+	{
+		NewManagerID = model.ManagerId;
+		PersonModelWithManagerBeingChanged = model;
+	}
+
+	public void SavePerson()
+	{
+		PersonModelWithManagerBeingChanged.ManagerId = NewManagerID;
+		PersonModelWithManagerBeingChanged = null;
+	}
+}

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
@@ -255,5 +256,26 @@ namespace BlazorComponents
 		/// <param name="currencyValue"></param>
 		/// <returns></returns>
 		public static string AsCurrency(this decimal currencyValue) => currencyValue.ToString("C", CultureInfo.GetCultureInfo("en-gb"));
+
+		/// <summary>
+		/// The default implementation of TryGetValue for a dictionary will throw an exception if the key provided is null.
+		/// This will not throw an exception and instead will just return a false result.
+		/// </summary>
+		/// <typeparam name="TKey"></typeparam>
+		/// <typeparam name="TValue"></typeparam>
+		/// <param name="dict"></param>
+		/// <param name="key"></param>
+		/// <param name="value"></param>
+		/// <returns></returns>
+		public static bool TryGetValueAllowNull<TKey, TValue>(this IDictionary<TKey, TValue> dict, TKey key, [MaybeNullWhen(false)] out TValue value)
+		{
+			if (key == null)
+			{
+				value = default;
+				return false;
+			}
+
+			return dict.TryGetValue(key, out value);
+		}
 	}
 }

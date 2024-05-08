@@ -1,0 +1,31 @@
+﻿@namespace BlazorComponents
+@typeparam TObject where TObject : class
+@typeparam TKey
+
+<CascadingValue Value="this">
+	<div class="hierarchy-border">
+		@if (AllowFiltering)
+		{
+			<form @onsubmit="FilterModels">
+				<div class="d-flex justify-content-end p-2 align-items-center bg-grey-lightest border-left border-right border-bottom">
+					<div class="input-group input-group-sm w-25">
+						<input type="text" placeholder="Filter..." class="form-control form-control-sm" @bind="@FilterText" />
+						<div class="input-group-append">
+							<button class="btn btn-sm py-0 px-1" style="border: 2px solid rgba(var(--greyLightRgb),.5)" type="submit">
+								<Tooltip TooltipText="Filtering returns those matching and their parent(s) in the relationship." Direction="TooltipDirection.Down">
+									<Icon>search</Icon>
+								</Tooltip>
+							</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		}
+		<div class="hierarchy-chart">
+			@foreach (var parent in FilteredHierarchyTree)
+			{
+				<HierarchyList Model="parent" OnClickCallback="OnSelectHierarchy" TKey="TKey" TObject="TObject" />
+			}
+		</div>
+	</div>
+</CascadingValue>

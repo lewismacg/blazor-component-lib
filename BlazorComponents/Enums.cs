@@ -56,4 +56,10 @@
 		November = 11,
 		December = 12
 	}
+
+	public enum HierarchyRelationshipEnum
+	{
+		ChildToParent = 0,
+		ParentToChildren = 1
+	}
 }

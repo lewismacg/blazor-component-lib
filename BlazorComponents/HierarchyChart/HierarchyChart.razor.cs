@@ -75,8 +75,12 @@ namespace BlazorComponents
 			var modelsMatchingFilter = Models.Where(x => DisplayTextFunc(x).Contains(FilterText, StringComparison.InvariantCultureIgnoreCase)).ToList();
 			var modelsParentIds = modelsMatchingFilter.Select(ParentKeyFunc).ToList();
 
-			while (modelsParentIds.Any())
+			// If we get more than 250 deep into the hierarchy exit the loop - chances are the data is bad and we're doing a big sad...
+			var count = 0;
+			while (modelsParentIds.Any() && count <= 250)
 			{
+				count++;
+
 				var modelsMatchingParentId = Models.Where(x => modelsParentIds.Contains(KeyFunc(x))).ToList();
 
 				modelsParentIds.Clear();
